@@ -1,0 +1,11 @@
+# Build output (generated zip packs, not tracked)
+dist/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+*.swp
+*~

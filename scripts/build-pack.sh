@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 # Build the downloadable member-facing zip for brief-materiales.
 #
-# Package contents: BRIEF.md + logos/ + a short LEEME-PRIMERO.txt with the
-# 3 usage steps. Version is read from BRIEF.md's own header line so the zip
-# name always matches the content, without a second place to update by hand.
+# Package contents: BRIEF.md, SKILL.md, README.md, CHANGELOG.md, logos/,
+# plantilla/ (including the embedded font's license file) and a short
+# LEEME-PRIMERO.txt with the usage steps. Version is read from BRIEF.md's
+# own header line so the zip name always matches the content, without a
+# second place to update by hand.
 #
 # Usage: scripts/build-pack.sh
 # Output: dist/brief-materiales-v<version>.zip (dist/ is gitignored)
@@ -41,6 +43,9 @@ PACK_DIR="$WORK_DIR/brief-materiales"
 mkdir -p "$PACK_DIR/logos" "$PACK_DIR/plantilla"
 
 cp "$BRIEF_FILE" "$PACK_DIR/BRIEF.md"
+cp "$SKILL_DIR/SKILL.md" "$PACK_DIR/SKILL.md"
+cp "$SKILL_DIR/README.md" "$PACK_DIR/README.md"
+cp "$SKILL_DIR/CHANGELOG.md" "$PACK_DIR/CHANGELOG.md"
 cp "$SKILL_DIR"/logos/*.svg "$PACK_DIR/logos/"
 cp "$SKILL_DIR"/logos/*.png "$PACK_DIR/logos/"
 cp "$SKILL_DIR/logos/LEEME.md" "$PACK_DIR/logos/LEEME.md"
@@ -48,29 +53,33 @@ cp "$SKILL_DIR/logos/LEEME.md" "$PACK_DIR/logos/LEEME.md"
 # rutas relativas "../logos/archivo.png" de adentro del HTML sigan
 # funcionando tal cual después de descomprimir el zip.
 cp "$SKILL_DIR/plantilla/plantilla-materiales.html" "$PACK_DIR/plantilla/plantilla-materiales.html"
+cp "$SKILL_DIR/plantilla/FUENTES-LICENCIA.txt" "$PACK_DIR/plantilla/FUENTES-LICENCIA.txt"
 
 cat > "$PACK_DIR/LEEME-PRIMERO.txt" <<EOF
 BRIEF DE MATERIALES - PARTIDO OBRERO (v$VERSION)
 
 Como usar este paquete:
 
-1. Subi el archivo BRIEF.md a tu IA (ChatGPT, Gemini, DeepSeek, Claude...),
-   junto con los logos de la carpeta logos/ que necesites.
+1. Subi el archivo BRIEF.md a tu IA (ChatGPT, Gemini, DeepSeek, Claude...).
+   Recomendado: subi tambien plantilla/plantilla-materiales.html (ver
+   punto 4) y los logos de la carpeta logos/ que necesites.
 2. Contale a la IA que queres comunicar, con tus propias palabras. Te va a
    ir preguntando los datos que falten (titulo, fecha, quien firma, etc.).
+   No va a producir nada hasta que le escribas "confirmo".
 3. Revisa el texto final letra por letra antes de imprimir o publicar
    nada. Las IA que generan imagenes a veces escriben mal el texto de
    adentro de la imagen.
 
-Tambien trae plantilla/plantilla-materiales.html: una plantilla ya
-disenada (posteo, historia y hoja A6 para imprenta/fotocopia) donde solo
-hay que completar el contenido. Si tu IA no genera imagenes, o preferis
-que los logos queden exactos sin riesgo de que se redibujen, subisela a
-la IA junto con el BRIEF.md y pedile que complete solo esa plantilla (ver
-seccion 7 del BRIEF.md). No la saques de su carpeta plantilla/: usa los
-logos de logos/ con una ruta relativa.
+4. plantilla/plantilla-materiales.html: una plantilla ya disenada (posteo,
+   historia, hoja A6 para imprenta/fotocopia a color y en blanco y negro,
+   volante A5 y afiche A4) donde solo hay que completar un bloque de
+   contenido. Es la via recomendada, incluso si tu IA genera imagenes: sale
+   con los logos reales y el QR que funciona. Cuando la IA te devuelva el
+   archivo completo, GUARDALO DENTRO DE LA CARPETA plantilla/ (al lado de
+   logos/): si lo guardas en otro lado, los logos no van a cargar.
 
-Mas detalle en BRIEF.md y en logos/LEEME.md.
+Mas detalle en BRIEF.md, en logos/LEEME.md y en SKILL.md (version para
+Claude como Agent Skill).
 EOF
 
 mkdir -p "$DIST_DIR"

@@ -10,1290 +10,763 @@
   ---------------------------------------
   Este archivo vive en la carpeta "plantilla/", al lado de una carpeta
   "logos/" un nivel arriba (así viene en el paquete descargable). Todas las
-  imágenes se referencian como "../logos/archivo.png". Si movés este HTML
-  de lugar, tenés que mover también la carpeta logos/ manteniendo esa
-  misma relación, o corregir las rutas a mano.
+  imágenes de logos se referencian como "../logos/archivo.png". Una foto
+  real (variante "foto") se referencia como archivo suelto en ESTA MISMA
+  carpeta (ej. "foto.jpg", al lado de este HTML). Si movés este HTML de
+  lugar, movés también "logos/" manteniendo la relación, o corregís las
+  rutas a mano.
 
-  CÓMO EDITAR EL CONTENIDO (para una IA o para un compañero/a)
+  GUARDAR EL RESULTADO (para una IA o para un compañero/a)
   ---------------------------------------------------------------
-  Todo el contenido real vive en UN solo lugar: el objeto "MATERIAL" del
-  <script> que está más abajo, justo antes de las piezas. Cada campo tiene
-  un comentario "EDITAR:" al lado.
+  Si le diste este archivo a una IA para completar, cuando te devuelva el
+  archivo completo GUARDALO DENTRO de esta misma carpeta "plantilla/"
+  (podés pisar este archivo o guardarlo con otro nombre, pero siempre dentro
+  de "plantilla/"): si lo guardás en otro lado, las imágenes de "../logos/"
+  no van a cargar y vas a ver recuadros rotos en vez de los logos.
 
-  Para cambiar texto, fecha, firma, redes, logo o color de acento, editá
-  SOLO ese objeto. Un script al final de la página toma esos valores y los
-  copia automáticamente a las 10 veces que aparecen repetidos en el diseño
-  (posteo, historia y las 8 mariposas de las 2 hojas A6). No edites el
-  texto que aparece más abajo, dentro de cada pieza: ese texto es apenas
-  un "placeholder" de ejemplo que se pisa solo al cargar la página, y si
-  el navegador no ejecuta JavaScript por algún motivo, ese mismo texto de
-  ejemplo queda visible como contenido de respaldo (nunca queda vacío).
+  CÓMO EDITAR EL CONTENIDO
+  ---------------------------------------------------------------
+  Todo el contenido real vive en UN solo lugar: el bloque JSON de más abajo
+  (la etiqueta `script` de tipo `application/json`, con `id="material"`),
+  justo antes de las piezas. Es JSON estricto (sin comentarios adentro): la
+  referencia de cada campo está acá:
+
+    variante            'tipografico' | 'bloque' | 'foto' | 'consigna'
+                         (elegí la que mejor le quede al contenido; no uses
+                         siempre la misma en todos los materiales — ver la
+                         nota "SISTEMA DE DISEÑO" más abajo)
+    etiqueta             etiqueta/categoría chica arriba del título ('' si no hace falta)
+    titulo               título o consigna principal (OBLIGATORIO)
+    bajada               bajada opcional ('' si no hace falta; se oculta sola en 'consigna')
+    cuerpo               cuerpo opcional ('' si no hace falta; se oculta solo en 'consigna' y 'foto')
+    foto                 nombre de archivo de una foto REAL en esta misma carpeta (ej. 'foto.jpg').
+                         Solo se usa con variante:'foto'. Nunca un archivo generado por IA: si lo
+                         dejás vacío, se ve un recuadro "FOTO: subí tu foto" en vez de inventar una imagen.
+    fecha_actividad      fecha de la actividad ('' si no aplica)
+    hora                 hora de la actividad ('' si no aplica)
+    lugar                lugar de la actividad ('' si no aplica)
+    orden_datos          'despues' (bloque fecha/hora/lugar después del cuerpo, por defecto) | 'antes'
+    firma                agrupación que firma (OBLIGATORIO; tabla de la sección 8 del BRIEF)
+    logo_firma           archivo exacto en logos/ (nombre y extensión tal cual), o '' si no hay logo
+    logo_firma_deseado   true (por defecto) | false. Si logo_firma es '' y esto es true, se ve un
+                         recuadro "LOGO: [firma]" pidiendo el archivo. Si es false (agrupaciones sin
+                         logo propio aprobado, ver sección 8 del BRIEF), NO se ve ningún recuadro:
+                         firma solo con el nombre en texto.
+    logo_po              archivo del logo del Partido Obrero en logos/, o '' si no se suma
+    redes                lista de redes verificadas de la sección 9 del BRIEF, en el orden que quieras
+                         (el orden importa: en digital solo se muestran las primeras 3)
+    qr                   true = sumar "Suscribite a Prensa Obrera" (QR en impresos, texto en digital);
+                         false = sacarlo
+    enlace_digital       texto que acompaña "Suscribite a Prensa Obrera" en piezas digitales;
+                         por defecto 'prensaobrera.com', también podés poner 'link en bio'
+    fecha_realizacion    fecha en que se hizo este material, dd/mm/aaaa (OBLIGATORIO; nunca inventarla)
+    color_acento         color de acento del material en hex, ej. '#E84426' (rojo PO por defecto)
+
+  Si falta un campo obligatorio (titulo, firma, fecha_realizacion con formato
+  dd/mm/aaaa) o el JSON no es válido, la página muestra un aviso rojo grande
+  y NO arma ninguna pieza imprimible: nunca se inventa ni se muestra un
+  contenido de ejemplo en su lugar.
 
   NO cambies la estructura, el tamaño de las piezas, el tamaño del QR ni
   los tamaños mínimos de letra: eso es lo que hace que el material sea
   profesional y siga las reglas de BRIEF.md. Si te pidieron completar esta
-  plantilla, devolvé el archivo completo con solo el bloque MATERIAL
-  cambiado.
+  plantilla, devolvé el archivo completo con solo el bloque JSON cambiado.
 
   ESTO ES UN SISTEMA DE DISEÑO, NO UNA SOLA PLANTILLA REPETIDA
   ---------------------------------------------------------------
-  MATERIAL.variante elige entre 4 composiciones distintas que comparten la
-  misma grilla, los mismos tamaños mínimos, el mismo QR y las mismas
-  reglas de logos: 'tipografico' (título grande domina, fondo blanco),
-  'bloque' (campo de color a pleno, título en blanco), 'foto' (una foto
-  real arriba, protagonista) y 'consigna' (la frase es la pieza, sin
-  bajada ni cuerpo). Elegí la que mejor le quede al contenido de cada
-  material — no uses siempre la misma, así distintas campañas no quedan
-  todas iguales ("fábrica de churros"). La plantilla garantiza el piso de
-  calidad (tamaños, QR, logos, blanco y negro), no que todo se vea igual.
+  MATERIAL.variante elige entre 4 composiciones bien distintas que comparten
+  la misma grilla, los mismos tamaños mínimos, el mismo QR y las mismas
+  reglas de logos: 'tipografico' (el título ocupa la mayor parte del
+  espacio, fondo blanco), 'bloque' (campo de color en diagonal con el
+  título en blanco, datos en su propia franja de contraste), 'foto' (una
+  foto real a pleno arriba con el título sobre una franja sólida) y
+  'consigna' (la frase ocupa casi toda la pieza, sin bajada ni cuerpo).
+  Elegí la que mejor le quede al contenido de cada material — no uses
+  siempre la misma, así distintas campañas no quedan todas iguales
+  ("fábrica de churros"). La plantilla garantiza el piso de calidad
+  (tamaños, QR, logos, blanco y negro real), no que todo se vea igual.
+
+  Todas las piezas (posteo, historia, mariposas A6, A5, A4) se arman con UNA
+  sola función de armado en JavaScript a partir de este mismo bloque de
+  contenido: no hay 10 copias de la misma marca repetidas en el archivo.
 -->
 
 <style>
-  :root {
-    --acento: #E84426; /* rojo PO por defecto; MATERIAL.color_acento lo puede pisar */
-    --negro: #1a1a1a;
-    --gris-cuerpo: #333333;
-    --gris-pie: #595959;
-    --blanco: #ffffff;
-    --font-titulo: "Arial Black", "Helvetica Neue Condensed Bold", "Helvetica Neue", "Arial Narrow", Arial, sans-serif;
-    --font-texto: "Helvetica Neue", Arial, sans-serif;
-  }
+/* =========================================================================
+   Fuente embebida: Anton (Google Fonts, OFL) — subconjunto Latin + acentos
+   españoles + ¿¡. Licencia SIL Open Font License 1.1, texto completo en
+   plantilla/FUENTES-LICENCIA.txt (y en el repo de origen:
+   github.com/google/fonts/tree/main/ofl/anton). Copyright 2020 The Anton
+   Project Authors (github.com/googlefonts/AntonFont). No se modificó el
+   dibujo de la tipografía: solo se recortó el juego de caracteres.
+   ========================================================================= */
+@font-face {
+  font-family: 'Anton';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(data:font/woff;base64,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) format('woff');
+}
 
-  * { box-sizing: border-box; }
+:root {
+  --acento: #E84426; /* rojo PO por defecto; MATERIAL.color_acento lo puede pisar */
+  --negro: #171717;
+  --gris-cuerpo: #2e2e2e;
+  --gris-pie: #595959;
+  --gris-fecha: #666666;
+  --blanco: #ffffff;
+  --font-titulo: 'Anton', 'Arial Narrow', 'Helvetica Neue Condensed Bold', Impact, sans-serif;
+  --font-texto: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
 
-  html, body {
-    margin: 0;
-    padding: 0;
-    background: #e9e9e9;
-    font-family: var(--font-texto);
-    color: var(--negro);
-  }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #e9e9e9; font-family: var(--font-texto); color: var(--negro); }
+img { display: block; }
+.oculto { display: none !important; }
 
-  img { display: block; }
+/* ============ SIN JAVASCRIPT: aviso claro, nunca una pieza vacía ============ */
+noscript .aviso-nojs {
+  display: block; background: #b00020; color: #fff; padding: 18px 24px;
+  font-family: var(--font-texto); font-size: 15px; line-height: 1.5;
+}
+.pieza:empty::before {
+  content: "TÍTULO ACÁ — esta plantilla necesita JavaScript activado para completar el material";
+  display: flex; align-items: center; justify-content: center; text-align: center;
+  height: 100%; padding: 10%; font-family: var(--font-texto); font-weight: 700; color: #b00020;
+}
 
-  /* ============ BARRA DE INSTRUCCIONES (solo pantalla) ============ */
-  .barra-instrucciones {
-    background: var(--negro);
-    color: #fff;
-    padding: 18px 24px 22px;
-    font-family: var(--font-texto);
-  }
-  .barra-instrucciones h1 {
-    font-size: 18px;
-    margin: 0 0 8px;
-    color: #fff;
-  }
-  .barra-instrucciones ol {
-    margin: 0;
-    padding-left: 20px;
-    font-size: 14px;
-    line-height: 1.6;
-  }
-  .barra-instrucciones li { margin-bottom: 6px; }
-  .barra-instrucciones code {
-    background: rgba(255,255,255,0.14);
-    padding: 1px 6px;
-    border-radius: 3px;
-    font-size: 13px;
-  }
-  .barra-instrucciones .aviso {
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: 1px solid rgba(255,255,255,0.25);
-    font-size: 13px;
-    color: #f0c9c0;
-  }
+/* ============ AVISO DE ERROR (JSON inválido o campos obligatorios vacíos) ============ */
+.banner-error {
+  background: #b00020; color: #fff; font-family: var(--font-texto);
+  padding: 22px 26px; margin: 0 0 24px; font-size: 16px; line-height: 1.55;
+}
+.banner-error h2 { margin: 0 0 8px; font-size: 20px; }
+.banner-error code { background: rgba(255,255,255,.18); padding: 1px 6px; border-radius: 3px; }
 
-  /* ============ LIENZO CONTENEDOR (solo para ver todo en pantalla) ============ */
-  .lienzos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    padding: 40px;
-    align-items: flex-start;
-  }
-  .etiqueta-pieza {
-    font-family: var(--font-texto);
-    font-size: 13px;
-    color: #444;
-    margin: 0 0 8px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: .04em;
-  }
-  .envoltorio-pieza { display: flex; flex-direction: column; }
+/* ============ BARRA DE INSTRUCCIONES (solo pantalla) ============ */
+.barra-instrucciones { background: var(--negro); color: #fff; padding: 18px 24px 22px; font-family: var(--font-texto); }
+.barra-instrucciones h1 { font-size: 18px; margin: 0 0 8px; color: #fff; }
+.barra-instrucciones ol { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.6; }
+.barra-instrucciones li { margin-bottom: 6px; }
+.barra-instrucciones code { background: rgba(255,255,255,0.14); padding: 1px 6px; border-radius: 3px; font-size: 13px; }
+.barra-instrucciones .aviso { margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.25); font-size: 13px; color: #f0c9c0; }
 
-  /* ============ COMPONENTES COMPARTIDOS (las 3 piezas y las 4 variantes) ============ */
-  .icono { width: 1em; height: 1em; flex: none; }
+/* ============ LIENZO CONTENEDOR (solo para ver todo en pantalla) ============ */
+.lienzos { display: flex; flex-wrap: wrap; gap: 40px; padding: 40px; align-items: flex-start; }
+.etiqueta-pieza { font-family: var(--font-texto); font-size: 13px; color: #444; margin: 0 0 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+.envoltorio-pieza { display: flex; flex-direction: column; }
+.acciones-pieza { margin: 0 0 10px; }
+.acciones-pieza button {
+  font-family: var(--font-texto); font-size: 13px; font-weight: 700; cursor: pointer;
+  background: #fff; border: 2px solid var(--negro); color: var(--negro); padding: 8px 14px; border-radius: 4px;
+}
+.acciones-pieza button:hover { background: var(--negro); color: #fff; }
 
-  /* Orden de los bloques dentro de cada pieza. MATERIAL.orden_datos puede
-     mover el bloque de fecha/hora/lugar antes del cuerpo en vez de después
-     (por defecto). Vale igual para el posteo, la historia y la mariposa. */
-  .foto-area { order: 5; }
-  .etiqueta { order: 10; }
-  .titulo { order: 20; }
-  .bajada { order: 30; }
-  .cuerpo { order: 40; }
-  .bloque-datos { order: 50; }
-  .pie { order: 60; }
-  [data-orden-datos="antes"] .bloque-datos { order: 35; }
+/* ============ COMPONENTES COMPARTIDOS (todas las piezas y las 4 variantes) ============ */
+.icono { width: 1em; height: 1em; flex: none; }
 
-  /* Escala del título según MATERIAL.titulo sea corto, medio o largo (el
-     script la calcula sola a partir de la cantidad de caracteres). En la
-     variante "consigna" el título es la pieza central, así que escala más. */
-  [data-largo="corto"] { --escala-titulo: 1.15; }
-  [data-largo="medio"] { --escala-titulo: 1; }
-  [data-largo="largo"] { --escala-titulo: 0.82; }
-  [data-variante="consigna"][data-largo="corto"] { --escala-titulo: 1.45; }
-  [data-variante="consigna"][data-largo="medio"] { --escala-titulo: 1.22; }
-  [data-variante="consigna"][data-largo="largo"] { --escala-titulo: 1; }
-  /* La variante "foto" le suma un bloque de imagen arriba de todo, así que
-     el título achica un poco para que todo entre en el tamaño fijo de la
-     pieza sin desbordar. */
-  [data-variante="foto"][data-largo="corto"] { --escala-titulo: 0.95; }
-  [data-variante="foto"][data-largo="medio"] { --escala-titulo: 0.78; }
-  [data-variante="foto"][data-largo="largo"] { --escala-titulo: 0.62; }
-  .pieza-story[data-variante="foto"][data-largo="corto"] { --escala-titulo: 0.8; }
-  .pieza-story[data-variante="foto"][data-largo="medio"] { --escala-titulo: 0.66; }
-  .pieza-story[data-variante="foto"][data-largo="largo"] { --escala-titulo: 0.52; }
+.pieza { position: relative; background: var(--blanco); overflow: hidden; }
+.pieza .campo-diagonal { position: absolute; inset: 0; z-index: 0; background: var(--acento); display: none; }
+.pieza .franja { position: absolute; top: 0; left: 0; right: 0; height: .6%; background: var(--acento); z-index: 2; }
+.pieza .contenido { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; padding: var(--pad-v) var(--pad-h); }
 
-  /* Área de foto (variante "foto"): oculta salvo que MATERIAL.variante sea
-     'foto'. Si MATERIAL.foto viene vacío se ve un recuadro "FOTO: subí tu
-     foto" en vez de generar o inventar una imagen (el brief lo prohíbe). */
-  .foto-area {
-    display: none;
-    position: relative;
-    overflow: hidden;
-    background: #ececec;
-  }
-  .foto-area .foto-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(0.85) contrast(1.05);
-  }
-  .foto-area .foto-tinte {
-    position: absolute;
-    inset: 0;
-    background: var(--acento);
-    mix-blend-mode: multiply;
-    opacity: .22;
-  }
-  .foto-area .foto-placeholder {
-    position: absolute;
-    inset: 0;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border: 2px dashed var(--acento);
-    background: rgba(0,0,0,.02);
-    font-family: var(--font-texto);
-    font-weight: 700;
-    color: var(--acento);
-  }
-  [data-variante="foto"] .foto-area { display: block; }
-  [data-variante="foto"] .foto-img.oculto { display: none; }
-  [data-variante="foto"] .foto-img:not(.oculto) ~ .foto-placeholder { display: none; }
+/* Orden de los bloques dentro de cada pieza. MATERIAL.orden_datos puede
+   mover el bloque de fecha/hora/lugar antes del cuerpo en vez de después. */
+.foto-area { order: 5; display: none; }
+.etiqueta { order: 10; }
+.titulo { order: 20; }
+.bajada { order: 30; }
+.cuerpo { order: 40; }
+.bloque-datos { order: 50; }
+.pie { order: 60; margin-top: auto; }
+.fecha-realizacion { order: 70; }
+[data-orden-datos="antes"] .bloque-datos { order: 35; }
 
-  /* =====================================================================
-     POSTEO 1080×1080
-     ===================================================================== */
-  .pieza-post {
-    position: relative;
-    width: 1080px;
-    height: 1080px;
-    background: var(--blanco);
-    overflow: hidden;
-  }
-  .pieza-post .franja {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 14px;
-    background: var(--acento);
-  }
-  .pieza-post .contenido {
-    position: absolute;
-    top: 78px; left: 72px; right: 72px; bottom: 0;
-    display: flex;
-    flex-direction: column;
-  }
-  .pieza-post .etiqueta {
-    font-family: var(--font-texto);
-    font-weight: 800;
-    font-size: 27px;
-    letter-spacing: .09em;
-    text-transform: uppercase;
-    color: var(--acento);
-    margin: 0 0 14px;
-  }
-  .pieza-post .foto-area { height: 260px; margin-bottom: 20px; }
-  .pieza-post .foto-placeholder { font-size: 22px; padding: 16px; }
-  .pieza-post .titulo {
-    font-family: var(--font-titulo);
-    font-weight: 900;
-    font-size: calc(78px * var(--escala-titulo, 1));
-    line-height: 1.03;
-    letter-spacing: -0.01em;
-    color: var(--negro);
-    margin: 0 0 22px;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .pieza-post .bajada {
-    font-size: 33px;
-    font-weight: 500;
-    line-height: 1.32;
-    color: var(--gris-cuerpo);
-    margin: 0 0 20px;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .pieza-post .cuerpo {
-    font-size: 26px;
-    line-height: 1.45;
-    color: var(--gris-cuerpo);
-    margin: 0;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .pieza-post .bloque-datos {
-    margin-top: auto;
-    background: var(--acento);
-    color: #fff;
-    padding: 30px 36px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .pieza-post .dato {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    font-size: 32px;
-    font-weight: 700;
-  }
-  .pieza-post .pie {
-    padding: 26px 0 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-  }
-  .pieza-post .pie-firma {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    min-width: 0;
-  }
-  .pieza-post .logo-firma { height: 64px; width: auto; max-width: 260px; object-fit: contain; }
-  .pieza-post .logo-po { height: 44px; width: auto; max-width: 170px; object-fit: contain; }
-  .pieza-post .nombre-firma {
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--negro);
-    white-space: nowrap;
-  }
-  .pieza-post .pie-der {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-  .pieza-post .redes {
-    list-style: none;
-    margin: 0; padding: 0;
-    font-size: 20px;
-    line-height: 1.5;
-    color: var(--gris-pie);
-    text-align: right;
-  }
-  .pieza-post .qr-bloque {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: #fff;
-    border: 2px solid #eee;
-    padding: 10px 14px;
-  }
-  .pieza-post .qr-bloque img { width: 240px; height: 240px; }
-  .pieza-post .qr-texto { font-size: 18px; line-height: 1.35; color: var(--negro); max-width: 150px; }
-  .pieza-post .qr-texto strong { color: var(--acento); }
-  .pieza-post .fecha-realizacion {
-    position: absolute;
-    left: 72px;
-    bottom: 12px;
-    font-size: 17px;
-    color: #9a9a9a;
-  }
+.etiqueta { font-family: var(--font-texto); font-weight: 800; font-size: var(--fs-etiqueta); letter-spacing: .08em; text-transform: uppercase; color: var(--acento); margin: 0 0 .35em; width: 100%; }
+.titulo {
+  font-family: var(--font-titulo); font-weight: 400; font-size: calc(var(--fs-titulo) * var(--escala-titulo, 1) * var(--escala-fit, 1));
+  line-height: .98; letter-spacing: .003em; color: var(--negro); margin: 0 0 .3em; overflow-wrap: normal; word-break: normal; width: 100%;
+}
+.bajada { font-family: var(--font-texto); font-size: calc(var(--fs-bajada) * var(--escala-fit, 1)); font-weight: 600; line-height: 1.3; color: var(--gris-cuerpo); margin: 0 0 .35em; overflow-wrap: normal; word-break: normal; width: 100%; }
+.cuerpo { font-family: var(--font-texto); font-size: var(--fs-cuerpo); line-height: 1.42; color: var(--gris-cuerpo); margin: 0 0 .2em; overflow-wrap: normal; word-break: normal; width: 100%; }
+/* Último recurso: si ni siquiera al tamaño mínimo entra una palabra muy
+   larga, se permite cortarla en vez de dejarla desbordar tapada por el
+   overflow:hidden de la pieza (nunca se trunca con "…"). */
+.ultimo-recurso .titulo, .ultimo-recurso .bajada, .ultimo-recurso .cuerpo { overflow-wrap: anywhere; }
 
-  /* =====================================================================
-     HISTORIA 1080×1920
-     ===================================================================== */
-  .pieza-story {
-    position: relative;
-    width: 1080px;
-    height: 1920px;
-    background: var(--blanco);
-    overflow: hidden;
-  }
-  .pieza-story .zona-segura {
-    position: absolute;
-    left: 0; right: 0;
-    height: 250px;
-    pointer-events: none;
-  }
-  .pieza-story .zona-segura.arriba { top: 0; }
-  .pieza-story .zona-segura.abajo { bottom: 0; }
-  .pieza-story .franja {
-    position: absolute;
-    top: 250px; left: 0; right: 0;
-    height: 14px;
-    background: var(--acento);
-  }
-  .pieza-story .contenido {
-    position: absolute;
-    top: 250px; bottom: 250px; left: 0; right: 0;
-    padding: 56px 76px 40px;
-    display: flex;
-    flex-direction: column;
-  }
-  .pieza-story .foto-area { height: 360px; margin-bottom: 28px; }
-  .pieza-story .foto-placeholder { font-size: 28px; padding: 20px; }
-  .pieza-story .etiqueta {
-    font-family: var(--font-texto);
-    font-weight: 800;
-    font-size: 32px;
-    letter-spacing: .09em;
-    text-transform: uppercase;
-    color: var(--acento);
-    margin: 0 0 20px;
-  }
-  .pieza-story .titulo {
-    font-family: var(--font-titulo);
-    font-weight: 900;
-    font-size: calc(104px * var(--escala-titulo, 1));
-    line-height: 1.03;
-    letter-spacing: -0.01em;
-    color: var(--negro);
-    margin: 0 0 30px;
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .pieza-story .bajada {
-    font-size: 42px;
-    font-weight: 500;
-    line-height: 1.34;
-    color: var(--gris-cuerpo);
-    margin: 0 0 26px;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .pieza-story .cuerpo {
-    font-size: 33px;
-    line-height: 1.48;
-    color: var(--gris-cuerpo);
-    margin: 0;
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .pieza-story .bloque-datos {
-    margin-top: 56px;
-    background: var(--acento);
-    color: #fff;
-    padding: 46px 52px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  .pieza-story .dato {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    font-size: 46px;
-    font-weight: 700;
-  }
-  .pieza-story .pie {
-    margin-top: auto;
-    padding-top: 56px;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-  }
-  .pieza-story .pie-firma {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-  }
-  .pieza-story .logo-firma { height: 84px; width: auto; max-width: 340px; object-fit: contain; }
-  .pieza-story .logo-po { height: 58px; width: auto; max-width: 220px; object-fit: contain; }
-  .pieza-story .nombre-firma { font-size: 30px; font-weight: 700; }
-  .pieza-story .pie-der {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-  }
-  .pieza-story .redes {
-    list-style: none;
-    margin: 0; padding: 0;
-    font-size: 26px;
-    line-height: 1.55;
-    color: var(--gris-pie);
-  }
-  .pieza-story .qr-bloque {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    background: #fff;
-    border: 2px solid #eee;
-    padding: 12px 16px;
-  }
-  .pieza-story .qr-bloque img { width: 260px; height: 260px; }
-  .pieza-story .qr-texto { font-size: 22px; line-height: 1.35; max-width: 180px; }
-  .pieza-story .qr-texto strong { color: var(--acento); }
-  .pieza-story .fecha-realizacion {
-    position: absolute;
-    left: 76px;
-    bottom: 210px;
-    font-size: 22px;
-    color: #9a9a9a;
-  }
+.bloque-datos { margin-top: .6em; background: var(--negro); color: #fff; padding: .55em .7em; display: flex; flex-direction: column; gap: .3em; }
+.dato { display: flex; align-items: center; gap: .45em; font-family: var(--font-texto); font-size: var(--fs-dato); font-weight: 700; }
 
-  /* =====================================================================
-     HOJA A4 CON 4 MARIPOSAS A6 (105×148,5 mm cada una)
-     ===================================================================== */
-  .hoja-a6 {
-    width: 210mm;
-    height: 297mm;
-    background: #fff;
-    display: grid;
-    grid-template-columns: 105mm 105mm;
-    grid-template-rows: 148.5mm 148.5mm;
-    overflow: hidden;
-  }
-  .mariposa {
-    position: relative;
-    width: 105mm;
-    height: 148.5mm;
-    overflow: hidden;
-    padding: 6mm 7mm 5mm;
-    display: flex;
-    flex-direction: column;
-  }
-  /* líneas de corte: solo en los bordes internos donde hay que cortar */
-  .mariposa:nth-child(1), .mariposa:nth-child(3) { border-right: 0.35mm dashed #b5b5b5; }
-  .mariposa:nth-child(1), .mariposa:nth-child(2) { border-bottom: 0.35mm dashed #b5b5b5; }
+.pie { display: flex; align-items: center; justify-content: space-between; gap: 1em; padding-top: .8em; flex-wrap: wrap; }
+.pie-firma { display: flex; align-items: center; gap: .5em; min-width: 0; }
+.logo-firma, .logo-po { height: var(--alto-logo, 1.6em); width: auto; max-width: 9em; object-fit: contain; }
+.logo-po { height: calc(var(--alto-logo, 1.6em) * .72); }
+.logo-caja {
+  border: .12em dashed var(--acento); color: var(--acento); font-family: var(--font-texto); font-weight: 800;
+  font-size: calc(var(--fs-nombre) * .95); text-transform: uppercase; padding: .4em .6em; line-height: 1.25;
+}
+.nombre-firma { font-family: var(--font-texto); font-size: var(--fs-nombre); font-weight: 700; color: var(--negro); white-space: nowrap; }
+.pie-der { display: flex; align-items: center; gap: .8em; flex-wrap: wrap; justify-content: flex-end; }
+.redes { list-style: none; margin: 0; padding: 0; font-family: var(--font-texto); font-size: var(--fs-redes); line-height: 1.45; color: var(--gris-pie); text-align: right; }
+.qr-bloque { display: flex; align-items: center; gap: .5em; background: #fff; border: 1px solid #ddd; padding: .3em .45em; }
+.qr-bloque img { width: var(--tam-qr); height: var(--tam-qr); }
+.qr-texto, .suscribite-texto { font-family: var(--font-texto); font-size: var(--fs-nombre); line-height: 1.3; color: var(--negro); max-width: 9em; }
+/* La mariposa A6 es el formato más chico: el QR con leyenda al lado no
+   entra junto al logo y las redes en el mismo ancho de pie. Se apila
+   la leyenda debajo del QR en vez de al lado, mucho más angosto. */
+.formato-mariposa .qr-bloque { flex-direction: column; gap: .2em; }
+.formato-mariposa .qr-texto { max-width: var(--tam-qr); text-align: center; }
+.qr-texto strong, .suscribite-texto strong { color: var(--acento); }
+.suscribite-texto { text-align: right; }
+.fecha-realizacion { font-family: var(--font-texto); font-size: var(--fs-fecha); color: var(--gris-fecha); margin-top: .5em; }
 
-  .mariposa .franja { display: none; } /* la mariposa no lleva franja superior, ya usa el color en el bloque de datos */
+/* Foto real (variante "foto"): si MATERIAL.foto viene vacío se ve un
+   recuadro "FOTO: subí tu foto" en vez de generar o inventar una imagen. */
+.foto-area { position: relative; overflow: hidden; background: #ececec; flex: none; height: var(--alto-foto); margin-bottom: .5em; }
+.foto-area .foto-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(.55) contrast(1.12); }
+.foto-area .foto-tinte { position: absolute; inset: 0; background: var(--acento); mix-blend-mode: multiply; opacity: .38; }
+.foto-area .foto-placeholder {
+  position: absolute; inset: 0; box-sizing: border-box; display: flex; align-items: center; justify-content: center;
+  text-align: center; border: .15em dashed var(--acento); background: rgba(0,0,0,.03); font-family: var(--font-texto);
+  font-weight: 700; color: var(--acento); padding: 6%;
+}
+[data-variante="foto"] .foto-area { display: block; }
 
-  .mariposa .etiqueta {
-    font-family: var(--font-texto);
-    font-weight: 800;
-    font-size: 9pt;
-    letter-spacing: .07em;
-    text-transform: uppercase;
-    color: var(--acento);
-    margin: 0 0 3.5mm;
-  }
-  .mariposa .foto-area { height: 20mm; margin-bottom: 2.5mm; }
-  .mariposa .foto-placeholder { font-size: 8pt; padding: 2mm; }
-  .mariposa .titulo {
-    font-family: var(--font-titulo);
-    font-weight: 900;
-    font-size: calc(24pt * var(--escala-titulo, 1));
-    line-height: 1.05;
-    letter-spacing: -0.005em;
-    color: var(--negro);
-    margin: 0 0 3.5mm;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .mariposa .bajada {
-    font-size: 12pt;
-    font-weight: 500;
-    line-height: 1.3;
-    color: var(--gris-cuerpo);
-    margin: 0 0 3mm;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .mariposa .cuerpo {
-    font-size: 10pt;
-    line-height: 1.4;
-    color: var(--gris-cuerpo);
-    margin: 0;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  .mariposa .bloque-datos {
-    margin-top: 5mm;
-    background: var(--acento);
-    color: #fff;
-    padding: 4.5mm 4mm;
-    display: flex;
-    flex-direction: column;
-    gap: 2mm;
-  }
-  .mariposa .dato {
-    display: flex;
-    align-items: center;
-    gap: 2mm;
-    font-size: 12.5pt;
-    font-weight: 700;
-  }
-  .mariposa .pie {
-    margin-top: auto;
-    padding-top: 3mm;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 2mm;
-  }
-  .mariposa .pie-firma {
-    display: flex;
-    align-items: center;
-    gap: 2mm;
-    min-width: 0;
-  }
-  .mariposa .logo-firma { height: 8mm; width: auto; max-width: 30mm; object-fit: contain; }
-  .mariposa .logo-po { height: 6mm; width: auto; max-width: 22mm; object-fit: contain; }
-  .mariposa .nombre-firma {
-    font-size: 7pt;
-    font-weight: 700;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .mariposa .pie-der {
-    display: flex;
-    align-items: center;
-    gap: 1.6mm;
-  }
-  .mariposa .redes {
-    list-style: none;
-    margin: 0; padding: 0;
-    font-size: 7pt;
-    line-height: 1.35;
-    color: var(--gris-pie);
-    text-align: right;
-  }
-  .mariposa .qr-bloque {
-    display: flex;
-    align-items: center;
-    background: #fff;
-    padding: 1mm;
-    border: 0.3mm solid #eee;
-  }
-  .mariposa .qr-bloque img { width: 22mm; height: 22mm; }
-  .mariposa .fecha-realizacion {
-    position: absolute;
-    left: 7mm;
-    bottom: 2mm;
-    font-size: 7pt;
-    color: #9a9a9a;
-  }
+/* Escala del título según MATERIAL.titulo sea corto, medio o largo (la
+   calcula el script a partir de la cantidad de caracteres). */
+[data-largo="corto"] { --escala-titulo: 1.15; }
+[data-largo="medio"] { --escala-titulo: 1; }
+[data-largo="largo"] { --escala-titulo: .8; }
+[data-variante="consigna"][data-largo="corto"] { --escala-titulo: 1.5; }
+[data-variante="consigna"][data-largo="medio"] { --escala-titulo: 1.25; }
+[data-variante="consigna"][data-largo="largo"] { --escala-titulo: 1; }
+[data-variante="foto"][data-largo="corto"] { --escala-titulo: .92; }
+[data-variante="foto"][data-largo="medio"] { --escala-titulo: .76; }
+[data-variante="foto"][data-largo="largo"] { --escala-titulo: .6; }
 
-  /* =====================================================================
-     VARIANTES DE COMPOSICIÓN (MATERIAL.variante)
-     Comparten la misma grilla, los mismos tamaños mínimos, el mismo QR y
-     las mismas reglas de logos que "tipográfico" (la variante por
-     defecto, ya definida arriba); acá solo se pisa el tratamiento visual.
-     Así una campaña puede verse distinta de otra sin dejar de cumplir el
-     brief: esto es un sistema de diseño, no una sola plantilla repetida.
-     ===================================================================== */
+/* ============ AVISO DE DESBORDE (pantalla solamente) ============ */
+.aviso-desborde {
+  position: absolute; inset: auto 0 0 0; z-index: 5; background: #ffb300; color: #1a1a1a; font-family: var(--font-texto);
+  font-weight: 800; font-size: 13px; text-align: center; padding: 6px 10px;
+}
 
-  /* BLOQUE: campo de color a pleno, título y etiqueta en blanco */
-  [data-variante="bloque"] { background: var(--acento); }
-  [data-variante="bloque"] .franja { background: #fff; }
-  [data-variante="bloque"] .etiqueta { color: #fff; }
-  [data-variante="bloque"] .titulo { color: #fff; }
-  [data-variante="bloque"] .bajada { color: rgba(255,255,255,.92); }
-  [data-variante="bloque"] .cuerpo { color: rgba(255,255,255,.85); }
-  [data-variante="bloque"] .bloque-datos { background: #fff; }
-  [data-variante="bloque"] .bloque-datos .dato { color: var(--negro); }
-  [data-variante="bloque"] .nombre-firma { color: #fff; }
-  [data-variante="bloque"] .redes { color: rgba(255,255,255,.8); }
-  [data-variante="bloque"] .fecha-realizacion { color: rgba(255,255,255,.6); }
-  [data-variante="bloque"] .qr-bloque { background: #fff; border-color: rgba(0,0,0,.08); }
-  [data-variante="bloque"] .qr-texto { color: var(--negro); }
-  [data-variante="bloque"] .foto-area { background: rgba(255,255,255,.15); }
-  [data-variante="bloque"] .foto-placeholder { border-color: #fff; color: #fff; background: rgba(255,255,255,.08); }
-  /* El logo puede tener el mismo tono que el color de acento (por ejemplo,
-     un logo que YA es el color de acento del material): sin esta chapita
-     blanca detrás, podría perderse contra el campo de color. */
-  [data-variante="bloque"] .logo-firma,
-  [data-variante="bloque"] .logo-po { background: #fff; }
-  .pieza-post[data-variante="bloque"] .logo-firma,
-  .pieza-post[data-variante="bloque"] .logo-po,
-  .pieza-story[data-variante="bloque"] .logo-firma,
-  .pieza-story[data-variante="bloque"] .logo-po { padding: 8px 12px; }
-  .mariposa[data-variante="bloque"] .logo-firma,
-  .mariposa[data-variante="bloque"] .logo-po { padding: 1mm 1.5mm; }
+/* =========================================================================
+   TAMAÑOS POR FORMATO — cada .formato-* define el tamaño del lienzo y las
+   variables tipográficas; las reglas de arriba (compartidas) las usan sin
+   duplicar CSS por formato.
+   ========================================================================= */
+.formato-post {
+  width: 1080px; height: 1080px;
+  --pad-v: 78px; --pad-h: 72px; --fs-etiqueta: 27px; --fs-titulo: 148px; --fs-bajada: 34px; --fs-cuerpo: 26px;
+  --fs-dato: 30px; --fs-nombre: 21px; --fs-redes: 19px; --fs-fecha: 18px; --alto-logo: 52px; --tam-qr: 0px; --alto-foto: 30%;
+}
+.formato-story {
+  width: 1080px; height: 1920px;
+  --pad-v: 0; --pad-h: 76px; --fs-etiqueta: 38px; --fs-titulo: 204px; --fs-bajada: 50px; --fs-cuerpo: 39px;
+  --fs-dato: 48px; --fs-nombre: 28px; --fs-redes: 26px; --fs-fecha: 23px; --alto-logo: 76px; --tam-qr: 0px; --alto-foto: 30%;
+}
+.formato-story .contenido { position: absolute; top: 250px; bottom: 250px; height: auto; left: 0; right: 0; padding: 40px var(--pad-h); }
+.formato-mariposa {
+  width: 105mm; height: 148.5mm;
+  --pad-v: 6mm; --pad-h: 7mm; --fs-etiqueta: 9pt; --fs-titulo: 30pt; --fs-bajada: 12pt; --fs-cuerpo: 9pt;
+  --fs-dato: 12.5pt; --fs-nombre: 7pt; --fs-redes: 7pt; --fs-fecha: 7pt; --alto-logo: 8mm; --tam-qr: 20mm; --alto-foto: 22mm;
+}
+.lienzo-print { position: relative; }
+.lienzo-print.tam-a5 { width: 148mm; height: 210mm; }
+.lienzo-print.tam-a4 { width: 210mm; height: 297mm; }
+.formato-a5 {
+  width: 148mm; height: 210mm;
+  --pad-v: 11mm; --pad-h: 11mm; --fs-etiqueta: 11pt; --fs-titulo: 46pt; --fs-bajada: 14pt; --fs-cuerpo: 10pt;
+  --fs-dato: 15pt; --fs-nombre: 8pt; --fs-redes: 8pt; --fs-fecha: 7pt; --alto-logo: 11mm; --tam-qr: 22mm; --alto-foto: 34mm;
+}
+.formato-a4 {
+  width: 210mm; height: 297mm;
+  --pad-v: 14mm; --pad-h: 14mm; --fs-etiqueta: 14pt; --fs-titulo: 66pt; --fs-bajada: 18pt; --fs-cuerpo: 11pt;
+  --fs-dato: 19pt; --fs-nombre: 9pt; --fs-redes: 9pt; --fs-fecha: 7.5pt; --alto-logo: 15mm; --tam-qr: 25mm; --alto-foto: 48mm;
+}
 
-  /* CONSIGNA: la frase (el título) es la pieza central; sin bajada ni cuerpo */
-  [data-variante="consigna"] .bajada,
-  [data-variante="consigna"] .cuerpo { display: none !important; }
-  [data-variante="consigna"] .etiqueta,
-  [data-variante="consigna"] .titulo { text-align: center; }
-  [data-variante="consigna"] .bloque-datos { align-items: center; }
-  [data-variante="consigna"] .dato { justify-content: center; }
+/* =========================================================================
+   VARIANTES DE COMPOSICIÓN — comparten grilla, tamaños mínimos, QR y reglas
+   de logos; acá solo cambia el tratamiento visual, para que una campaña se
+   vea distinta de otra (esto es un sistema de diseño, no un solo molde).
+   ========================================================================= */
 
-  /* FOTO: el cuerpo se oculta para que la foto, el título y la bajada
-     tengan lugar sin desbordar el tamaño fijo de la pieza. */
-  [data-variante="foto"] .cuerpo { display: none !important; }
-  [data-variante="foto"] .bajada { -webkit-line-clamp: 2; }
-  .pieza-story[data-variante="foto"] .foto-area { height: 260px; margin-bottom: 20px; }
-  .pieza-story[data-variante="foto"] .bloque-datos { margin-top: 24px; padding: 26px 40px; gap: 12px; }
-  .pieza-story[data-variante="foto"] .dato { font-size: 34px; }
-  .pieza-story[data-variante="foto"] .pie { padding-top: 20px; }
-  .pieza-story[data-variante="foto"] .qr-bloque img { width: 220px; height: 220px; }
+/* TIPOGRÁFICO (por defecto): el título domina, fondo blanco, franja fina. */
+[data-variante="tipografico"] .franja,
+[data-variante="foto"] .franja { display: block; }
 
-  /* Variante blanco y negro puro: mismo diseño, sin ningún color */
-  .hoja-a6.bn { filter: grayscale(1) contrast(1.05); }
+/* BLOQUE: campo de color en diagonal, título en blanco sobre ese campo,
+   datos en su propia franja de contraste (negra) para no depender solo
+   del color. */
+[data-variante="bloque"] .campo-diagonal { display: block; clip-path: polygon(0 0, 100% 0, 100% calc(var(--fin-diagonal, 55%) - 12%), 0 var(--fin-diagonal, 55%)); }
+[data-variante="bloque"] .etiqueta, [data-variante="bloque"] .titulo { color: #fff; }
+[data-variante="bloque"] .bajada, [data-variante="bloque"] .cuerpo { color: var(--gris-cuerpo); }
+[data-variante="bloque"] .contenido { padding-top: calc(var(--pad-v) * 1.1); }
 
-  /* Oculta cualquier bloque opcional (QR, logo PO, bajada, cuerpo, datos)
-     cuando el campo correspondiente viene vacío o apagado; el resto del
-     pie/diseño se reacomoda solo porque todo es flexbox, sin dejar huecos. */
-  .oculto { display: none !important; }
+/* CONSIGNA: la frase (el título) es la pieza central, a pleno color,
+   centrada; sin bajada ni cuerpo. */
+[data-variante="consigna"] .bajada, [data-variante="consigna"] .cuerpo { display: none !important; }
+[data-variante="consigna"] .campo-diagonal { display: block; clip-path: none; }
+[data-variante="consigna"] .contenido { justify-content: center; text-align: center; align-items: center; }
+[data-variante="consigna"] .etiqueta, [data-variante="consigna"] .titulo { color: #fff; text-align: center; }
+[data-variante="consigna"] .bloque-datos { background: rgba(255,255,255,.14); align-items: center; }
+[data-variante="consigna"] .bloque-datos .dato { color: #fff; justify-content: center; }
+[data-variante="consigna"] .pie { flex-direction: column; align-items: center; justify-content: center; gap: .5em; }
+[data-variante="consigna"] .pie-der { flex-direction: column; align-items: center; }
+[data-variante="consigna"] .nombre-firma, [data-variante="consigna"] .redes { color: rgba(255,255,255,.85); }
+[data-variante="consigna"] .redes, [data-variante="consigna"] .suscribite-texto { text-align: center; }
+[data-variante="consigna"] .suscribite-texto { color: rgba(255,255,255,.92); }
+[data-variante="consigna"] .suscribite-texto strong { color: #fff; }
+[data-variante="consigna"] .fecha-realizacion { color: rgba(255,255,255,.6); text-align: center; }
+[data-variante="consigna"] .qr-bloque { background: #fff; }
 
-  /* ============ ETIQUETAS DE FORMATO EN PANTALLA (no se imprimen) ============ */
-  .medida {
-    font-family: var(--font-texto);
-    font-size: 12px;
-    color: #666;
-  }
+/* FOTO: foto real a pleno arriba, título en franja sólida encima del
+   límite inferior de la foto; sin cuerpo, para no desbordar. */
+[data-variante="foto"] .cuerpo { display: none !important; }
+[data-variante="foto"] .etiqueta, [data-variante="foto"] .titulo { background: var(--negro); color: #fff; padding: .18em .3em; display: inline-block; width: fit-content; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+[data-variante="foto"] .etiqueta { background: var(--acento); }
 
-  /* ============ IMPRESIÓN ============ */
-  @page { size: A4; margin: 0; }
-  @media print {
-    html, body { background: #fff; }
-    .barra-instrucciones,
-    .lienzos > .envoltorio-pieza.digital,
-    .etiqueta-pieza { display: none !important; }
-    .lienzos { display: block; padding: 0; gap: 0; }
-    .hoja-a6 { page-break-after: always; break-after: page; }
-    .hoja-a6:last-child { page-break-after: auto; break-after: auto; }
-  }
+/* Blanco y negro real (solo hoja A6): sin filtro de escala de grises, sin
+   áreas grandes sólidas — el color se reemplaza por trama/contorno. */
+[data-modo="bn"] { --acento: #1a1a1a; }
+[data-modo="bn"] .foto-area .foto-img { filter: grayscale(1) contrast(1.15); }
+[data-modo="bn"] .foto-area .foto-tinte { display: none; }
+[data-modo="bn"] .bloque-datos { background: #fff; color: #000; border: .5pt solid #000; }
+[data-modo="bn"] .bloque-datos .dato { color: #000; }
+[data-modo="bn"][data-variante="bloque"] .campo-diagonal,
+[data-modo="bn"][data-variante="consigna"] .campo-diagonal { background: #fff; border: .6pt solid #000; }
+[data-modo="bn"][data-variante="bloque"] .etiqueta, [data-modo="bn"][data-variante="bloque"] .titulo,
+[data-modo="bn"][data-variante="consigna"] .etiqueta, [data-modo="bn"][data-variante="consigna"] .titulo,
+[data-modo="bn"][data-variante="consigna"] .nombre-firma, [data-modo="bn"][data-variante="consigna"] .redes,
+[data-modo="bn"][data-variante="consigna"] .fecha-realizacion { color: #000 !important; }
+[data-modo="bn"][data-variante="consigna"] .bloque-datos { background: #fff; }
+[data-modo="bn"] .qr-bloque { border: .6pt solid #000; }
+/* Los logos son archivos de color fijo (no se pueden "redibujar" en negro):
+   se pasan a escala de grises solo a ellos, no a toda la pieza (H5). */
+[data-modo="bn"] .logo-firma, [data-modo="bn"] .logo-po { filter: grayscale(1) contrast(1.1); }
+[data-modo="bn"] [data-variante="foto"] .etiqueta, [data-modo="bn"] [data-variante="foto"] .titulo { background: #000; }
+
+/* ============ ETIQUETAS DE FORMATO EN PANTALLA (no se imprimen) ============ */
+.medida { font-family: var(--font-texto); font-size: 12px; color: #666; }
+
+/* ============ HOJA A6 (4 mariposas en una A4) ============ */
+.hoja-a6 { width: 210mm; height: 297mm; background: #fff; display: grid; grid-template-columns: 105mm 105mm; grid-template-rows: 148.5mm 148.5mm; overflow: hidden; }
+.hoja-a6 .formato-mariposa:nth-child(1), .hoja-a6 .formato-mariposa:nth-child(3) { border-right: .35mm dashed #b5b5b5; }
+.hoja-a6 .formato-mariposa:nth-child(1), .hoja-a6 .formato-mariposa:nth-child(2) { border-bottom: .35mm dashed #b5b5b5; }
+
+/* ============ HOJAS A5 / A4 con sangrado + marcas de corte ============ */
+.marca-corte { position: absolute; background: #999; z-index: 3; }
+.marca-corte.h { width: 5mm; height: .3mm; }
+.marca-corte.v { width: .3mm; height: 5mm; }
+
+/* ============ VER UNA PIEZA SOLA (posteo/historia, tamaño real para captura) ============ */
+body[data-vista] .lienzos > .envoltorio-pieza { display: none; }
+body[data-vista] .lienzos { padding: 0; }
+body[data-vista] .barra-instrucciones,
+body[data-vista] .aviso-vista.oculto { display: none; }
+body[data-vista="post"] .lienzos > [data-pieza="post"],
+body[data-vista="story"] .lienzos > [data-pieza="story"] { display: flex; }
+body[data-vista] .acciones-pieza, body[data-vista] .etiqueta-pieza { display: none; }
+.aviso-vista { background: var(--negro); color: #fff; font-family: var(--font-texto); font-size: 14px; padding: 12px 20px; }
+
+/* ============ IMPRESIÓN ============ */
+@page { size: A4; margin: 0; }
+@media print {
+  html, body { background: #fff; }
+  .barra-instrucciones, .banner-error, .acciones-pieza, .etiqueta-pieza, .aviso-desborde, .aviso-vista,
+  .lienzos > .envoltorio-pieza.digital { display: none !important; }
+  .lienzos { display: block; padding: 0; gap: 0; }
+  .hoja-a6, .lienzo-print { page-break-after: always; break-after: page; }
+  .lienzos > .envoltorio-pieza:last-child .hoja-a6,
+  .lienzos > .envoltorio-pieza:last-child .lienzo-print { page-break-after: auto; break-after: auto; }
+  /* La regla real que oculta todas las hojas salvo la que se está
+     imprimiendo se inyecta en tiempo de ejecución dentro de
+     #estilo-pagina-dinamico (ver el botón "Imprimir / Guardar PDF" más
+     abajo): ahí sí se reemplaza el nombre de la pieza por el real. */
+}
 </style>
 </head>
 <body>
 
-  <!-- ============ BARRA DE INSTRUCCIONES (no sale impresa ni en capturas recortadas) ============ -->
+  <noscript><div class="aviso-nojs">Esta plantilla necesita JavaScript activado para armar el material a partir del contenido. Activalo en tu navegador (o pedile a un compañero o compañera que te ayude) y volvé a abrir este archivo.</div></noscript>
+
+  <!-- ============ BARRA DE INSTRUCCIONES (no sale impresa ni en "ver en tamaño real") ============ -->
   <div class="barra-instrucciones">
     <h1>Cómo usar esta plantilla</h1>
     <ol>
-      <li><strong>Editar el contenido:</strong> abrí este archivo con un editor de texto (o pedile a tu IA que lo edite) y cambiá solo el bloque <code>const MATERIAL = { ... }</code> que está antes de las piezas. Todo el diseño se actualiza solo.</li>
-      <li><strong>Imprimir la hoja A6 (mariposas):</strong> abrí este archivo en el navegador, <code>Ctrl+P</code> → Destino "Guardar como PDF" → Papel <strong>A4</strong> → Márgenes <strong>"Ninguno"</strong> → Escala <strong>100%</strong>. Salen 2 páginas: la hoja a color y la hoja en blanco y negro para fotocopia. Cortá primero al medio y después cada mitad, siguiendo la línea punteada.</li>
-      <li><strong>Guardar el posteo o la historia para redes:</strong> cada pieza tiene su tamaño exacto en píxeles (1080×1080 o 1080×1920). La forma más simple es: click derecho sobre la pieza → "Inspeccionar" → activar la vista de dispositivo móvil (ícono de celular) → poner ese ancho y alto exactos → sacar una captura de pantalla con la herramienta de captura del navegador o del sistema operativo, recortando solo esa pieza.</li>
+      <li><strong>Editar el contenido:</strong> abrí este archivo con un editor de texto (o pedile a tu IA que lo edite) y cambiá solo el bloque JSON <code>&lt;script type="application/json" id="material"&gt;</code> que está antes de las piezas. Todo el diseño se actualiza solo. Si le pasaste este archivo a una IA para completarlo, guardá el resultado DENTRO de esta misma carpeta "plantilla/" para que los logos sigan cargando.</li>
+      <li><strong>Posteo o historia (redes):</strong> tocá el botón "Ver en tamaño real" de esa pieza — se abre sola en una pestaña nueva, del tamaño exacto en píxeles. Sacale una captura de pantalla completa de esa pestaña con la herramienta de tu sistema operativo o navegador.</li>
+      <li><strong>Piezas para imprimir (mariposas A6, A5, A4):</strong> tocá el botón "Imprimir / Guardar PDF" de esa hoja — se abre el diálogo de impresión de tu navegador con solo esa hoja. Elegí "Guardar como PDF" o mandala directo a la impresora.</li>
       <li><strong>Revisá el texto letra por letra</strong> antes de publicar o imprimir.</li>
     </ol>
-    <div class="aviso">Si le pasaste este archivo a una IA para que lo complete: solo tiene que cambiar el bloque MATERIAL, eligiendo la variante (<code>tipografico</code> / <code>bloque</code> / <code>foto</code> / <code>consigna</code>) que mejor le quede a este contenido en particular. Nunca debe rediseñar la estructura, achicar el QR por debajo de 20×20&nbsp;mm, ni bajar el cuerpo de 9&nbsp;pt o el pie/redes/fecha de 7&nbsp;pt.</div>
+    <div class="aviso">Si le pasaste este archivo a una IA para que lo complete: solo tiene que cambiar el bloque JSON, eligiendo la variante (<code>tipografico</code> / <code>bloque</code> / <code>foto</code> / <code>consigna</code>) que mejor le quede a este contenido en particular. Nunca debe rediseñar la estructura ni el CSS, achicar el QR por debajo de 20×20&nbsp;mm, ni bajar el cuerpo de 9&nbsp;pt (A6) / 10&nbsp;pt (A5/A4) o el pie/redes/fecha de 7&nbsp;pt.</div>
   </div>
 
-  <script>
-    /* =====================================================================
-       CONTENIDO DEL MATERIAL — el único lugar que hay que editar.
-       El ejemplo de abajo es el de la charla de Tribuna Docente usada para
-       probar esta plantilla; reemplazalo por el contenido real.
-       ===================================================================== */
-    const MATERIAL = {
-      variante: 'tipografico',        // EDITAR: 'tipografico' (título grande domina, fondo blanco) | 'bloque' (campo de color a pleno, título en blanco) | 'foto' (foto real arriba, protagonista) | 'consigna' (la frase es la pieza, sin bajada ni cuerpo). Elegí la que mejor le quede al contenido: no uses siempre la misma variante en todos los materiales.
-      etiqueta: 'Charla abierta',                 // EDITAR: etiqueta/categoría chica arriba del título
-      titulo: 'IA y educación: ¿herramienta o amenaza?', // EDITAR: título o consigna principal
-      bajada: 'Inteligencia artificial en las escuelas: qué cambia en el trabajo docente', // EDITAR: bajada (opcional; dejar '' si no hace falta; se oculta sola en la variante 'consigna')
-      cuerpo: 'Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.', // EDITAR: cuerpo (opcional; dejar '' si no hace falta; se oculta solo en la variante 'consigna')
-      foto: '',                       // EDITAR: nombre de archivo de una foto real, en esta misma carpeta (ej. 'foto.jpg'). Solo se usa con variante: 'foto'. Nunca un archivo generado por IA: si lo dejás vacío, se ve un recuadro "FOTO: subí tu foto" en vez de inventar una imagen.
-      fecha_actividad: 'Jueves 8/10', // EDITAR: fecha de la actividad (vacío si no aplica)
-      hora: '19 h',                   // EDITAR: hora de la actividad
-      lugar: 'Local de San Justo · Arieta 3000', // EDITAR: lugar de la actividad
-      orden_datos: 'despues',         // EDITAR: 'despues' (bloque de fecha/hora/lugar después del cuerpo, por defecto) | 'antes' (antes del cuerpo)
-      firma: 'Tribuna Docente',       // EDITAR: agrupación que firma (tabla de la sección 8 del BRIEF)
-      logo_firma: 'tribuna-docente.png', // EDITAR: archivo exacto en logos/ (nombre y extensión tal cual)
-      logo_po: '',                    // EDITAR: archivo del logo del Partido Obrero en logos/, o '' si no se suma
-      redes: [                        // EDITAR: redes verificadas de la sección 9 del BRIEF, en el orden que quieras
-        'tribunadocente.com.ar',
-        'IG @tribunadocente',
-        'X @TD_Nacional',
-        'facebook.com/TribunaDocenteNacional'
-      ],
-      qr: true,                       // EDITAR: true = mostrar "Suscribite a Prensa Obrera" con QR; false = sacarlo
-      fecha_realizacion: '26/09/2026', // EDITAR: fecha en que se hizo este material, dd/mm/aaaa (nunca inventarla)
-      color_acento: '#BD3979'         // EDITAR: color de acento del material (por defecto, rojo PO #E84426)
-    };
-    /* Contenido de ejemplo: charla de Tribuna Docente, usada para probar esta
-       plantilla. Reemplazar por el material real antes de publicar. */
+  <div id="banner-error" class="banner-error oculto" role="alert"></div>
+
+  <!-- =====================================================================
+       CONTENIDO DEL MATERIAL — el único lugar que hay que editar. JSON
+       estricto (sin comentarios); la referencia de cada campo está en el
+       comentario grande del <head>. El ejemplo de abajo es el de la charla
+       de Tribuna Docente usada para probar esta plantilla (EJEMPLO: lugar
+       con dirección neutra a propósito) — reemplazalo por el material real.
+       ===================================================================== -->
+  <script type="application/json" id="material">
+{
+  "variante": "tipografico",
+  "etiqueta": "Charla abierta",
+  "titulo": "IA y educación: ¿herramienta o amenaza?",
+  "bajada": "Charla abierta de Tribuna Docente sobre inteligencia artificial en las escuelas",
+  "cuerpo": "Debatimos cómo afecta la IA al trabajo docente, qué usos sirven en el aula y qué intereses hay detrás de las empresas que la venden. Abierta a docentes, estudiantes y familias.",
+  "foto": "",
+  "fecha_actividad": "Jueves 8/10",
+  "hora": "19 h",
+  "lugar": "Local · Dirección (ejemplo)",
+  "orden_datos": "despues",
+  "firma": "Tribuna Docente",
+  "logo_firma": "tribuna-docente.png",
+  "logo_firma_deseado": true,
+  "logo_po": "",
+  "redes": [
+    "tribunadocente.com.ar",
+    "IG @tribunadocente",
+    "X @TD_Nacional",
+    "facebook.com/TribunaDocenteNacional"
+  ],
+  "qr": true,
+  "enlace_digital": "prensaobrera.com",
+  "fecha_realizacion": "26/09/2026",
+  "color_acento": "#BD3979"
+}
   </script>
 
-  <main class="lienzos">
+  <main class="lienzos" id="lienzos">
 
     <!-- ============ POSTEO 1080×1080 ============ -->
-    <div class="envoltorio-pieza digital">
+    <div class="envoltorio-pieza digital" data-pieza="post">
       <p class="etiqueta-pieza medida">Posteo — 1080 × 1080 px</p>
-      <div class="pieza-post" id="pieza-post" data-variante="tipografico" data-orden-datos="despues" data-largo="medio">
-        <div class="franja"></div>
-        <div class="contenido">
-          <div class="foto-area">
-            <img class="foto-img oculto" data-foto src="" alt="Foto de la actividad">
-            <div class="foto-tinte"></div>
-            <div class="foto-placeholder">FOTO: subí tu foto<br>(foto.jpg)</div>
-          </div>
-          <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
-          <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
-          <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
-          <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
-
-          <div class="bloque-datos" data-if="datos">
-            <div class="dato">
-              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              <span><span data-field="fecha_actividad">Jueves 8/10</span> · <span data-field="hora">19 h</span></span>
-            </div>
-            <div class="dato">
-              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-              <span data-field="lugar">Local de San Justo · Arieta 3000</span>
-            </div>
-          </div>
-
-          <div class="pie">
-            <div class="pie-firma">
-              <img class="logo-firma" data-logo="firma" src="../logos/tribuna-docente.png" alt="Logo de la agrupación que firma">
-              <img class="logo-po oculto" data-logo="po" src="" alt="Logo Partido Obrero">
-              <span class="nombre-firma" data-field="firma">Tribuna Docente</span>
-            </div>
-            <div class="pie-der">
-              <ul class="redes" data-field="redes">
-                <li>tribunadocente.com.ar</li>
-                <li>IG @tribunadocente</li>
-                <li>X @TD_Nacional</li>
-                <li>facebook.com/TribunaDocenteNacional</li>
-              </ul>
-              <div class="qr-bloque" data-if="qr">
-                <img src="../logos/qr-suscribite-prensa-obrera.png" alt="Código QR: Suscribite a Prensa Obrera">
-                <span class="qr-texto"><strong>Suscribite a Prensa Obrera</strong><br>prensaobrera.com/bancar-a-prensa-obrera</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
-      </div>
+      <div class="acciones-pieza"><button type="button" data-accion="ver" data-pieza="post">Ver en tamaño real</button></div>
+      <div class="pieza formato-post" id="pieza-post" data-formato="post"></div>
     </div>
 
     <!-- ============ HISTORIA 1080×1920 ============ -->
-    <div class="envoltorio-pieza digital">
+    <div class="envoltorio-pieza digital" data-pieza="story">
       <p class="etiqueta-pieza medida">Historia — 1080 × 1920 px (250 px libres arriba y abajo)</p>
-      <div class="pieza-story" id="pieza-story" data-variante="tipografico" data-orden-datos="despues" data-largo="medio">
-        <div class="zona-segura arriba"></div>
-        <div class="franja"></div>
-        <div class="contenido">
-          <div class="foto-area">
-            <img class="foto-img oculto" data-foto src="" alt="Foto de la actividad">
-            <div class="foto-tinte"></div>
-            <div class="foto-placeholder">FOTO: subí tu foto<br>(foto.jpg)</div>
-          </div>
-          <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
-          <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
-          <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
-          <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
-
-          <div class="bloque-datos" data-if="datos">
-            <div class="dato">
-              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              <span><span data-field="fecha_actividad">Jueves 8/10</span> · <span data-field="hora">19 h</span></span>
-            </div>
-            <div class="dato">
-              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-              <span data-field="lugar">Local de San Justo · Arieta 3000</span>
-            </div>
-          </div>
-
-          <div class="pie">
-            <div class="pie-firma">
-              <img class="logo-firma" data-logo="firma" src="../logos/tribuna-docente.png" alt="Logo de la agrupación que firma">
-              <img class="logo-po oculto" data-logo="po" src="" alt="Logo Partido Obrero">
-              <span class="nombre-firma" data-field="firma">Tribuna Docente</span>
-            </div>
-            <div class="pie-der">
-              <ul class="redes" data-field="redes">
-                <li>tribunadocente.com.ar</li>
-                <li>IG @tribunadocente</li>
-                <li>X @TD_Nacional</li>
-                <li>facebook.com/TribunaDocenteNacional</li>
-              </ul>
-              <div class="qr-bloque" data-if="qr">
-                <img src="../logos/qr-suscribite-prensa-obrera.png" alt="Código QR: Suscribite a Prensa Obrera">
-                <span class="qr-texto"><strong>Suscribite a Prensa Obrera</strong><br>prensaobrera.com/bancar-a-prensa-obrera</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
-        <div class="zona-segura abajo"></div>
-      </div>
+      <div class="acciones-pieza"><button type="button" data-accion="ver" data-pieza="story">Ver en tamaño real</button></div>
+      <div class="pieza formato-story" id="pieza-story" data-formato="story"></div>
     </div>
 
-    <!-- ============ HOJA A4 · 4 MARIPOSAS A6 · COLOR ============ -->
-    <div class="envoltorio-pieza">
+    <!-- ============ HOJA A6 · 4 MARIPOSAS · COLOR ============ -->
+    <div class="envoltorio-pieza" data-pieza="a6-color">
       <p class="etiqueta-pieza medida">Hoja A6 para imprenta o fotocopia — A4, 4 mariposas (color)</p>
-      <div class="hoja-a6" id="hoja-a6-color">
-        <!-- Las 4 mariposas son idénticas: el script las completa a todas desde MATERIAL -->
-        <div class="mariposa" data-variante="tipografico" data-orden-datos="despues" data-largo="medio">
-          <div class="foto-area">
-            <img class="foto-img oculto" data-foto src="" alt="Foto de la actividad">
-            <div class="foto-tinte"></div>
-            <div class="foto-placeholder">FOTO: subí tu foto<br>(foto.jpg)</div>
-          </div>
-          <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
-          <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
-          <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
-          <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
-          <div class="bloque-datos" data-if="datos">
-            <div class="dato">
-              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              <span><span data-field="fecha_actividad">Jueves 8/10</span> · <span data-field="hora">19 h</span></span>
-            </div>
-            <div class="dato">
-              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-              <span data-field="lugar">Local de San Justo · Arieta 3000</span>
-            </div>
-          </div>
-          <div class="pie">
-            <div class="pie-firma">
-              <img class="logo-firma" data-logo="firma" src="../logos/tribuna-docente.png" alt="Logo de la agrupación que firma">
-              <img class="logo-po oculto" data-logo="po" src="" alt="Logo Partido Obrero">
-              <span class="nombre-firma" data-field="firma">Tribuna Docente</span>
-            </div>
-            <div class="pie-der">
-              <div class="qr-bloque" data-if="qr">
-                <img src="../logos/qr-suscribite-prensa-obrera.png" alt="Código QR: Suscribite a Prensa Obrera">
-              </div>
-              <ul class="redes" data-field="redes">
-                <li>tribunadocente.com.ar</li>
-                <li>IG @tribunadocente</li>
-                <li>X @TD_Nacional</li>
-                <li>facebook.com/TribunaDocenteNacional</li>
-              </ul>
-            </div>
-          </div>
-          <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
-        </div>
-
-        <div class="mariposa" data-variante="tipografico" data-orden-datos="despues" data-largo="medio">
-          <div class="foto-area">
-            <img class="foto-img oculto" data-foto src="" alt="Foto de la actividad">
-            <div class="foto-tinte"></div>
-            <div class="foto-placeholder">FOTO: subí tu foto<br>(foto.jpg)</div>
-          </div>
-          <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
-          <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
-          <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
-          <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
-          <div class="bloque-datos" data-if="datos">
-            <div class="dato">
-              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              <span><span data-field="fecha_actividad">Jueves 8/10</span> · <span data-field="hora">19 h</span></span>
-            </div>
-            <div class="dato">
-              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-              <span data-field="lugar">Local de San Justo · Arieta 3000</span>
-            </div>
-          </div>
-          <div class="pie">
-            <div class="pie-firma">
-              <img class="logo-firma" data-logo="firma" src="../logos/tribuna-docente.png" alt="Logo de la agrupación que firma">
-              <img class="logo-po oculto" data-logo="po" src="" alt="Logo Partido Obrero">
-              <span class="nombre-firma" data-field="firma">Tribuna Docente</span>
-            </div>
-            <div class="pie-der">
-              <div class="qr-bloque" data-if="qr">
-                <img src="../logos/qr-suscribite-prensa-obrera.png" alt="Código QR: Suscribite a Prensa Obrera">
-              </div>
-              <ul class="redes" data-field="redes">
-                <li>tribunadocente.com.ar</li>
-                <li>IG @tribunadocente</li>
-                <li>X @TD_Nacional</li>
-                <li>facebook.com/TribunaDocenteNacional</li>
-              </ul>
-            </div>
-          </div>
-          <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
-        </div>
-
-        <div class="mariposa" data-variante="tipografico" data-orden-datos="despues" data-largo="medio">
-          <div class="foto-area">
-            <img class="foto-img oculto" data-foto src="" alt="Foto de la actividad">
-            <div class="foto-tinte"></div>
-            <div class="foto-placeholder">FOTO: subí tu foto<br>(foto.jpg)</div>
-          </div>
-          <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
-          <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
-          <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
-          <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
-          <div class="bloque-datos" data-if="datos">
-            <div class="dato">
-              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              <span><span data-field="fecha_actividad">Jueves 8/10</span> · <span data-field="hora">19 h</span></span>
-            </div>
-            <div class="dato">
-              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-              <span data-field="lugar">Local de San Justo · Arieta 3000</span>
-            </div>
-          </div>
-          <div class="pie">
-            <div class="pie-firma">
-              <img class="logo-firma" data-logo="firma" src="../logos/tribuna-docente.png" alt="Logo de la agrupación que firma">
-              <img class="logo-po oculto" data-logo="po" src="" alt="Logo Partido Obrero">
-              <span class="nombre-firma" data-field="firma">Tribuna Docente</span>
-            </div>
-            <div class="pie-der">
-              <div class="qr-bloque" data-if="qr">
-                <img src="../logos/qr-suscribite-prensa-obrera.png" alt="Código QR: Suscribite a Prensa Obrera">
-              </div>
-              <ul class="redes" data-field="redes">
-                <li>tribunadocente.com.ar</li>
-                <li>IG @tribunadocente</li>
-                <li>X @TD_Nacional</li>
-                <li>facebook.com/TribunaDocenteNacional</li>
-              </ul>
-            </div>
-          </div>
-          <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
-        </div>
-
-        <div class="mariposa" data-variante="tipografico" data-orden-datos="despues" data-largo="medio">
-          <div class="foto-area">
-            <img class="foto-img oculto" data-foto src="" alt="Foto de la actividad">
-            <div class="foto-tinte"></div>
-            <div class="foto-placeholder">FOTO: subí tu foto<br>(foto.jpg)</div>
-          </div>
-          <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
-          <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
-          <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
-          <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
-          <div class="bloque-datos" data-if="datos">
-            <div class="dato">
-              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              <span><span data-field="fecha_actividad">Jueves 8/10</span> · <span data-field="hora">19 h</span></span>
-            </div>
-            <div class="dato">
-              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-              <span data-field="lugar">Local de San Justo · Arieta 3000</span>
-            </div>
-          </div>
-          <div class="pie">
-            <div class="pie-firma">
-              <img class="logo-firma" data-logo="firma" src="../logos/tribuna-docente.png" alt="Logo de la agrupación que firma">
-              <img class="logo-po oculto" data-logo="po" src="" alt="Logo Partido Obrero">
-              <span class="nombre-firma" data-field="firma">Tribuna Docente</span>
-            </div>
-            <div class="pie-der">
-              <div class="qr-bloque" data-if="qr">
-                <img src="../logos/qr-suscribite-prensa-obrera.png" alt="Código QR: Suscribite a Prensa Obrera">
-              </div>
-              <ul class="redes" data-field="redes">
-                <li>tribunadocente.com.ar</li>
-                <li>IG @tribunadocente</li>
-                <li>X @TD_Nacional</li>
-                <li>facebook.com/TribunaDocenteNacional</li>
-              </ul>
-            </div>
-          </div>
-          <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
-        </div>
-      </div>
+      <div class="acciones-pieza"><button type="button" data-accion="imprimir" data-pieza="a6-color" data-tam="A4">Imprimir / Guardar PDF</button></div>
+      <div class="hoja-a6" id="hoja-a6-color" data-modo="color"></div>
     </div>
 
-    <!-- ============ HOJA A4 · 4 MARIPOSAS A6 · BLANCO Y NEGRO (fotocopia) ============ -->
-    <div class="envoltorio-pieza">
-      <p class="etiqueta-pieza medida">Hoja A6 para fotocopia — A4, 4 mariposas (blanco y negro puro)</p>
-      <div class="hoja-a6 bn" id="hoja-a6-bn">
-        <div class="mariposa" data-variante="tipografico" data-orden-datos="despues" data-largo="medio">
-          <div class="foto-area">
-            <img class="foto-img oculto" data-foto src="" alt="Foto de la actividad">
-            <div class="foto-tinte"></div>
-            <div class="foto-placeholder">FOTO: subí tu foto<br>(foto.jpg)</div>
-          </div>
-          <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
-          <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
-          <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
-          <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
-          <div class="bloque-datos" data-if="datos">
-            <div class="dato">
-              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              <span><span data-field="fecha_actividad">Jueves 8/10</span> · <span data-field="hora">19 h</span></span>
-            </div>
-            <div class="dato">
-              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-              <span data-field="lugar">Local de San Justo · Arieta 3000</span>
-            </div>
-          </div>
-          <div class="pie">
-            <div class="pie-firma">
-              <img class="logo-firma" data-logo="firma" src="../logos/tribuna-docente.png" alt="Logo de la agrupación que firma">
-              <img class="logo-po oculto" data-logo="po" src="" alt="Logo Partido Obrero">
-              <span class="nombre-firma" data-field="firma">Tribuna Docente</span>
-            </div>
-            <div class="pie-der">
-              <div class="qr-bloque" data-if="qr">
-                <img src="../logos/qr-suscribite-prensa-obrera.png" alt="Código QR: Suscribite a Prensa Obrera">
-              </div>
-              <ul class="redes" data-field="redes">
-                <li>tribunadocente.com.ar</li>
-                <li>IG @tribunadocente</li>
-                <li>X @TD_Nacional</li>
-                <li>facebook.com/TribunaDocenteNacional</li>
-              </ul>
-            </div>
-          </div>
-          <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
-        </div>
+    <!-- ============ HOJA A6 · 4 MARIPOSAS · BLANCO Y NEGRO REAL ============ -->
+    <div class="envoltorio-pieza" data-pieza="a6-bn">
+      <p class="etiqueta-pieza medida">Hoja A6 para fotocopia — A4, 4 mariposas (blanco y negro real, sin filtro de grises)</p>
+      <div class="acciones-pieza"><button type="button" data-accion="imprimir" data-pieza="a6-bn" data-tam="A4">Imprimir / Guardar PDF</button></div>
+      <div class="hoja-a6" id="hoja-a6-bn" data-modo="bn"></div>
+    </div>
 
-        <div class="mariposa" data-variante="tipografico" data-orden-datos="despues" data-largo="medio">
-          <div class="foto-area">
-            <img class="foto-img oculto" data-foto src="" alt="Foto de la actividad">
-            <div class="foto-tinte"></div>
-            <div class="foto-placeholder">FOTO: subí tu foto<br>(foto.jpg)</div>
-          </div>
-          <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
-          <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
-          <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
-          <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
-          <div class="bloque-datos" data-if="datos">
-            <div class="dato">
-              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              <span><span data-field="fecha_actividad">Jueves 8/10</span> · <span data-field="hora">19 h</span></span>
-            </div>
-            <div class="dato">
-              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-              <span data-field="lugar">Local de San Justo · Arieta 3000</span>
-            </div>
-          </div>
-          <div class="pie">
-            <div class="pie-firma">
-              <img class="logo-firma" data-logo="firma" src="../logos/tribuna-docente.png" alt="Logo de la agrupación que firma">
-              <img class="logo-po oculto" data-logo="po" src="" alt="Logo Partido Obrero">
-              <span class="nombre-firma" data-field="firma">Tribuna Docente</span>
-            </div>
-            <div class="pie-der">
-              <div class="qr-bloque" data-if="qr">
-                <img src="../logos/qr-suscribite-prensa-obrera.png" alt="Código QR: Suscribite a Prensa Obrera">
-              </div>
-              <ul class="redes" data-field="redes">
-                <li>tribunadocente.com.ar</li>
-                <li>IG @tribunadocente</li>
-                <li>X @TD_Nacional</li>
-                <li>facebook.com/TribunaDocenteNacional</li>
-              </ul>
-            </div>
-          </div>
-          <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
-        </div>
+    <!-- ============ A5 (148 × 210 mm) ============ -->
+    <div class="envoltorio-pieza" data-pieza="a5">
+      <p class="etiqueta-pieza medida">Volante A5 — 148 × 210 mm (3 mm de resguardo + marcas de corte)</p>
+      <div class="acciones-pieza"><button type="button" data-accion="imprimir" data-pieza="a5" data-tam="A5">Imprimir / Guardar PDF</button></div>
+      <div class="lienzo-print tam-a5" id="pieza-a5" data-formato="a5"></div>
+    </div>
 
-        <div class="mariposa" data-variante="tipografico" data-orden-datos="despues" data-largo="medio">
-          <div class="foto-area">
-            <img class="foto-img oculto" data-foto src="" alt="Foto de la actividad">
-            <div class="foto-tinte"></div>
-            <div class="foto-placeholder">FOTO: subí tu foto<br>(foto.jpg)</div>
-          </div>
-          <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
-          <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
-          <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
-          <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
-          <div class="bloque-datos" data-if="datos">
-            <div class="dato">
-              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              <span><span data-field="fecha_actividad">Jueves 8/10</span> · <span data-field="hora">19 h</span></span>
-            </div>
-            <div class="dato">
-              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-              <span data-field="lugar">Local de San Justo · Arieta 3000</span>
-            </div>
-          </div>
-          <div class="pie">
-            <div class="pie-firma">
-              <img class="logo-firma" data-logo="firma" src="../logos/tribuna-docente.png" alt="Logo de la agrupación que firma">
-              <img class="logo-po oculto" data-logo="po" src="" alt="Logo Partido Obrero">
-              <span class="nombre-firma" data-field="firma">Tribuna Docente</span>
-            </div>
-            <div class="pie-der">
-              <div class="qr-bloque" data-if="qr">
-                <img src="../logos/qr-suscribite-prensa-obrera.png" alt="Código QR: Suscribite a Prensa Obrera">
-              </div>
-              <ul class="redes" data-field="redes">
-                <li>tribunadocente.com.ar</li>
-                <li>IG @tribunadocente</li>
-                <li>X @TD_Nacional</li>
-                <li>facebook.com/TribunaDocenteNacional</li>
-              </ul>
-            </div>
-          </div>
-          <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
-        </div>
-
-        <div class="mariposa" data-variante="tipografico" data-orden-datos="despues" data-largo="medio">
-          <div class="foto-area">
-            <img class="foto-img oculto" data-foto src="" alt="Foto de la actividad">
-            <div class="foto-tinte"></div>
-            <div class="foto-placeholder">FOTO: subí tu foto<br>(foto.jpg)</div>
-          </div>
-          <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
-          <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
-          <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
-          <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
-          <div class="bloque-datos" data-if="datos">
-            <div class="dato">
-              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              <span><span data-field="fecha_actividad">Jueves 8/10</span> · <span data-field="hora">19 h</span></span>
-            </div>
-            <div class="dato">
-              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
-              <span data-field="lugar">Local de San Justo · Arieta 3000</span>
-            </div>
-          </div>
-          <div class="pie">
-            <div class="pie-firma">
-              <img class="logo-firma" data-logo="firma" src="../logos/tribuna-docente.png" alt="Logo de la agrupación que firma">
-              <img class="logo-po oculto" data-logo="po" src="" alt="Logo Partido Obrero">
-              <span class="nombre-firma" data-field="firma">Tribuna Docente</span>
-            </div>
-            <div class="pie-der">
-              <div class="qr-bloque" data-if="qr">
-                <img src="../logos/qr-suscribite-prensa-obrera.png" alt="Código QR: Suscribite a Prensa Obrera">
-              </div>
-              <ul class="redes" data-field="redes">
-                <li>tribunadocente.com.ar</li>
-                <li>IG @tribunadocente</li>
-                <li>X @TD_Nacional</li>
-                <li>facebook.com/TribunaDocenteNacional</li>
-              </ul>
-            </div>
-          </div>
-          <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
-        </div>
-      </div>
+    <!-- ============ A4 (210 × 297 mm) ============ -->
+    <div class="envoltorio-pieza" data-pieza="a4">
+      <p class="etiqueta-pieza medida">Afiche A4 — 210 × 297 mm (3 mm de resguardo + marcas de corte)</p>
+      <div class="acciones-pieza"><button type="button" data-accion="imprimir" data-pieza="a4" data-tam="A4">Imprimir / Guardar PDF</button></div>
+      <div class="lienzo-print tam-a4" id="pieza-a4" data-formato="a4"></div>
     </div>
 
   </main>
 
+  <style id="estilo-pagina-dinamico"></style>
+
   <script>
-    /* =====================================================================
-       Aplica MATERIAL a todas las piezas. Si esto no llega a ejecutarse
-       (JavaScript desactivado), el contenido de ejemplo de arriba queda
-       visible tal cual, así que la página nunca se ve vacía o rota.
-       ===================================================================== */
-    (function aplicarMaterial(m) {
-      try {
-        document.documentElement.style.setProperty('--acento', m.color_acento || '#E84426');
+  /* ===========================================================================
+     MOTOR DE ARMADO — UNA sola función construye cada pieza (posteo, historia,
+     mariposa ×4, A5, A4) a partir del bloque JSON de arriba. Nada de markup
+     repetido a mano: si hay que cambiar el diseño, se cambia acá una vez.
+     =========================================================================== */
+  (function () {
+    'use strict';
 
-        // Raíces de cada pieza (posteo, historia, cada mariposa): ahí van
-        // los atributos data-variante / data-orden-datos / data-largo que
-        // maneja el CSS de las variantes de composición.
-        var raices = document.querySelectorAll('#pieza-post, #pieza-story, .mariposa');
-        var variante = m.variante || 'tipografico';
-        var ordenDatos = m.orden_datos || 'despues';
-        var largoTitulo = (function (titulo) {
-          var len = (titulo || '').length;
-          if (len <= 22) return 'corto';
-          if (len <= 46) return 'medio';
-          return 'largo';
-        })(m.titulo);
-        raices.forEach(function (raiz) {
-          raiz.dataset.variante = variante;
-          raiz.dataset.ordenDatos = ordenDatos;
-          raiz.dataset.largo = largoTitulo;
-        });
-
-        // Foto real (solo se ve con variante 'foto'): si no hay archivo,
-        // queda el recuadro "FOTO: subí tu foto" en vez de una imagen
-        // generada o inventada.
-        document.querySelectorAll('[data-foto]').forEach(function (img) {
-          if (m.foto) {
-            img.src = m.foto;
-            img.alt = 'Foto de la actividad';
-            img.classList.remove('oculto');
-          } else {
-            img.classList.add('oculto');
-          }
-        });
-
-        var campos = ['etiqueta', 'titulo', 'bajada', 'cuerpo', 'fecha_actividad', 'hora', 'lugar', 'firma', 'fecha_realizacion'];
-        campos.forEach(function (campo) {
-          var valor = m[campo] || '';
-          document.querySelectorAll('[data-field="' + campo + '"]').forEach(function (el) {
-            el.textContent = valor;
-          });
-        });
-
-        // Redes: se reconstruye la lista completa en cada lugar donde aparece.
-        document.querySelectorAll('[data-field="redes"]').forEach(function (ul) {
-          ul.innerHTML = '';
-          (m.redes || []).forEach(function (red) {
-            var li = document.createElement('li');
-            li.textContent = red;
-            ul.appendChild(li);
-          });
-        });
-
-        // Logo de la agrupación que firma.
-        document.querySelectorAll('[data-logo="firma"]').forEach(function (img) {
-          if (m.logo_firma) {
-            img.src = '../logos/' + m.logo_firma;
-            img.alt = 'Logo de ' + (m.firma || 'la agrupación que firma');
-          }
-        });
-
-        // Logo opcional del Partido Obrero (co-firma).
-        document.querySelectorAll('[data-logo="po"]').forEach(function (img) {
-          if (m.logo_po) {
-            img.src = '../logos/' + m.logo_po;
-            img.classList.remove('oculto');
-          } else {
-            img.classList.add('oculto');
-          }
-        });
-
-        // Bloque "Suscribite a Prensa Obrera" con QR: se apaga y el pie se
-        // reacomoda solo porque es flexbox (no queda un hueco vacío).
-        document.querySelectorAll('[data-if="qr"]').forEach(function (el) {
-          el.classList.toggle('oculto', !m.qr);
-        });
-
-        // Bloque de fecha/hora/lugar: si no hay actividad (fecha vacía), se
-        // saca del diseño para no dejar una caja vacía.
-        var hayDatos = !!(m.fecha_actividad || m.hora || m.lugar);
-        document.querySelectorAll('[data-if="datos"]').forEach(function (el) {
-          el.classList.toggle('oculto', !hayDatos);
-        });
-
-        // Bajada y cuerpo son opcionales: si vienen vacíos, se ocultan.
-        document.querySelectorAll('[data-field="bajada"]').forEach(function (el) {
-          el.closest('p').classList.toggle('oculto', !m.bajada);
-        });
-        document.querySelectorAll('[data-field="cuerpo"]').forEach(function (el) {
-          el.closest('p').classList.toggle('oculto', !m.cuerpo);
-        });
-      } catch (e) {
-        // Si algo falla, no rompe la página: queda el contenido de ejemplo.
-        console.error('No se pudo aplicar MATERIAL, se muestra el contenido de ejemplo.', e);
+    function el(tag, attrs, children) {
+      var n = document.createElement(tag);
+      for (var k in (attrs || {})) {
+        if (k === 'class') n.className = attrs[k];
+        else if (k === 'text') n.textContent = attrs[k];
+        else if (k === 'html') n.innerHTML = attrs[k];
+        else n.setAttribute(k, attrs[k]);
       }
-    })(MATERIAL);
+      (children || []).forEach(function (c) { if (c) n.appendChild(c); });
+      return n;
+    }
+
+    function mostrarError(mensaje) {
+      var banner = document.getElementById('banner-error');
+      banner.innerHTML = '<h2>No se pudo armar el material</h2><p>' + mensaje + '</p><p>Revisá el bloque <code>&lt;script type="application/json" id="material"&gt;</code>: tiene que ser JSON válido y completar al menos <code>titulo</code>, <code>firma</code> y <code>fecha_realizacion</code> (formato dd/mm/aaaa).</p>';
+      banner.classList.remove('oculto');
+    }
+
+    function validar(raw) {
+      var problemas = [];
+      if (!raw || typeof raw !== 'object') { problemas.push('El contenido no es un objeto JSON válido.'); return problemas; }
+      if (!raw.titulo || !String(raw.titulo).trim()) problemas.push('Falta "titulo".');
+      if (!raw.firma || !String(raw.firma).trim()) problemas.push('Falta "firma".');
+      if (!raw.fecha_realizacion || !/^\d{2}\/\d{2}\/\d{4}$/.test(raw.fecha_realizacion)) problemas.push('Falta o es inválida "fecha_realizacion" (formato dd/mm/aaaa).');
+      var variantesValidas = ['tipografico', 'bloque', 'foto', 'consigna'];
+      if (raw.variante && variantesValidas.indexOf(raw.variante) === -1) problemas.push('"variante" tiene que ser tipografico, bloque, foto o consigna.');
+      return problemas;
+    }
+
+    function normalizar(raw) {
+      return {
+        variante: raw.variante || 'tipografico',
+        etiqueta: raw.etiqueta || '',
+        titulo: raw.titulo,
+        bajada: raw.bajada || '',
+        cuerpo: raw.cuerpo || '',
+        foto: raw.foto || '',
+        fecha_actividad: raw.fecha_actividad || '',
+        hora: raw.hora || '',
+        lugar: raw.lugar || '',
+        orden_datos: raw.orden_datos === 'antes' ? 'antes' : 'despues',
+        firma: raw.firma,
+        logo_firma: raw.logo_firma || '',
+        logo_firma_deseado: raw.logo_firma_deseado !== false,
+        logo_po: raw.logo_po || '',
+        redes: Array.isArray(raw.redes) ? raw.redes : [],
+        qr: !!raw.qr,
+        enlace_digital: raw.enlace_digital || 'prensaobrera.com',
+        fecha_realizacion: raw.fecha_realizacion,
+        color_acento: raw.color_acento || '#E84426'
+      };
+    }
+
+    function largoTitulo(t) {
+      var len = (t || '').length;
+      if (len <= 24) return 'corto';
+      if (len <= 50) return 'medio';
+      return 'largo';
+    }
+
+    function crearFoto(m) {
+      var img = el('img', { class: 'foto-img' + (m.foto ? '' : ' oculto'), alt: 'Foto de la actividad', src: m.foto || '' });
+      img.addEventListener('error', function () { img.classList.add('oculto'); placeholder.classList.remove('oculto'); });
+      var placeholder = el('div', { class: 'foto-placeholder' + (m.foto ? ' oculto' : ''), html: 'FOTO: subí tu foto<br>(foto.jpg)' });
+      return el('div', { class: 'foto-area' }, [img, el('div', { class: 'foto-tinte' }), placeholder]);
+    }
+
+    function crearDatos(m) {
+      if (!m.fecha_actividad && !m.hora && !m.lugar) return null;
+      var filas = [];
+      if (m.fecha_actividad || m.hora) {
+        var texto = [m.fecha_actividad, m.hora].filter(Boolean).join(' · ');
+        filas.push(el('div', { class: 'dato' }, [iconoCalendario(), el('span', { text: texto })]));
+      }
+      if (m.lugar) filas.push(el('div', { class: 'dato' }, [iconoPin(), el('span', { text: m.lugar })]));
+      return el('div', { class: 'bloque-datos' }, filas);
+    }
+
+    function svg(pathHtml) {
+      var s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      s.setAttribute('class', 'icono'); s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('fill', 'none');
+      s.setAttribute('stroke', 'currentColor'); s.setAttribute('stroke-width', '2'); s.setAttribute('stroke-linecap', 'round');
+      s.setAttribute('stroke-linejoin', 'round'); s.setAttribute('aria-hidden', 'true'); s.innerHTML = pathHtml; return s;
+    }
+    function iconoCalendario() { return svg('<rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/>'); }
+    function iconoPin() { return svg('<path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/>'); }
+
+    function crearFirma(m) {
+      var hijos = [];
+      if (m.logo_firma) {
+        var caja = el('div', { class: 'logo-caja oculto', text: 'LOGO: ' + m.firma });
+        var img = el('img', { class: 'logo-firma', alt: 'Logo de ' + m.firma, src: '../logos/' + m.logo_firma });
+        img.addEventListener('error', function () { img.classList.add('oculto'); caja.classList.remove('oculto'); });
+        hijos.push(img, caja);
+      } else if (m.logo_firma_deseado) {
+        hijos.push(el('div', { class: 'logo-caja', text: 'LOGO: ' + m.firma }));
+      } else {
+        hijos.push(el('span', { class: 'nombre-firma', text: m.firma }));
+      }
+      if (m.logo_po) {
+        var logoPo = el('img', { class: 'logo-po', alt: 'Logo Partido Obrero', src: '../logos/' + m.logo_po });
+        logoPo.addEventListener('error', function () { logoPo.classList.add('oculto'); });
+        hijos.push(logoPo);
+      }
+      // Si hay logo (real o recuadro pedido) no repetimos el nombre como texto
+      // aparte, para no duplicar información en un pie ya ajustado (H3).
+      return el('div', { class: 'pie-firma' }, hijos);
+    }
+
+    function crearPie(m, esImpreso) {
+      var redesAMostrar = esImpreso ? m.redes : m.redes.slice(0, 3);
+      var listaRedes = el('ul', { class: 'redes' }, redesAMostrar.map(function (r) { return el('li', { text: r }); }));
+      var derecha = [listaRedes];
+      if (m.qr) {
+        if (esImpreso) {
+          var img = el('img', { alt: 'Código QR: Suscribite a Prensa Obrera', src: '../logos/qr-suscribite-prensa-obrera.png' });
+          derecha.push(el('div', { class: 'qr-bloque' }, [img, el('span', { class: 'qr-texto', html: '<strong>Suscribite a Prensa Obrera</strong>' })]));
+        } else {
+          derecha.push(el('div', { class: 'suscribite-texto', html: '<strong>Suscribite a Prensa Obrera</strong><br>' + m.enlace_digital }));
+        }
+      }
+      return el('div', { class: 'pie' }, [crearFirma(m), el('div', { class: 'pie-der' }, derecha)]);
+    }
+
+    function crearPieza(m, formato, modo) {
+      var claseFormato = formato === 'mariposa' ? 'formato-mariposa' : 'formato-' + formato;
+      var esImpreso = formato === 'mariposa' || formato === 'a5' || formato === 'a4';
+      var raiz = el('div', {
+        class: 'pieza ' + claseFormato,
+        'data-formato': formato, 'data-variante': m.variante, 'data-orden-datos': m.orden_datos, 'data-largo': largoTitulo(m.titulo)
+      });
+      if (modo) raiz.setAttribute('data-modo', modo);
+
+      var fotoArea = crearFoto(m);
+      var etiquetaEl = el('p', { class: 'etiqueta', text: m.etiqueta });
+      var tituloEl = el('h1', { class: 'titulo', text: m.titulo });
+      var bajada = m.bajada ? el('p', { class: 'bajada', text: m.bajada }) : null;
+      var cuerpo = m.cuerpo ? el('p', { class: 'cuerpo', text: m.cuerpo }) : null;
+      var datos = crearDatos(m);
+      var pie = crearPie(m, esImpreso);
+      var fecha = el('div', { class: 'fecha-realizacion', text: m.fecha_realizacion });
+
+      var contenido = el('div', { class: 'contenido' }, [fotoArea, etiquetaEl, tituloEl, bajada, cuerpo, datos, pie, fecha]);
+      raiz.appendChild(el('div', { class: 'campo-diagonal' }));
+      raiz.appendChild(el('div', { class: 'franja' }));
+      raiz.appendChild(contenido);
+      raiz.appendChild(el('div', { class: 'aviso-desborde oculto', text: 'El título es demasiado largo para este formato: acortalo' }));
+      return raiz;
+    }
+
+    function ajustarEscala(pieza) {
+      var contenido = pieza.querySelector('.contenido');
+      if (!contenido) return;
+      var titulo = pieza.querySelector('.titulo');
+      var bajada = pieza.querySelector('.bajada');
+      var min = 0.5, paso = 0.05, escala = 1;
+      pieza.style.setProperty('--escala-fit', '1');
+      function anchoDesborda(n) { return !!n && n.scrollWidth > n.clientWidth + 1; }
+      function desborda() {
+        return contenido.scrollHeight > contenido.clientHeight + 1 || anchoDesborda(titulo) || anchoDesborda(bajada);
+      }
+      while (escala > min && desborda()) {
+        escala = Math.round((escala - paso) * 100) / 100;
+        pieza.style.setProperty('--escala-fit', String(escala));
+      }
+      // Última instancia: si al tamaño mínimo todavía desborda, se permite
+      // cortar una palabra larga (nunca truncar con "…" ni dejarla oculta
+      // fuera de la pieza) y se muestra el aviso en pantalla.
+      var aviso = pieza.querySelector('.aviso-desborde');
+      if (desborda()) {
+        pieza.classList.add('ultimo-recurso');
+        if (aviso) aviso.classList.remove('oculto');
+      } else if (aviso) {
+        aviso.classList.add('oculto');
+      }
+      // Campo diagonal de la variante "bloque": su límite inferior sigue al
+      // bloque etiqueta+título ya escalado, con un margen, para que la
+      // bajada nunca quede a caballo entre el campo de color y el blanco.
+      if (pieza.dataset.variante === 'bloque' && titulo) {
+        var rPieza = pieza.getBoundingClientRect();
+        var rTitulo = titulo.getBoundingClientRect();
+        var pct = ((rTitulo.bottom - rPieza.top) / rPieza.height) * 100 + 9;
+        pieza.style.setProperty('--fin-diagonal', Math.min(pct, 92).toFixed(1) + '%');
+      }
+    }
+
+    function renderTodo(m) {
+      document.documentElement.style.setProperty('--acento', m.color_acento);
+      var post = document.getElementById('pieza-post'); post.replaceChildren(crearPieza(m, 'post'));
+      var story = document.getElementById('pieza-story'); story.replaceChildren(crearPieza(m, 'story'));
+      var a5 = document.getElementById('pieza-a5'); a5.replaceChildren(crearPieza(m, 'a5'));
+      var a4 = document.getElementById('pieza-a4'); a4.replaceChildren(crearPieza(m, 'a4'));
+      ['color', 'bn'].forEach(function (modo) {
+        var hoja = document.getElementById('hoja-a6-' + modo);
+        var piezas = [];
+        for (var i = 0; i < 4; i++) piezas.push(crearPieza(m, 'mariposa', modo));
+        hoja.replaceChildren.apply(hoja, piezas);
+      });
+      document.querySelectorAll('.pieza').forEach(ajustarEscala);
+      colocarMarcasDeCorte();
+      // La tipografía Anton está embebida pero puede terminar de decodificar
+      // después de este primer ajuste; se vuelve a medir cuando la fuente
+      // está lista para no dejar un ajuste calculado con la fuente de
+      // reemplazo (evita un desborde silencioso de unos pocos píxeles).
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function () {
+          document.querySelectorAll('.pieza').forEach(ajustarEscala);
+        });
+      }
+    }
+
+    function colocarMarcasDeCorte() {
+      [['pieza-a5', 3], ['pieza-a4', 3]].forEach(function (par) {
+        var cont = document.getElementById(par[0]);
+        if (!cont || cont.dataset.marcado) return;
+        cont.dataset.marcado = '1';
+        var s = par[1] + 'mm';
+        [
+          ['h', s, s], ['v', s, s],
+          ['h', 'calc(100% - ' + s + ' - 5mm)', s], ['v', 'calc(100% - ' + s + ')', s],
+          ['h', s, 'calc(100% - ' + s + ')'], ['v', s, 'calc(100% - ' + s + ' - 5mm)'],
+          ['h', 'calc(100% - ' + s + ' - 5mm)', 'calc(100% - ' + s + ')'], ['v', 'calc(100% - ' + s + ')', 'calc(100% - ' + s + ' - 5mm)']
+        ].forEach(function (m) {
+          var marca = el('div', { class: 'marca-corte ' + m[0] });
+          marca.style.left = m[1]; marca.style.top = m[2];
+          cont.appendChild(marca);
+        });
+      });
+    }
+
+    // -------------------------------------------------------------------
+    // Arranque: parsear el JSON, validar, y armar (o mostrar el aviso rojo
+    // y no dibujar nada imprimible si algo obligatorio falta o el JSON es
+    // inválido — nunca se cae a un contenido de ejemplo).
+    // -------------------------------------------------------------------
+    try {
+      var crudo = JSON.parse(document.getElementById('material').textContent);
+      var problemas = validar(crudo);
+      if (problemas.length) { mostrarError(problemas.join(' ')); }
+      else { renderTodo(normalizar(crudo)); }
+    } catch (e) {
+      mostrarError('El JSON no se pudo interpretar (' + e.message + ').');
+    }
+
+    // -------------------------------------------------------------------
+    // Botones "Ver en tamaño real" / "Imprimir / Guardar PDF".
+    // -------------------------------------------------------------------
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-accion]');
+      if (!btn) return;
+      var accion = btn.dataset.accion, pieza = btn.dataset.pieza;
+      if (accion === 'ver') {
+        window.open(location.pathname + location.search + '#ver=' + pieza, '_blank');
+      } else if (accion === 'imprimir') {
+        document.body.setAttribute('data-imprimiendo', pieza);
+        document.getElementById('estilo-pagina-dinamico').textContent = '@page { size: ' + (btn.dataset.tam || 'A4') + '; margin: 0; } @media print { body[data-imprimiendo] .lienzos > .envoltorio-pieza:not([data-pieza="' + pieza + '"]) { display: none !important; } }';
+        requestAnimationFrame(function () { window.print(); });
+      }
+    });
+    window.addEventListener('afterprint', function () {
+      document.body.removeAttribute('data-imprimiendo');
+      document.getElementById('estilo-pagina-dinamico').textContent = '';
+    });
+
+    var hash = location.hash.match(/^#ver=(post|story)$/);
+    if (hash) {
+      document.body.setAttribute('data-vista', hash[1]);
+      document.body.insertAdjacentHTML('afterbegin', '<div class="aviso-vista">Esta pestaña muestra la pieza a tamaño real (' + (hash[1] === 'post' ? '1080 × 1080' : '1080 × 1920') + ' px). Sacale una captura de pantalla completa y después podés cerrar esta pestaña.</div>');
+    }
+  })();
   </script>
 
 </body>

@@ -17,7 +17,8 @@ Tribuna Docente explicada abajo) ni "mejorar" ninguno de estos archivos.
 | Archivo | Organización | Variante | Uso | Fuente |
 |---|---|---|---|---|
 | `partido-obrero.svg` | Partido Obrero | Rojo `#E84426` (vectorial) | Fondo claro u oscuro | po.org.ar (cabecera del sitio) |
-| `partido-obrero.png` | Partido Obrero | Rojo, raster (452×172) | Fondo claro u oscuro | po.org.ar (logo `schema.org` del sitio) |
+| `partido-obrero-hd.png` | Partido Obrero | Rojo, raster en alta resolución (1600 px) | Fondo claro u oscuro | Generado desde `partido-obrero.svg`; **usar este, no el de abajo** |
+| `partido-obrero.png` | Partido Obrero | Rojo, raster de baja resolución (452×172) | Fondo claro u oscuro | po.org.ar (logo `schema.org` del sitio) — se conserva por referencia, pero para cualquier material usá `partido-obrero-hd.png` |
 | `partido-obrero-mascot.svg` | Partido Obrero | "Obrerito" (mascota), rojo `#E84426` — **decorativo, opcional, nunca reemplaza al logo** | Fondo claro u oscuro | po.org.ar (cabecera del sitio) |
 | `prensa-obrera.svg` | Prensa Obrera | Rojo `#E64427` + bajada en negro | **Fondo claro** | prensaobrera.com (cabecera del sitio) |
 | `prensa-obrera-blanco.svg` | Prensa Obrera | Rojo `#E64427` + bajada en blanco | **Fondo oscuro** | Igual que arriba; bajada recoloreada negro→blanco |

@@ -3,6 +3,79 @@
 Todas las versiones siguen [semver](https://semver.org/lang/es/)
 (`MAYOR.MENOR.PARCHE`) y se documentan con fecha.
 
+## [1.4.0] - 2026-09-26
+
+Reescritura de la plantilla tras una auditoría independiente de la versión
+anterior (commits `7e96b8e`/`addd25d`, nunca publicados: la versión previa
+seguía diciendo 1.3.0 en el paquete aunque ya no era la 1.3.0 revisada por
+el compañero — esta versión la reemplaza). Arregla todos los hallazgos
+críticos y altos de esa auditoría, más los medios y los bajos aplicables.
+
+- **Reescritura completa de `plantilla-materiales.html`** como un único
+  sistema de armado en JavaScript (una sola función por pieza) en vez de
+  10 copias de la misma marca repetidas a mano: más fácil de mantener y
+  elimina el riesgo de que una IA "arregle" una copia y deje otra rota.
+- **Contenido en JSON estricto** (`<script type="application/json"
+  id="material">`), con `try/catch`: si el JSON es inválido o falta un
+  campo obligatorio (`titulo`, `firma`, `fecha_realizacion`), se muestra
+  un aviso rojo grande en pantalla y **no se arma ninguna pieza
+  imprimible** — nunca más un contenido de ejemplo mostrado por error
+  (antes, un simple apóstrofe en el título rompía el `<script>` y la
+  página se quedaba mostrando el ejemplo sin avisar).
+- **Nunca se trunca texto**: se sacó el recorte por CSS (`line-clamp`) que
+  cortaba títulos largos con "…"; ahora un ajuste automático de escala
+  achica el título (y la bajada) hasta que entra, y si ni así entra
+  muestra un aviso visible en pantalla ("acortalo") en vez de cortar el
+  texto en silencio.
+- **Las 4 variantes ahora se ven realmente distintas** (antes solo
+  cambiaba el fondo): `tipografico` (título dominante), `bloque` (campo de
+  color en diagonal), `foto` (foto real a pleno con franja de título) y
+  `consigna` (frase centrada a pleno color). Se agregó una tipografía
+  condensada real (Anton, Google Fonts/OFL, embebida como subconjunto
+  base64) en vez de depender de `Arial Black`, que en Linux/Android cae a
+  una fuente sin peso.
+- **QR solo en impresos**: se sacó el QR de posteo e historia (nadie puede
+  escanear un código en la misma pantalla donde lo mira); en digital ahora
+  va como texto ("Suscribite a Prensa Obrera · prensaobrera.com" o "link
+  en bio").
+- **Nuevos formatos A5 (148×210 mm) y A4 (210×297 mm)**, con resguardo y
+  marcas de corte, sumados al posteo, la historia y la hoja A6.
+- **Blanco y negro real** en la hoja A6: ya no es un filtro de escala de
+  grises sobre el diseño a color (que dejaba áreas sólidas pesadas de
+  tóner); ahora es su propio tratamiento (bloque de datos con borde en vez
+  de relleno, sin áreas grandes sólidas), con el texto como vector real en
+  el PDF.
+- **Logos**: `logo_firma` vacío ya no deja el logo anterior puesto; un
+  archivo de logo roto o faltante muestra el mismo recuadro
+  "LOGO: [agrupación]" en vez de un ícono de imagen rota. Se sacó la
+  chapita blanca automática detrás de los logos en la variante `bloque`
+  (tapaba el diseño): la regla ahora es una sola — variante `-blanco`
+  sobre campos de color, variante normal sobre fondo claro — reflejada
+  también en `BRIEF.md` §4.
+- **Fecha de producción**: ahora siempre a ≥ 5 mm de cualquier borde o
+  corte y separada del pie (antes, 2 mm en la mariposa); en la historia se
+  movió fuera de las zonas seguras de 250 px (antes quedaba adentro de la
+  franja inferior reservada).
+- **Ejemplo de contenido restaurado** al texto real confirmado por el
+  responsable del proyecto (bajada y cuerpo de la charla de Tribuna
+  Docente, tal cual los había dado, sin reescribirlos) y el lugar de
+  ejemplo con una dirección neutra marcada `(ejemplo)` en vez de una
+  dirección real.
+- **Guardado**: instrucciones más simples en la propia plantilla — un
+  botón "Ver en tamaño real" para posteo/historia (abre la pieza sola,
+  del tamaño exacto, para sacarle una captura) y un botón "Imprimir /
+  Guardar PDF" por cada hoja de impresión, sin necesitar herramientas de
+  desarrollador.
+- `BRIEF.md` actualizado en línea con la plantilla: QR solo impreso,
+  elegir y justificar la variante en el plan, la única regla de logos
+  sobre fondo de color, nombres de archivo `.png`/`-blanco.png` en la
+  tabla de agrupaciones, nota de CMYK para imprenta y checklist final
+  ampliado. Corregido además un `<script>` de ejemplo mal citado dentro
+  de un comentario de la plantilla que confundía a herramientas de
+  búsqueda de texto.
+- `scripts/build-pack.sh` ahora suma `SKILL.md`, `README.md`,
+  `CHANGELOG.md` y la licencia de la fuente al paquete descargable.
+
 ## [1.3.0] - 2026-09-26
 
 Ajustes tras la segunda ronda de pruebas (ChatGPT y Gemini).

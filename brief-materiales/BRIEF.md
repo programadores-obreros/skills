@@ -1,6 +1,6 @@
 # Brief de materiales — Partido Obrero
 
-**Versión:** 1.3.0
+**Versión:** 1.4.0
 **Fecha:** 2026-09-26
 
 ---
@@ -10,10 +10,17 @@
 > 1. **Subí este archivo** a tu IA (ChatGPT, Gemini, DeepSeek, Claude...),
 >    junto con los **logos** que necesites de la carpeta `logos/` que vino
 >    en el mismo paquete.
-> 2. **Contale a la IA qué querés comunicar**, en tus propias palabras (por
+> 2. **Recomendado: subí también `plantilla/plantilla-materiales.html`.**
+>    Es la misma plantilla para todas las IA: la IA solo completa un bloque
+>    de contenido y el resultado sale con los logos reales, el QR que
+>    funciona y el diseño ya resuelto (ver sección 7). Cuando la IA te
+>    devuelva el archivo completo, **guardalo dentro de la carpeta
+>    `plantilla/`** (pisando este archivo o con otro nombre, pero siempre
+>    ahí adentro): si lo guardás en otro lado, los logos no van a cargar.
+> 3. **Contale a la IA qué querés comunicar**, en tus propias palabras (por
 >    ejemplo: "necesito un flyer para una charla de Tribuna Docente el
 >    viernes"). La IA te va a ir preguntando los datos que falten.
-> 3. **Revisá el texto final letra por letra** antes de imprimir o publicar
+> 4. **Revisá el texto final letra por letra** antes de imprimir o publicar
 >    nada. Las IA que generan imágenes suelen escribir mal las palabras
 >    dentro de la imagen.
 >
@@ -84,11 +91,16 @@ final. El plan **siempre** incluye estas líneas, sin excepción:
 - Formatos que vas a entregar (y si hay versión blanco y negro).
 - Quién firma y qué redes van.
 - Con o sin foto.
+- **Qué variante de composición elegiste y por qué** (si usás la plantilla
+  HTML: `tipografico` / `bloque` / `foto` / `consigna` — ver sección 7).
+  Justificalo en una frase corta según el contenido de este material en
+  particular, no repitas siempre la misma variante en todos los materiales.
 - **Fecha de realización** que va a llevar el material (`dd/mm/aaaa`).
 - **¿Sumamos también el logo del Partido Obrero?** (cuando firma una
   agrupación; preguntalo siempre, no lo decidas vos).
-- **¿Sumamos "Suscribite a Prensa Obrera" con el QR?** (preguntalo
-  siempre; es opcional, pero no te lo podés saltear).
+- **¿Sumamos "Suscribite a Prensa Obrera"?** (preguntalo siempre; es
+  opcional, pero no te lo podés saltear — en impresos va con QR, en
+  piezas digitales va como texto con el link).
 
 Cerrá el plan con estas dos preguntas **explícitas** (si falta alguna
 respuesta, no avances) y terminá con: *"Si está todo bien, escribí
@@ -119,18 +131,24 @@ Todo material final (cualquier formato) tiene que incluir:
 4. **Logos**, tomados únicamente de los archivos adjuntos (ver sección 4).
 
 **Opcional, pero recomendado:** un llamado a bancar a Prensa Obrera.
-Proponelo siempre y dejá que el compañero decida si va:
+Proponelo siempre y dejá que el compañero decida si va. La forma cambia
+según el soporte — **nunca un QR en una pieza digital**: nadie puede
+escanear un código que está en la misma pantalla desde la que lo mira.
 
-- Texto sugerido: **"Suscribite a Prensa Obrera"** o **"Bancá a Prensa
-  Obrera"**, con el link `prensaobrera.com/bancar-a-prensa-obrera`.
-- En impresos, usá el **código QR adjunto** (`qr-suscribite-prensa-obrera`),
-  que ya apunta a esa página. **Nunca generes ni dibujes un QR vos**: un QR
-  inventado no funciona. Si el archivo no está adjunto, poné solo el link
-  en texto.
-- **Tamaño mínimo del QR: 2 × 2 cm impreso** (en una mariposa A6 también)
-  y 220 × 220 px en piezas digitales, siempre con margen blanco alrededor.
-  Más chico no se puede escanear. Si no entra con ese tamaño, **no lo
-  achiques**: sacalo y poné solo el link en texto.
+- **En piezas digitales** (posteo, historia): texto, nunca QR. Usá
+  **"Suscribite a Prensa Obrera"** con el link `prensaobrera.com` (o la
+  frase "link en bio" si el link no se puede tocar, como en un posteo de
+  Instagram), o el link completo `prensaobrera.com/bancar-a-prensa-obrera`
+  si hay espacio.
+- **En impresos** (A6, A5, A4): usá el **código QR adjunto**
+  (`qr-suscribite-prensa-obrera`), que ya apunta a esa página. **Nunca
+  generes ni dibujes un QR vos**: un QR inventado no funciona. Si el
+  archivo no está adjunto, poné solo el link en texto.
+  - **Tamaño mínimo del QR: 2 × 2 cm** (en una mariposa A6 también), con
+    una leyenda corta al lado o debajo ("Suscribite a Prensa Obrera") y
+    margen blanco alrededor (zona de silencio). Más chico no se puede
+    escanear. Si no entra con ese tamaño, **no lo achiques**: sacalo y
+    poné solo el link en texto.
 - Va en el pie, chico, junto a las redes: nunca compite con el título.
 
 ---
@@ -157,10 +175,15 @@ Proponelo siempre y dejá que el compañero decida si va:
 - **Respetá el área de resguardo** del logo (un margen libre alrededor,
   sin texto ni otros elementos encima, de aproximadamente la altura de una
   letra del propio logo).
-- **Usá la variante blanca del logo sobre fondos oscuros**, y la variante
-  de color/oscura sobre fondos claros. Los nombres de archivo indican la
-  variante (ver `logos/LEEME.md`): el que termina en `-blanco` es para
-  fondo oscuro.
+- **Regla única para fondos de color** (campos a pleno color, como la
+  variante `bloque` de la plantilla, o la franja del pie sobre un fondo
+  oscuro): usá el archivo que termina en **`-blanco`** — nunca le pongas
+  un cartel o chapita blanca detrás a un logo de color para "hacerlo
+  entrar": eso tapa el diseño y no es la solución. Sobre **fondo claro**,
+  usá el archivo de color normal (sin `-blanco`). Los logos que ya sirven
+  para los dos fondos sin variante aparte (`partido-obrero`, `fit-u`,
+  `revista-edm`, `tribuna-docente`, el "obrerito") están marcados así en
+  `logos/LEEME.md`.
 - El **"obrerito"** (la mascota/silueta con la bandera, archivo
   `partido-obrero-mascot.svg`) es un elemento decorativo **opcional**.
   Nunca reemplaza al logo del Partido Obrero ni al de una agrupación:
@@ -271,7 +294,12 @@ sino una misma pieza que se reacomoda.
 | A6 ("mariposa") | 105×148 mm | Volante de mano, fotocopia barata | Entran **4 A6 por hoja A4** ("mariposas"): armá también una versión de la hoja A4 con las 4 mariposas repetidas o combinadas, lista para fotocopiar y cortar |
 
 **Impresión en imprenta**: entregá los archivos a **300 dpi** con **3 mm de
-sangrado** (bleed) en los formatos de impresión (A4/A5/A6).
+sangrado** (bleed) en los formatos de impresión (A4/A5/A6). El PDF que sale
+de la plantilla o de "Guardar como PDF" del navegador es en **color RGB**;
+algunas imprentas piden el archivo en **CMYK**. Si la imprenta lo pide,
+avisale al compañero o compañera que se lo consulte directamente a la
+imprenta (ellos suelen convertirlo, o piden un formato específico) — no es
+algo que la IA ni esta plantilla puedan resolver de antemano.
 
 **Impresión casera / fotocopia en blanco y negro**: el diseño tiene que
 funcionar también en blanco y negro puro. Esto significa:
@@ -306,51 +334,65 @@ se redibuje un logo o de quedarte sin usos de imágenes.
 
 Reglas al usarla:
 
-1. **Solo completá el bloque `const MATERIAL = { ... }`** que está cerca
-   del principio del archivo (tiene un comentario `EDITAR:` en cada campo).
-   No edites el texto que aparece repetido más abajo, dentro de cada
-   pieza: se pisa solo con lo que pusiste en `MATERIAL`.
-2. **Elegí la variante (`MATERIAL.variante`) que mejor le quede al
-   contenido de este material en particular**, y contá cuál elegiste y
-   por qué en el plan que le mandás a la persona antes de producir nada
-   (sección 2). Hay 4, y todas cumplen el mismo piso de calidad (grilla,
-   tamaños mínimos, QR, logos, blanco y negro):
-   - `tipografico`: el título grande domina, fondo blanco. Sirve casi
-     siempre, sobre todo si el título es lo más fuerte que tenés.
-   - `bloque`: campo de color a pleno con el título en blanco. Da más
-     impacto de marca; sirve bien para consignas de agrupación o cuando
-     el acento de color es protagonista.
-   - `foto`: una foto real arriba, protagonista (nunca una imagen
-     generada o de stock — si no hay foto, queda un recuadro "FOTO: subí
-     tu foto" en vez de inventar una). Usala cuando el compañero o
-     compañera tenga una foto real de la actividad o de la organización.
-   - `consigna`: la frase es la pieza, sin bajada ni cuerpo. Sirve para
-     una consigna corta y contundente, sin mucho texto de desarrollo.
+1. **Solo editás el contenido, nunca el diseño.** Todo lo que tenés que
+   cambiar vive en un único bloque JSON: `<script type="application/json"
+   id="material">`, cerca del principio del archivo (la referencia de cada
+   campo está en el comentario grande que está justo arriba, en el
+   `<head>`). Eso incluye el texto (título, bajada, cuerpo, fecha, lugar,
+   firma, redes) y también un puñado de campos de opción — `variante`,
+   `color_acento`, `orden_datos`, `qr` — que la propia plantilla usa para
+   ajustar la composición dentro de sus reglas. **Nunca edites el CSS ni
+   la estructura HTML** del resto del archivo (eso es lo que garantiza que
+   el resultado sea profesional y siga las reglas de este brief).
+2. **Elegí la variante (`variante`) que mejor le quede al contenido de
+   este material en particular**, y contá cuál elegiste y por qué en el
+   plan que le mandás a la persona antes de producir nada (sección 2). Hay
+   4, y todas cumplen el mismo piso de calidad (grilla, tamaños mínimos,
+   QR, logos, blanco y negro):
+   - `tipografico`: el título ocupa la mayor parte del espacio, fondo
+     blanco. Sirve casi siempre, sobre todo si el título es lo más fuerte
+     que tenés.
+   - `bloque`: campo de color en diagonal con el título en blanco, datos
+     en su propia franja de contraste. Da más impacto de marca; sirve
+     bien para consignas de agrupación o cuando el acento de color es
+     protagonista.
+   - `foto`: una foto real a pleno arriba, protagonista, con el título
+     sobre una franja sólida (nunca una imagen generada o de stock — si
+     no hay foto, queda un recuadro "FOTO: subí tu foto" en vez de
+     inventar una). Usala cuando el compañero o compañera tenga una foto
+     real de la actividad o de la organización.
+   - `consigna`: la frase ocupa casi toda la pieza, sin bajada ni cuerpo.
+     Sirve para una consigna corta y contundente, sin mucho texto de
+     desarrollo.
    **No uses siempre la misma variante en todos los materiales que te
    pidan**: la idea es que cada campaña se vea distinta de las demás (y
    coherente entre sus propios formatos), no una "fábrica de churros"
    donde todo sale con el mismo molde. La plantilla te garantiza el piso
    de calidad, no que todo se vea igual.
-3. **Podés adaptar proporciones y ubicación dentro de las reglas**: por
-   ejemplo, `MATERIAL.orden_datos` pone el bloque de fecha/hora/lugar
-   antes o después del cuerpo, y el tamaño del título ya se ajusta solo
-   según sea corto, medio o largo. Lo que no podés tocar es la estructura
-   general, los tamaños mínimos ni el QR (ver punto 4).
+3. **La plantilla ajusta sola el tamaño del título y evita que se corte**:
+   nunca vas a ver un texto cortado con "…"; si un título es demasiado
+   largo para el formato, la propia plantilla se lo avisa a la persona en
+   pantalla (un cartel amarillo) en vez de recortarlo en silencio. Vos no
+   tenés que resolver eso: si aparece ese aviso, sugerile a la persona un
+   título más corto.
 4. **Nunca reestructures el diseño**: no cambies el tamaño de las piezas,
-   no muevas ni saques bloques fuera de lo que la propia plantilla permite
-   configurar, no cambies la tipografía ni la grilla.
-5. **Nunca achiques el QR** por debajo de 20×20 mm (impreso) ni por debajo
-   de 220×220 px (digital) — son los valores con los que ya viene. Si no
-   va QR, usá `qr: false` en vez de achicarlo.
-6. **Nunca bajes los tamaños mínimos de letra**: cuerpo 9 pt, pie/redes/
-   fecha de realización 7 pt en la hoja A6 (10 pt de cuerpo en A5/A4).
+   no toques el CSS ni el HTML fuera del bloque JSON de contenido, no
+   cambies la tipografía ni la grilla.
+5. **Nunca achiques el QR** por debajo de 20×20 mm — es el tamaño con el
+   que ya viene en los impresos. Si no va, usá `"qr": false` en vez de
+   achicarlo. En piezas digitales nunca hay QR (la plantilla ya lo
+   resuelve sola con el texto "Suscribite a Prensa Obrera").
+6. **Nunca bajes los tamaños mínimos de letra**: cuerpo 9 pt en la hoja
+   A6 (10 pt en A5/A4), pie/redes/fecha de realización 7 pt como mínimo.
 7. Devolvé **el archivo HTML completo**, no solo un fragmento, con
-   únicamente el bloque `MATERIAL` cambiado.
-8. Recordale a la persona los pasos simples para usarlo: abrir el archivo
-   con doble clic, `Ctrl+P` para pasar a PDF la hoja de imprenta/fotocopia,
-   o una captura de pantalla para el posteo/historia (la propia plantilla
-   trae esos pasos escritos arriba de todo, en una barra que no sale
-   impresa).
+   únicamente el bloque JSON de contenido cambiado.
+8. Recordale a la persona **guardar el archivo dentro de la carpeta
+   `plantilla/`** (para que seguir viendo los logos reales) y los pasos
+   simples para usarlo: el botón "Ver en tamaño real" para el posteo o la
+   historia (se abre solo, del tamaño exacto, para sacarle una captura de
+   pantalla), y el botón "Imprimir / Guardar PDF" para cada hoja de
+   impresión. La propia plantilla trae esos pasos escritos arriba de
+   todo, en una barra que no sale impresa ni en la vista de captura.
 
 ### Si tu IA genera imágenes y no te dieron la plantilla (ChatGPT, Gemini, y similares)
 
@@ -398,22 +440,22 @@ de asumir.
 
 | Agrupación | Sector / tema | Cuándo sugerirla | Archivo de logo |
 |---|---|---|---|
-| **Partido Obrero (PO)** | General / el partido | Valor por defecto; material que no es de una agrupación sectorial específica | `logos/partido-obrero.svg` (o `.png`) |
-| **Prensa Obrera** | Prensa / medio del PO | Contenido editorial, difusión de notas de Prensa Obrera | `logos/prensa-obrera.svg` |
-| **UJS** (Unión de Juventudes por el Socialismo) | Juventud | Actividades de juventud, estudiantes secundarios/universitarios | `logos/ujs.svg` |
-| **Polo Obrero** | Desocupados / movimiento piquetero | Actividades de comedores, planes sociales, organización barrial | `logos/polo-obrero.svg` (o `-blanco.svg` en fondo oscuro) |
-| **Tribuna Docente** | Docentes | Actividades gremiales docentes | `logos/tribuna-docente.svg` |
-| **PDT** (Plenario de Trabajadoras) | Mujeres trabajadoras | Actividades de género, mujeres trabajadoras | `logos/pdt.svg` |
-| **CSC** (Coordinadora Sindical Clasista) | Activismo sindical de base, intersindical | Actividades gremiales/sindicales transversales, de fábrica | `logos/csc.svg` |
-| **APeL** (Asociación de Profesionales en Lucha) | Abogados y profesionales | Actividades de profesionales, asesoramiento legal/laboral | `logos/apel.svg` |
-| **Agrupación 1969** | LGBTI+ | Actividades de diversidad sexual y género | `logos/agrupacion-1969.svg` |
-| **Ojo Obrero** | Fotografía y cine | Actividades culturales, audiovisuales, muestras de fotos | `logos/ojo-obrero.svg` |
-| **Revista EDM** (En Defensa del Marxismo) | Revista teórica | Material relacionado específicamente con la revista | `logos/revista-edm.svg` |
+| **Partido Obrero (PO)** | General / el partido | Valor por defecto; material que no es de una agrupación sectorial específica | `logos/partido-obrero-hd.png` (o `.svg`) |
+| **Prensa Obrera** | Prensa / medio del PO | Contenido editorial, difusión de notas de Prensa Obrera | `logos/prensa-obrera.png` (o `-blanco.png` en fondo oscuro) |
+| **UJS** (Unión de Juventudes por el Socialismo) | Juventud | Actividades de juventud, estudiantes secundarios/universitarios | `logos/ujs.png` (o `-blanco.png` en fondo oscuro) |
+| **Polo Obrero** | Desocupados / movimiento piquetero | Actividades de comedores, planes sociales, organización barrial | `logos/polo-obrero.png` (o `-blanco.png` en fondo oscuro) |
+| **Tribuna Docente** | Docentes | Actividades gremiales docentes | `logos/tribuna-docente.png` |
+| **PDT** (Plenario de Trabajadoras) | Mujeres trabajadoras | Actividades de género, mujeres trabajadoras | `logos/pdt.png` (o `-blanco.png` en fondo oscuro) |
+| **CSC** (Coordinadora Sindical Clasista) | Activismo sindical de base, intersindical | Actividades gremiales/sindicales transversales, de fábrica | `logos/csc.png` (o `-blanco.png` en fondo oscuro) |
+| **APeL** (Asociación de Profesionales en Lucha) | Abogados y profesionales | Actividades de profesionales, asesoramiento legal/laboral | `logos/apel.png` (o `-blanco.png` en fondo oscuro) |
+| **Agrupación 1969** | LGBTI+ | Actividades de diversidad sexual y género | `logos/agrupacion-1969.png` (o `-blanco.png` en fondo oscuro) |
+| **Ojo Obrero** | Fotografía y cine | Actividades culturales, audiovisuales, muestras de fotos | `logos/ojo-obrero.png` (o `-blanco.png` en fondo oscuro) |
+| **Revista EDM** (En Defensa del Marxismo) | Revista teórica | Material relacionado específicamente con la revista | `logos/revista-edm.png` |
 | **Tribuna Estatal** | Empleados/as estatales | Actividades de trabajadores del Estado | No hay logo propio aprobado — firmar solo por nombre, sin logo de agrupación (podés usar el logo de Partido Obrero) |
 | **Tribuna Bancaria** | Bancarios/as | Actividades del sector bancario | No hay logo propio ni cuenta propia — firmar por nombre, difundir por canales de Partido Obrero / Prensa Obrera |
 | **Tribuna de Salud** | Trabajadores/as de la salud | Actividades del sector salud | No hay logo propio ni cuenta propia — firmar por nombre, difundir por canales de Partido Obrero / Prensa Obrera. **Ver advertencia en la sección 9: no es lo mismo que "Tribuna de Salud (Tendencia)" de Política Obrera.** |
 | **Tribuna Ambiental** | Ambiente | Actividades y campañas ambientales (extractivismo, agua, falsas soluciones) | Todavía no hay logo en el paquete: si firma, pedí el archivo o dejá el recuadro "LOGO: Tribuna Ambiental". |
-| **FIT-U** (Frente de Izquierda y de Trabajadores – Unidad) | Frente electoral | **Solo** cuando el material es específicamente sobre el frente electoral (no como reemplazo genérico de "Partido Obrero") | `logos/fit-u.svg` |
+| **FIT-U** (Frente de Izquierda y de Trabajadores – Unidad) | Frente electoral | **Solo** cuando el material es específicamente sobre el frente electoral (no como reemplazo genérico de "Partido Obrero") | `logos/fit-u.png` |
 
 ---
 
@@ -576,6 +618,11 @@ Esta regla aplica a **todo** lo que hagas en esta skill:
 
 Antes de dar por terminado el material, repasá esta lista:
 
+- [ ] **Esperaste que la persona escriba "confirmo"** antes de producir
+      nada (sección 2).
+- [ ] **Elegiste una variante de composición y la justificaste** en el
+      plan (sección 2 y 7); no es siempre la misma en todos los
+      materiales que te piden.
 - [ ] La **fecha de realización** está presente, completa (`dd/mm/aaaa`),
       **sin texto delante**, chica, en el pie y lejos de la fecha del evento.
 - [ ] Preguntaste si se suma el **logo del Partido Obrero** (si firma una
@@ -584,13 +631,18 @@ Antes de dar por terminado el material, repasá esta lista:
 - [ ] Las **redes mostradas** están todas en la tabla verificada de la
       sección 9, sin handles inventados.
 - [ ] Los **logos** usados son únicamente los archivos adjuntos, sin
-      modificar, con la variante correcta según el fondo (clara/oscura).
-- [ ] El **texto** está completo, bien escrito, y coincide letra por letra
-      con lo que aparece en cualquier imagen generada.
+      modificar, con la variante correcta según el fondo (clara/oscura,
+      sección 4): `-blanco` sobre color, normal sobre fondo claro, nunca
+      una chapita blanca detrás.
+- [ ] El **texto** está completo, bien escrito, y **nada quedó cortado**
+      (ni con "…" ni de ninguna otra forma); coincide letra por letra con
+      lo que aparece en cualquier imagen generada.
 - [ ] Se entregaron **al menos 3 formatos**, adaptando el mismo diseño.
 - [ ] Hay **buen contraste** de texto y fondo en todos los formatos.
-- [ ] **Preguntaste en el plan** si va "Suscribite a Prensa Obrera" con
-      QR, y respetaste lo que decidió.
+- [ ] **Preguntaste en el plan** si va "Suscribite a Prensa Obrera", y
+      respetaste lo que decidió.
+- [ ] **El QR solo aparece en los impresos** (A6/A5/A4), nunca en el
+      posteo ni en la historia, y mide **2 × 2 cm como mínimo**.
 - [ ] Si va a fotocopia, entregaste también la **versión en blanco y
       negro** y los textos del pie respetan el **tamaño mínimo**.
 - [ ] Si el material va a fotocopia o impresión casera, **funciona en

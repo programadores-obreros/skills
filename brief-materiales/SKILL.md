@@ -43,3 +43,7 @@ quedan al día automáticamente.
 - `README.md` — explicación para humanos de esta skill.
 - `CHANGELOG.md` — historial de versiones.
 - `logos/` — paquete de logos oficiales aprobados (ver `logos/LEEME.md`).
+- `plantilla/plantilla-materiales.html` — plantilla ya diseñada (ver
+  sección 7 de `BRIEF.md`); si el usuario la adjuntó, es la vía
+  recomendada. Guardá el resultado dentro de esa misma carpeta
+  `plantilla/` para que los logos sigan cargando.

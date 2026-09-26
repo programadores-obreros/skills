@@ -3,6 +3,11 @@
 Todas las versiones siguen [semver](https://semver.org/lang/es/)
 (`MAYOR.MENOR.PARCHE`) y se documentan con fecha.
 
+## [1.1.1] - 2026-09-26
+
+- Todos los logos también en `.png` (1600 px, fondo transparente) para
+  subirlos a ChatGPT/Gemini, que suelen rechazar `.svg`.
+
 ## [1.1.0] - 2026-09-26
 
 - Suma **Tribuna Ambiental** (Instagram @tribunaambiental, verificado: su

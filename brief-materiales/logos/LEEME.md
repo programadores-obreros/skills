@@ -56,3 +56,11 @@ Tribuna Docente explicada abajo) ni "mejorar" ninguno de estos archivos.
 - Si necesitás un logo que no está en esta carpeta, **no lo generes con
   IA**: pedilo a Coordinación/Comunicación para que lo sumen como
   candidato aprobado (ver `CONTRIBUTING.md` del repositorio).
+
+## Versiones PNG
+
+Cada logo `.svg` tiene también su `.png` (1600 px de ancho, fondo
+transparente), generado desde el SVG sin tocar el dibujo. **Para ChatGPT y
+Gemini usá los `.png`**: muchas IA no aceptan archivos `.svg`. Para
+imprenta o HTML, preferí el `.svg`. El PNG del Partido Obrero en alta
+resolución es `partido-obrero-hd.png`.

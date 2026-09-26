@@ -310,16 +310,43 @@ Reglas al usarla:
    del principio del archivo (tiene un comentario `EDITAR:` en cada campo).
    No edites el texto que aparece repetido más abajo, dentro de cada
    pieza: se pisa solo con lo que pusiste en `MATERIAL`.
-2. **Nunca reestructures el diseño**: no cambies el tamaño de las piezas,
-   no muevas ni saques bloques, no cambies la tipografía ni la grilla.
-3. **Nunca achiques el QR** por debajo de 20×20 mm (impreso) ni por debajo
+2. **Elegí la variante (`MATERIAL.variante`) que mejor le quede al
+   contenido de este material en particular**, y contá cuál elegiste y
+   por qué en el plan que le mandás a la persona antes de producir nada
+   (sección 2). Hay 4, y todas cumplen el mismo piso de calidad (grilla,
+   tamaños mínimos, QR, logos, blanco y negro):
+   - `tipografico`: el título grande domina, fondo blanco. Sirve casi
+     siempre, sobre todo si el título es lo más fuerte que tenés.
+   - `bloque`: campo de color a pleno con el título en blanco. Da más
+     impacto de marca; sirve bien para consignas de agrupación o cuando
+     el acento de color es protagonista.
+   - `foto`: una foto real arriba, protagonista (nunca una imagen
+     generada o de stock — si no hay foto, queda un recuadro "FOTO: subí
+     tu foto" en vez de inventar una). Usala cuando el compañero o
+     compañera tenga una foto real de la actividad o de la organización.
+   - `consigna`: la frase es la pieza, sin bajada ni cuerpo. Sirve para
+     una consigna corta y contundente, sin mucho texto de desarrollo.
+   **No uses siempre la misma variante en todos los materiales que te
+   pidan**: la idea es que cada campaña se vea distinta de las demás (y
+   coherente entre sus propios formatos), no una "fábrica de churros"
+   donde todo sale con el mismo molde. La plantilla te garantiza el piso
+   de calidad, no que todo se vea igual.
+3. **Podés adaptar proporciones y ubicación dentro de las reglas**: por
+   ejemplo, `MATERIAL.orden_datos` pone el bloque de fecha/hora/lugar
+   antes o después del cuerpo, y el tamaño del título ya se ajusta solo
+   según sea corto, medio o largo. Lo que no podés tocar es la estructura
+   general, los tamaños mínimos ni el QR (ver punto 4).
+4. **Nunca reestructures el diseño**: no cambies el tamaño de las piezas,
+   no muevas ni saques bloques fuera de lo que la propia plantilla permite
+   configurar, no cambies la tipografía ni la grilla.
+5. **Nunca achiques el QR** por debajo de 20×20 mm (impreso) ni por debajo
    de 220×220 px (digital) — son los valores con los que ya viene. Si no
    va QR, usá `qr: false` en vez de achicarlo.
-4. **Nunca bajes los tamaños mínimos de letra**: cuerpo 9 pt, pie/redes/
+6. **Nunca bajes los tamaños mínimos de letra**: cuerpo 9 pt, pie/redes/
    fecha de realización 7 pt en la hoja A6 (10 pt de cuerpo en A5/A4).
-5. Devolvé **el archivo HTML completo**, no solo un fragmento, con
+7. Devolvé **el archivo HTML completo**, no solo un fragmento, con
    únicamente el bloque `MATERIAL` cambiado.
-6. Recordale a la persona los pasos simples para usarlo: abrir el archivo
+8. Recordale a la persona los pasos simples para usarlo: abrir el archivo
    con doble clic, `Ctrl+P` para pasar a PDF la hoja de imprenta/fotocopia,
    o una captura de pantalla para el posteo/historia (la propia plantilla
    trae esos pasos escritos arriba de todo, en una barra que no sale

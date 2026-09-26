@@ -34,6 +34,18 @@
   profesional y siga las reglas de BRIEF.md. Si te pidieron completar esta
   plantilla, devolvé el archivo completo con solo el bloque MATERIAL
   cambiado.
+
+  ESTO ES UN SISTEMA DE DISEÑO, NO UNA SOLA PLANTILLA REPETIDA
+  ---------------------------------------------------------------
+  MATERIAL.variante elige entre 4 composiciones distintas que comparten la
+  misma grilla, los mismos tamaños mínimos, el mismo QR y las mismas
+  reglas de logos: 'tipografico' (título grande domina, fondo blanco),
+  'bloque' (campo de color a pleno, título en blanco), 'foto' (una foto
+  real arriba, protagonista) y 'consigna' (la frase es la pieza, sin
+  bajada ni cuerpo). Elegí la que mejor le quede al contenido de cada
+  material — no uses siempre la misma, así distintas campañas no quedan
+  todas iguales ("fábrica de churros"). La plantilla garantiza el piso de
+  calidad (tamaños, QR, logos, blanco y negro), no que todo se vea igual.
 -->
 
 <style>
@@ -111,8 +123,79 @@
   }
   .envoltorio-pieza { display: flex; flex-direction: column; }
 
-  /* ============ COMPONENTES COMPARTIDOS ============ */
+  /* ============ COMPONENTES COMPARTIDOS (las 3 piezas y las 4 variantes) ============ */
   .icono { width: 1em; height: 1em; flex: none; }
+
+  /* Orden de los bloques dentro de cada pieza. MATERIAL.orden_datos puede
+     mover el bloque de fecha/hora/lugar antes del cuerpo en vez de después
+     (por defecto). Vale igual para el posteo, la historia y la mariposa. */
+  .foto-area { order: 5; }
+  .etiqueta { order: 10; }
+  .titulo { order: 20; }
+  .bajada { order: 30; }
+  .cuerpo { order: 40; }
+  .bloque-datos { order: 50; }
+  .pie { order: 60; }
+  [data-orden-datos="antes"] .bloque-datos { order: 35; }
+
+  /* Escala del título según MATERIAL.titulo sea corto, medio o largo (el
+     script la calcula sola a partir de la cantidad de caracteres). En la
+     variante "consigna" el título es la pieza central, así que escala más. */
+  [data-largo="corto"] { --escala-titulo: 1.15; }
+  [data-largo="medio"] { --escala-titulo: 1; }
+  [data-largo="largo"] { --escala-titulo: 0.82; }
+  [data-variante="consigna"][data-largo="corto"] { --escala-titulo: 1.45; }
+  [data-variante="consigna"][data-largo="medio"] { --escala-titulo: 1.22; }
+  [data-variante="consigna"][data-largo="largo"] { --escala-titulo: 1; }
+  /* La variante "foto" le suma un bloque de imagen arriba de todo, así que
+     el título achica un poco para que todo entre en el tamaño fijo de la
+     pieza sin desbordar. */
+  [data-variante="foto"][data-largo="corto"] { --escala-titulo: 0.95; }
+  [data-variante="foto"][data-largo="medio"] { --escala-titulo: 0.78; }
+  [data-variante="foto"][data-largo="largo"] { --escala-titulo: 0.62; }
+  .pieza-story[data-variante="foto"][data-largo="corto"] { --escala-titulo: 0.8; }
+  .pieza-story[data-variante="foto"][data-largo="medio"] { --escala-titulo: 0.66; }
+  .pieza-story[data-variante="foto"][data-largo="largo"] { --escala-titulo: 0.52; }
+
+  /* Área de foto (variante "foto"): oculta salvo que MATERIAL.variante sea
+     'foto'. Si MATERIAL.foto viene vacío se ve un recuadro "FOTO: subí tu
+     foto" en vez de generar o inventar una imagen (el brief lo prohíbe). */
+  .foto-area {
+    display: none;
+    position: relative;
+    overflow: hidden;
+    background: #ececec;
+  }
+  .foto-area .foto-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.85) contrast(1.05);
+  }
+  .foto-area .foto-tinte {
+    position: absolute;
+    inset: 0;
+    background: var(--acento);
+    mix-blend-mode: multiply;
+    opacity: .22;
+  }
+  .foto-area .foto-placeholder {
+    position: absolute;
+    inset: 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 2px dashed var(--acento);
+    background: rgba(0,0,0,.02);
+    font-family: var(--font-texto);
+    font-weight: 700;
+    color: var(--acento);
+  }
+  [data-variante="foto"] .foto-area { display: block; }
+  [data-variante="foto"] .foto-img.oculto { display: none; }
+  [data-variante="foto"] .foto-img:not(.oculto) ~ .foto-placeholder { display: none; }
 
   /* =====================================================================
      POSTEO 1080×1080
@@ -145,10 +228,12 @@
     color: var(--acento);
     margin: 0 0 14px;
   }
+  .pieza-post .foto-area { height: 260px; margin-bottom: 20px; }
+  .pieza-post .foto-placeholder { font-size: 22px; padding: 16px; }
   .pieza-post .titulo {
     font-family: var(--font-titulo);
     font-weight: 900;
-    font-size: 78px;
+    font-size: calc(78px * var(--escala-titulo, 1));
     line-height: 1.03;
     letter-spacing: -0.01em;
     color: var(--negro);
@@ -279,7 +364,8 @@
     display: flex;
     flex-direction: column;
   }
-  .pieza-story .bloque-texto { display: flex; flex-direction: column; }
+  .pieza-story .foto-area { height: 360px; margin-bottom: 28px; }
+  .pieza-story .foto-placeholder { font-size: 28px; padding: 20px; }
   .pieza-story .etiqueta {
     font-family: var(--font-texto);
     font-weight: 800;
@@ -292,7 +378,7 @@
   .pieza-story .titulo {
     font-family: var(--font-titulo);
     font-weight: 900;
-    font-size: 104px;
+    font-size: calc(104px * var(--escala-titulo, 1));
     line-height: 1.03;
     letter-spacing: -0.01em;
     color: var(--negro);
@@ -422,10 +508,12 @@
     color: var(--acento);
     margin: 0 0 3.5mm;
   }
+  .mariposa .foto-area { height: 20mm; margin-bottom: 2.5mm; }
+  .mariposa .foto-placeholder { font-size: 8pt; padding: 2mm; }
   .mariposa .titulo {
     font-family: var(--font-titulo);
     font-weight: 900;
-    font-size: 24pt;
+    font-size: calc(24pt * var(--escala-titulo, 1));
     line-height: 1.05;
     letter-spacing: -0.005em;
     color: var(--negro);
@@ -524,6 +612,61 @@
     color: #9a9a9a;
   }
 
+  /* =====================================================================
+     VARIANTES DE COMPOSICIÓN (MATERIAL.variante)
+     Comparten la misma grilla, los mismos tamaños mínimos, el mismo QR y
+     las mismas reglas de logos que "tipográfico" (la variante por
+     defecto, ya definida arriba); acá solo se pisa el tratamiento visual.
+     Así una campaña puede verse distinta de otra sin dejar de cumplir el
+     brief: esto es un sistema de diseño, no una sola plantilla repetida.
+     ===================================================================== */
+
+  /* BLOQUE: campo de color a pleno, título y etiqueta en blanco */
+  [data-variante="bloque"] { background: var(--acento); }
+  [data-variante="bloque"] .franja { background: #fff; }
+  [data-variante="bloque"] .etiqueta { color: #fff; }
+  [data-variante="bloque"] .titulo { color: #fff; }
+  [data-variante="bloque"] .bajada { color: rgba(255,255,255,.92); }
+  [data-variante="bloque"] .cuerpo { color: rgba(255,255,255,.85); }
+  [data-variante="bloque"] .bloque-datos { background: #fff; }
+  [data-variante="bloque"] .bloque-datos .dato { color: var(--negro); }
+  [data-variante="bloque"] .nombre-firma { color: #fff; }
+  [data-variante="bloque"] .redes { color: rgba(255,255,255,.8); }
+  [data-variante="bloque"] .fecha-realizacion { color: rgba(255,255,255,.6); }
+  [data-variante="bloque"] .qr-bloque { background: #fff; border-color: rgba(0,0,0,.08); }
+  [data-variante="bloque"] .qr-texto { color: var(--negro); }
+  [data-variante="bloque"] .foto-area { background: rgba(255,255,255,.15); }
+  [data-variante="bloque"] .foto-placeholder { border-color: #fff; color: #fff; background: rgba(255,255,255,.08); }
+  /* El logo puede tener el mismo tono que el color de acento (por ejemplo,
+     un logo que YA es el color de acento del material): sin esta chapita
+     blanca detrás, podría perderse contra el campo de color. */
+  [data-variante="bloque"] .logo-firma,
+  [data-variante="bloque"] .logo-po { background: #fff; }
+  .pieza-post[data-variante="bloque"] .logo-firma,
+  .pieza-post[data-variante="bloque"] .logo-po,
+  .pieza-story[data-variante="bloque"] .logo-firma,
+  .pieza-story[data-variante="bloque"] .logo-po { padding: 8px 12px; }
+  .mariposa[data-variante="bloque"] .logo-firma,
+  .mariposa[data-variante="bloque"] .logo-po { padding: 1mm 1.5mm; }
+
+  /* CONSIGNA: la frase (el título) es la pieza central; sin bajada ni cuerpo */
+  [data-variante="consigna"] .bajada,
+  [data-variante="consigna"] .cuerpo { display: none !important; }
+  [data-variante="consigna"] .etiqueta,
+  [data-variante="consigna"] .titulo { text-align: center; }
+  [data-variante="consigna"] .bloque-datos { align-items: center; }
+  [data-variante="consigna"] .dato { justify-content: center; }
+
+  /* FOTO: el cuerpo se oculta para que la foto, el título y la bajada
+     tengan lugar sin desbordar el tamaño fijo de la pieza. */
+  [data-variante="foto"] .cuerpo { display: none !important; }
+  [data-variante="foto"] .bajada { -webkit-line-clamp: 2; }
+  .pieza-story[data-variante="foto"] .foto-area { height: 260px; margin-bottom: 20px; }
+  .pieza-story[data-variante="foto"] .bloque-datos { margin-top: 24px; padding: 26px 40px; gap: 12px; }
+  .pieza-story[data-variante="foto"] .dato { font-size: 34px; }
+  .pieza-story[data-variante="foto"] .pie { padding-top: 20px; }
+  .pieza-story[data-variante="foto"] .qr-bloque img { width: 220px; height: 220px; }
+
   /* Variante blanco y negro puro: mismo diseño, sin ningún color */
   .hoja-a6.bn { filter: grayscale(1) contrast(1.05); }
 
@@ -563,7 +706,7 @@
       <li><strong>Guardar el posteo o la historia para redes:</strong> cada pieza tiene su tamaño exacto en píxeles (1080×1080 o 1080×1920). La forma más simple es: click derecho sobre la pieza → "Inspeccionar" → activar la vista de dispositivo móvil (ícono de celular) → poner ese ancho y alto exactos → sacar una captura de pantalla con la herramienta de captura del navegador o del sistema operativo, recortando solo esa pieza.</li>
       <li><strong>Revisá el texto letra por letra</strong> antes de publicar o imprimir.</li>
     </ol>
-    <div class="aviso">Si le pasaste este archivo a una IA para que lo complete: solo tiene que cambiar el bloque MATERIAL. Nunca debe rediseñar la estructura, achicar el QR por debajo de 20×20&nbsp;mm, ni bajar el cuerpo de 9&nbsp;pt o el pie/redes/fecha de 7&nbsp;pt.</div>
+    <div class="aviso">Si le pasaste este archivo a una IA para que lo complete: solo tiene que cambiar el bloque MATERIAL, eligiendo la variante (<code>tipografico</code> / <code>bloque</code> / <code>foto</code> / <code>consigna</code>) que mejor le quede a este contenido en particular. Nunca debe rediseñar la estructura, achicar el QR por debajo de 20×20&nbsp;mm, ni bajar el cuerpo de 9&nbsp;pt o el pie/redes/fecha de 7&nbsp;pt.</div>
   </div>
 
   <script>
@@ -573,13 +716,16 @@
        probar esta plantilla; reemplazalo por el contenido real.
        ===================================================================== */
     const MATERIAL = {
+      variante: 'tipografico',        // EDITAR: 'tipografico' (título grande domina, fondo blanco) | 'bloque' (campo de color a pleno, título en blanco) | 'foto' (foto real arriba, protagonista) | 'consigna' (la frase es la pieza, sin bajada ni cuerpo). Elegí la que mejor le quede al contenido: no uses siempre la misma variante en todos los materiales.
       etiqueta: 'Charla abierta',                 // EDITAR: etiqueta/categoría chica arriba del título
       titulo: 'IA y educación: ¿herramienta o amenaza?', // EDITAR: título o consigna principal
-      bajada: 'Inteligencia artificial en las escuelas: qué cambia en el trabajo docente', // EDITAR: bajada (opcional; dejar '' si no hace falta)
-      cuerpo: 'Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.', // EDITAR: cuerpo (opcional; dejar '' si no hace falta)
+      bajada: 'Inteligencia artificial en las escuelas: qué cambia en el trabajo docente', // EDITAR: bajada (opcional; dejar '' si no hace falta; se oculta sola en la variante 'consigna')
+      cuerpo: 'Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.', // EDITAR: cuerpo (opcional; dejar '' si no hace falta; se oculta solo en la variante 'consigna')
+      foto: '',                       // EDITAR: nombre de archivo de una foto real, en esta misma carpeta (ej. 'foto.jpg'). Solo se usa con variante: 'foto'. Nunca un archivo generado por IA: si lo dejás vacío, se ve un recuadro "FOTO: subí tu foto" en vez de inventar una imagen.
       fecha_actividad: 'Jueves 8/10', // EDITAR: fecha de la actividad (vacío si no aplica)
       hora: '19 h',                   // EDITAR: hora de la actividad
       lugar: 'Local de San Justo · Arieta 3000', // EDITAR: lugar de la actividad
+      orden_datos: 'despues',         // EDITAR: 'despues' (bloque de fecha/hora/lugar después del cuerpo, por defecto) | 'antes' (antes del cuerpo)
       firma: 'Tribuna Docente',       // EDITAR: agrupación que firma (tabla de la sección 8 del BRIEF)
       logo_firma: 'tribuna-docente.png', // EDITAR: archivo exacto en logos/ (nombre y extensión tal cual)
       logo_po: '',                    // EDITAR: archivo del logo del Partido Obrero en logos/, o '' si no se suma
@@ -602,9 +748,14 @@
     <!-- ============ POSTEO 1080×1080 ============ -->
     <div class="envoltorio-pieza digital">
       <p class="etiqueta-pieza medida">Posteo — 1080 × 1080 px</p>
-      <div class="pieza-post" id="pieza-post">
+      <div class="pieza-post" id="pieza-post" data-variante="tipografico" data-orden-datos="despues" data-largo="medio">
         <div class="franja"></div>
         <div class="contenido">
+          <div class="foto-area">
+            <img class="foto-img oculto" data-foto src="" alt="Foto de la actividad">
+            <div class="foto-tinte"></div>
+            <div class="foto-placeholder">FOTO: subí tu foto<br>(foto.jpg)</div>
+          </div>
           <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
           <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
           <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
@@ -648,16 +799,19 @@
     <!-- ============ HISTORIA 1080×1920 ============ -->
     <div class="envoltorio-pieza digital">
       <p class="etiqueta-pieza medida">Historia — 1080 × 1920 px (250 px libres arriba y abajo)</p>
-      <div class="pieza-story" id="pieza-story">
+      <div class="pieza-story" id="pieza-story" data-variante="tipografico" data-orden-datos="despues" data-largo="medio">
         <div class="zona-segura arriba"></div>
         <div class="franja"></div>
         <div class="contenido">
-          <div class="bloque-texto">
-            <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
-            <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
-            <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
-            <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
+          <div class="foto-area">
+            <img class="foto-img oculto" data-foto src="" alt="Foto de la actividad">
+            <div class="foto-tinte"></div>
+            <div class="foto-placeholder">FOTO: subí tu foto<br>(foto.jpg)</div>
           </div>
+          <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
+          <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
+          <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
+          <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
 
           <div class="bloque-datos" data-if="datos">
             <div class="dato">
@@ -700,7 +854,12 @@
       <p class="etiqueta-pieza medida">Hoja A6 para imprenta o fotocopia — A4, 4 mariposas (color)</p>
       <div class="hoja-a6" id="hoja-a6-color">
         <!-- Las 4 mariposas son idénticas: el script las completa a todas desde MATERIAL -->
-        <div class="mariposa">
+        <div class="mariposa" data-variante="tipografico" data-orden-datos="despues" data-largo="medio">
+          <div class="foto-area">
+            <img class="foto-img oculto" data-foto src="" alt="Foto de la actividad">
+            <div class="foto-tinte"></div>
+            <div class="foto-placeholder">FOTO: subí tu foto<br>(foto.jpg)</div>
+          </div>
           <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
           <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
           <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
@@ -736,7 +895,12 @@
           <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
         </div>
 
-        <div class="mariposa">
+        <div class="mariposa" data-variante="tipografico" data-orden-datos="despues" data-largo="medio">
+          <div class="foto-area">
+            <img class="foto-img oculto" data-foto src="" alt="Foto de la actividad">
+            <div class="foto-tinte"></div>
+            <div class="foto-placeholder">FOTO: subí tu foto<br>(foto.jpg)</div>
+          </div>
           <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
           <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
           <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
@@ -772,7 +936,12 @@
           <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
         </div>
 
-        <div class="mariposa">
+        <div class="mariposa" data-variante="tipografico" data-orden-datos="despues" data-largo="medio">
+          <div class="foto-area">
+            <img class="foto-img oculto" data-foto src="" alt="Foto de la actividad">
+            <div class="foto-tinte"></div>
+            <div class="foto-placeholder">FOTO: subí tu foto<br>(foto.jpg)</div>
+          </div>
           <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
           <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
           <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
@@ -808,7 +977,12 @@
           <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
         </div>
 
-        <div class="mariposa">
+        <div class="mariposa" data-variante="tipografico" data-orden-datos="despues" data-largo="medio">
+          <div class="foto-area">
+            <img class="foto-img oculto" data-foto src="" alt="Foto de la actividad">
+            <div class="foto-tinte"></div>
+            <div class="foto-placeholder">FOTO: subí tu foto<br>(foto.jpg)</div>
+          </div>
           <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
           <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
           <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
@@ -850,7 +1024,12 @@
     <div class="envoltorio-pieza">
       <p class="etiqueta-pieza medida">Hoja A6 para fotocopia — A4, 4 mariposas (blanco y negro puro)</p>
       <div class="hoja-a6 bn" id="hoja-a6-bn">
-        <div class="mariposa">
+        <div class="mariposa" data-variante="tipografico" data-orden-datos="despues" data-largo="medio">
+          <div class="foto-area">
+            <img class="foto-img oculto" data-foto src="" alt="Foto de la actividad">
+            <div class="foto-tinte"></div>
+            <div class="foto-placeholder">FOTO: subí tu foto<br>(foto.jpg)</div>
+          </div>
           <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
           <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
           <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
@@ -886,7 +1065,12 @@
           <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
         </div>
 
-        <div class="mariposa">
+        <div class="mariposa" data-variante="tipografico" data-orden-datos="despues" data-largo="medio">
+          <div class="foto-area">
+            <img class="foto-img oculto" data-foto src="" alt="Foto de la actividad">
+            <div class="foto-tinte"></div>
+            <div class="foto-placeholder">FOTO: subí tu foto<br>(foto.jpg)</div>
+          </div>
           <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
           <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
           <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
@@ -922,7 +1106,12 @@
           <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
         </div>
 
-        <div class="mariposa">
+        <div class="mariposa" data-variante="tipografico" data-orden-datos="despues" data-largo="medio">
+          <div class="foto-area">
+            <img class="foto-img oculto" data-foto src="" alt="Foto de la actividad">
+            <div class="foto-tinte"></div>
+            <div class="foto-placeholder">FOTO: subí tu foto<br>(foto.jpg)</div>
+          </div>
           <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
           <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
           <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
@@ -958,7 +1147,12 @@
           <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
         </div>
 
-        <div class="mariposa">
+        <div class="mariposa" data-variante="tipografico" data-orden-datos="despues" data-largo="medio">
+          <div class="foto-area">
+            <img class="foto-img oculto" data-foto src="" alt="Foto de la actividad">
+            <div class="foto-tinte"></div>
+            <div class="foto-placeholder">FOTO: subí tu foto<br>(foto.jpg)</div>
+          </div>
           <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
           <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
           <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
@@ -1007,6 +1201,37 @@
     (function aplicarMaterial(m) {
       try {
         document.documentElement.style.setProperty('--acento', m.color_acento || '#E84426');
+
+        // Raíces de cada pieza (posteo, historia, cada mariposa): ahí van
+        // los atributos data-variante / data-orden-datos / data-largo que
+        // maneja el CSS de las variantes de composición.
+        var raices = document.querySelectorAll('#pieza-post, #pieza-story, .mariposa');
+        var variante = m.variante || 'tipografico';
+        var ordenDatos = m.orden_datos || 'despues';
+        var largoTitulo = (function (titulo) {
+          var len = (titulo || '').length;
+          if (len <= 22) return 'corto';
+          if (len <= 46) return 'medio';
+          return 'largo';
+        })(m.titulo);
+        raices.forEach(function (raiz) {
+          raiz.dataset.variante = variante;
+          raiz.dataset.ordenDatos = ordenDatos;
+          raiz.dataset.largo = largoTitulo;
+        });
+
+        // Foto real (solo se ve con variante 'foto'): si no hay archivo,
+        // queda el recuadro "FOTO: subí tu foto" en vez de una imagen
+        // generada o inventada.
+        document.querySelectorAll('[data-foto]').forEach(function (img) {
+          if (m.foto) {
+            img.src = m.foto;
+            img.alt = 'Foto de la actividad';
+            img.classList.remove('oculto');
+          } else {
+            img.classList.add('oculto');
+          }
+        });
 
         var campos = ['etiqueta', 'titulo', 'bajada', 'cuerpo', 'fecha_actividad', 'hora', 'lugar', 'firma', 'fecha_realizacion'];
         campos.forEach(function (campo) {

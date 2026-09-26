@@ -23,6 +23,21 @@ Ajustes tras la segunda ronda de pruebas (ChatGPT y Gemini).
   para cualquier IA (evita que se redibujen logos o se gasten usos de
   imágenes). Verificada: QR decodificado con `zbarimg` en las 8 mariposas
   (color y B/N), hoja A6 exportada a exactamente 1 página A4 por variante.
+- **La plantilla es un sistema de diseño, no un solo molde**:
+  `MATERIAL.variante` elige entre 4 composiciones distintas que comparten
+  la misma grilla, tamaños mínimos, QR y reglas de logos —
+  `tipografico` (título grande, fondo blanco), `bloque` (campo de color a
+  pleno, título en blanco), `foto` (foto real arriba, protagonista; sin
+  foto real muestra un recuadro "FOTO: subí tu foto", nunca una imagen
+  inventada) y `consigna` (la frase es la pieza, sin bajada ni cuerpo).
+  También configurable dentro de esas reglas: `orden_datos` (bloque de
+  fecha/hora/lugar antes o después del cuerpo) y la escala del título
+  según sea corto, medio o largo (automática). Sección 7 le pide a la IA
+  elegir la variante según el contenido y variarla entre materiales, en
+  vez de repetir siempre el mismo molde. Corrige además un bug real de
+  contraste: un logo del mismo tono que el color de acento (frecuente,
+  porque el acento suele salir del propio logo de la agrupación) quedaba
+  casi invisible sobre la variante `bloque` sin una chapita blanca detrás.
 
 ## [1.2.0] - 2026-09-26
 

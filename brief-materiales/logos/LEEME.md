@@ -38,6 +38,7 @@ Tribuna Docente explicada abajo) ni "mejorar" ninguno de estos archivos.
 | `ojo-obrero-blanco.svg` | Ojo Obrero | Recoloreado negro→blanco | **Fondo oscuro** | Igual que arriba |
 | `revista-edm.svg` | Revista "En Defensa del Marxismo" | Naranja/rojo `#e23b1a` | Fondo claro u oscuro | revistaedm.com |
 | `fit-u.svg` | FIT-U (Frente de Izquierda y de Trabajadores – Unidad) | Negro/rojo/blanco (tiene su propia placa de fondo) | Fondo claro u oscuro — **usar solo en material específicamente electoral del frente** | po.org.ar (barra superior del sitio) |
+| `qr-suscribite-prensa-obrera.svg` / `.png` | QR a prensaobrera.com/bancar-a-prensa-obrera | Negro sobre blanco | Impresos (pie) — no achicar a menos de 2 cm | Generado con `qrencode` y verificado con `zbarimg` |
 
 ## Notas
 

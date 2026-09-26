@@ -3,6 +3,15 @@
 Todas las versiones siguen [semver](https://semver.org/lang/es/)
 (`MAYOR.MENOR.PARCHE`) y se documentan con fecha.
 
+## [1.1.0] - 2026-09-26
+
+- Suma **Tribuna Ambiental** (Instagram @tribunaambiental, verificado: su
+  bio la ubica en el Partido Obrero). Sin logo todavía en el paquete.
+- Nuevo elemento **opcional recomendado**: llamado a suscribirse/bancar a
+  Prensa Obrera (`prensaobrera.com/bancar-a-prensa-obrera`), con **QR
+  listo** en el paquete de logos (nunca generarlo con IA).
+- Checklist final actualizado.
+
 ## [1.0.0] - 2026-09-26
 
 Primera versión publicada.

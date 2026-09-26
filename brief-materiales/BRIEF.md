@@ -1,6 +1,6 @@
 # Brief de materiales — Partido Obrero
 
-**Versión:** 1.0.0
+**Versión:** 1.1.0
 **Fecha:** 2026-09-26
 
 ---
@@ -94,6 +94,17 @@ Todo material final (cualquier formato) tiene que incluir:
    **únicamente** de la tabla verificada de la sección 9. Nunca inventes ni
    "completes" un handle que no esté en esa tabla.
 4. **Logos**, tomados únicamente de los archivos adjuntos (ver sección 4).
+
+**Opcional, pero recomendado:** un llamado a bancar a Prensa Obrera.
+Proponelo siempre y dejá que el compañero decida si va:
+
+- Texto sugerido: **"Suscribite a Prensa Obrera"** o **"Bancá a Prensa
+  Obrera"**, con el link `prensaobrera.com/bancar-a-prensa-obrera`.
+- En impresos, usá el **código QR adjunto** (`qr-suscribite-prensa-obrera`),
+  que ya apunta a esa página. **Nunca generes ni dibujes un QR vos**: un QR
+  inventado no funciona. Si el archivo no está adjunto, poné solo el link
+  en texto.
+- Va en el pie, chico, junto a las redes: nunca compite con el título.
 
 ---
 
@@ -272,7 +283,7 @@ de asumir.
 | **Tribuna Estatal** | Empleados/as estatales | Actividades de trabajadores del Estado | No hay logo propio aprobado — firmar solo por nombre, sin logo de agrupación (podés usar el logo de Partido Obrero) |
 | **Tribuna Bancaria** | Bancarios/as | Actividades del sector bancario | No hay logo propio ni cuenta propia — firmar por nombre, difundir por canales de Partido Obrero / Prensa Obrera |
 | **Tribuna de Salud** | Trabajadores/as de la salud | Actividades del sector salud | No hay logo propio ni cuenta propia — firmar por nombre, difundir por canales de Partido Obrero / Prensa Obrera. **Ver advertencia en la sección 9: no es lo mismo que "Tribuna de Salud (Tendencia)" de Política Obrera.** |
-| **Tribuna Ambiental** | Ambiental | — | **No usar todavía.** No se confirmó que exista con ese nombre exacto; si te piden este espacio, avisá que hay que confirmarlo con Coordinación antes de producir el material. |
+| **Tribuna Ambiental** | Ambiente | Actividades y campañas ambientales (extractivismo, agua, falsas soluciones) | Todavía no hay logo en el paquete: si firma, pedí el archivo o dejá el recuadro "LOGO: Tribuna Ambiental". |
 | **FIT-U** (Frente de Izquierda y de Trabajadores – Unidad) | Frente electoral | **Solo** cuando el material es específicamente sobre el frente electoral (no como reemplazo genérico de "Partido Obrero") | `logos/fit-u.svg` |
 
 ---
@@ -385,9 +396,12 @@ surgida de una escisión en 2019) que tiene su propia "Tribuna de Salud
 Partido Obrero.
 
 ### Tribuna Ambiental
+| Red | Cuenta / link |
+|---|---|
+| Instagram | @tribunaambiental (su bio dice "En el @partidoobrero") |
 
-No encontrada en ninguna fuente verificada. No uses este nombre ni le
-asignes redes hasta que Coordinación lo confirme.
+Tiene también un canal de WhatsApp enlazado desde su Instagram: no lo
+copies a mano; si hace falta, que el compañero pegue el link exacto.
 
 ### Revista EDM (En Defensa del Marxismo)
 
@@ -444,6 +458,8 @@ Antes de dar por terminado el material, repasá esta lista:
       con lo que aparece en cualquier imagen generada.
 - [ ] Se entregaron **al menos 3 formatos**, adaptando el mismo diseño.
 - [ ] Hay **buen contraste** de texto y fondo en todos los formatos.
+- [ ] Le **ofreciste** al compañero el llamado a suscribirse a Prensa
+      Obrera (con el QR adjunto en impresos) y respetaste lo que decidió.
 - [ ] Si el material va a fotocopia o impresión casera, **funciona en
       blanco y negro puro** (ningún dato depende solo del color, sin
       áreas oscuras grandes que gasten tóner).

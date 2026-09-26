@@ -216,6 +216,11 @@ noscript .aviso-nojs {
    la leyenda debajo del QR en vez de al lado, mucho más angosto. */
 .formato-mariposa .qr-bloque { flex-direction: column; gap: .2em; }
 .formato-mariposa .qr-texto { max-width: var(--tam-qr); text-align: center; }
+/* La mariposa A6 es el formato más chico: logo+nombre y redes+QR no
+   entran cómodos en la misma fila sin arriesgar que se envuelvan y el pie
+   se coma varios milímetros de alto. Se apilan en dos filas propias. */
+.formato-mariposa .pie { flex-direction: column; align-items: stretch; gap: .3em; }
+.formato-mariposa .pie-der { justify-content: flex-end; }
 .qr-texto strong, .suscribite-texto strong { color: var(--acento); }
 .suscribite-texto { text-align: right; }
 .fecha-realizacion { font-family: var(--font-texto); font-size: var(--fs-fecha); color: var(--gris-fecha); margin-top: .5em; }
@@ -240,9 +245,9 @@ noscript .aviso-nojs {
 [data-variante="consigna"][data-largo="corto"] { --escala-titulo: 1.5; }
 [data-variante="consigna"][data-largo="medio"] { --escala-titulo: 1.25; }
 [data-variante="consigna"][data-largo="largo"] { --escala-titulo: 1; }
-[data-variante="foto"][data-largo="corto"] { --escala-titulo: .92; }
-[data-variante="foto"][data-largo="medio"] { --escala-titulo: .76; }
-[data-variante="foto"][data-largo="largo"] { --escala-titulo: .6; }
+[data-variante="foto"][data-largo="corto"] { --escala-titulo: .86; }
+[data-variante="foto"][data-largo="medio"] { --escala-titulo: .68; }
+[data-variante="foto"][data-largo="largo"] { --escala-titulo: .54; }
 
 /* ============ AVISO DE DESBORDE (pantalla solamente) ============ */
 .aviso-desborde {
@@ -258,18 +263,24 @@ noscript .aviso-nojs {
 .formato-post {
   width: 1080px; height: 1080px;
   --pad-v: 78px; --pad-h: 72px; --fs-etiqueta: 27px; --fs-titulo: 148px; --fs-bajada: 34px; --fs-cuerpo: 26px;
-  --fs-dato: 30px; --fs-nombre: 21px; --fs-redes: 19px; --fs-fecha: 18px; --alto-logo: 52px; --tam-qr: 0px; --alto-foto: 30%;
+  --fs-dato: 30px; --fs-nombre: 21px; --fs-redes: 19px; --fs-fecha: 18px; --alto-logo: 52px; --tam-qr: 0px; --alto-foto: 30%; --solapa-foto: 110px;
 }
 .formato-story {
   width: 1080px; height: 1920px;
-  --pad-v: 0; --pad-h: 76px; --fs-etiqueta: 38px; --fs-titulo: 204px; --fs-bajada: 50px; --fs-cuerpo: 39px;
-  --fs-dato: 48px; --fs-nombre: 28px; --fs-redes: 26px; --fs-fecha: 23px; --alto-logo: 76px; --tam-qr: 0px; --alto-foto: 30%;
+  --pad-v: 0; --pad-h: 76px; --fs-etiqueta: 42px; --fs-titulo: 232px; --fs-bajada: 56px; --fs-cuerpo: 42px;
+  --fs-dato: 52px; --fs-nombre: 30px; --fs-redes: 28px; --fs-fecha: 24px; --alto-logo: 80px; --tam-qr: 0px; --alto-foto: 30%; --solapa-foto: 150px;
 }
-.formato-story .contenido { position: absolute; top: 250px; bottom: 250px; height: auto; left: 0; right: 0; padding: 40px var(--pad-h); }
+.formato-story .contenido { position: absolute; top: 250px; bottom: 250px; height: auto; left: 0; right: 0; padding: 24px var(--pad-h) 26px; }
+/* La historia tiene mucho alto libre entre los 250px seguros de arriba y
+   abajo: en vez de que todo el espacio sobrante se acumule en un solo
+   hueco (siempre antes del pie, por su margin-top:auto), se reparte entre
+   varios bloques — con varios márgenes automáticos en el mismo contenedor
+   flex, el espacio libre se divide en partes iguales entre todos. */
+.formato-story .bajada, .formato-story .cuerpo, .formato-story .bloque-datos { margin-top: auto; }
 .formato-mariposa {
   width: 105mm; height: 148.5mm;
   --pad-v: 6mm; --pad-h: 7mm; --fs-etiqueta: 9pt; --fs-titulo: 30pt; --fs-bajada: 12pt; --fs-cuerpo: 9pt;
-  --fs-dato: 12.5pt; --fs-nombre: 7pt; --fs-redes: 7pt; --fs-fecha: 7pt; --alto-logo: 8mm; --tam-qr: 20mm; --alto-foto: 22mm;
+  --fs-dato: 12.5pt; --fs-nombre: 7pt; --fs-redes: 7pt; --fs-fecha: 7pt; --alto-logo: 8mm; --tam-qr: 20mm; --alto-foto: 22mm; --solapa-foto: 11mm;
 }
 .lienzo-print { position: relative; }
 .lienzo-print.tam-a5 { width: 148mm; height: 210mm; }
@@ -277,12 +288,12 @@ noscript .aviso-nojs {
 .formato-a5 {
   width: 148mm; height: 210mm;
   --pad-v: 11mm; --pad-h: 11mm; --fs-etiqueta: 11pt; --fs-titulo: 46pt; --fs-bajada: 14pt; --fs-cuerpo: 10pt;
-  --fs-dato: 15pt; --fs-nombre: 8pt; --fs-redes: 8pt; --fs-fecha: 7pt; --alto-logo: 11mm; --tam-qr: 22mm; --alto-foto: 34mm;
+  --fs-dato: 15pt; --fs-nombre: 8pt; --fs-redes: 8pt; --fs-fecha: 7pt; --alto-logo: 11mm; --tam-qr: 22mm; --alto-foto: 34mm; --solapa-foto: 16mm;
 }
 .formato-a4 {
   width: 210mm; height: 297mm;
   --pad-v: 14mm; --pad-h: 14mm; --fs-etiqueta: 14pt; --fs-titulo: 66pt; --fs-bajada: 18pt; --fs-cuerpo: 11pt;
-  --fs-dato: 19pt; --fs-nombre: 9pt; --fs-redes: 9pt; --fs-fecha: 7.5pt; --alto-logo: 15mm; --tam-qr: 25mm; --alto-foto: 48mm;
+  --fs-dato: 19pt; --fs-nombre: 9pt; --fs-redes: 9pt; --fs-fecha: 7.5pt; --alto-logo: 15mm; --tam-qr: 25mm; --alto-foto: 48mm; --solapa-foto: 22mm;
 }
 
 /* =========================================================================
@@ -298,10 +309,15 @@ noscript .aviso-nojs {
 /* BLOQUE: campo de color en diagonal, título en blanco sobre ese campo,
    datos en su propia franja de contraste (negra) para no depender solo
    del color. */
-[data-variante="bloque"] .campo-diagonal { display: block; clip-path: polygon(0 0, 100% 0, 100% calc(var(--fin-diagonal, 55%) - 12%), 0 var(--fin-diagonal, 55%)); }
+[data-variante="bloque"] .campo-diagonal { display: block; clip-path: polygon(0 0, 100% 0, 100% var(--fin-diagonal-alto, 45%), 0 var(--fin-diagonal-bajo, 55%)); }
 [data-variante="bloque"] .etiqueta, [data-variante="bloque"] .titulo { color: #fff; }
 [data-variante="bloque"] .bajada, [data-variante="bloque"] .cuerpo { color: var(--gris-cuerpo); }
 [data-variante="bloque"] .contenido { padding-top: calc(var(--pad-v) * 1.1); }
+/* Aire real entre el título y lo que sigue: el límite del campo de color
+   se calcula en JS a partir de esta separación, así que necesita espacio
+   de verdad (no solo el margen chico de siempre) para poder ubicarse sin
+   invadir ni el título ni la bajada. */
+[data-variante="bloque"] .titulo { margin-bottom: .5em; }
 
 /* CONSIGNA: la frase (el título) es la pieza central, a pleno color,
    centrada; sin bajada ni cuerpo. */
@@ -309,22 +325,68 @@ noscript .aviso-nojs {
 [data-variante="consigna"] .campo-diagonal { display: block; clip-path: none; }
 [data-variante="consigna"] .contenido { justify-content: center; text-align: center; align-items: center; }
 [data-variante="consigna"] .etiqueta, [data-variante="consigna"] .titulo { color: #fff; text-align: center; }
-[data-variante="consigna"] .bloque-datos { background: rgba(255,255,255,.14); align-items: center; }
-[data-variante="consigna"] .bloque-datos .dato { color: #fff; justify-content: center; }
+/* Bloque de datos: se deja el fondo negro sólido de siempre (no un tinte
+   translúcido sobre el color de acento), así el contraste del texto blanco
+   no depende de qué tan clara sea la variable color_acento elegida. */
+[data-variante="consigna"] .bloque-datos { align-items: center; }
+[data-variante="consigna"] .bloque-datos .dato { justify-content: center; }
 [data-variante="consigna"] .pie { flex-direction: column; align-items: center; justify-content: center; gap: .5em; }
 [data-variante="consigna"] .pie-der { flex-direction: column; align-items: center; }
-[data-variante="consigna"] .nombre-firma, [data-variante="consigna"] .redes { color: rgba(255,255,255,.85); }
+/* Toda la pieza es un campo sólido de color_acento: un texto translúcido
+   directo sobre ese color no garantiza 4.5:1 con cualquier acento posible.
+   Se les da a redes/fecha/firma-sin-logo/enlace una chapita casi negra
+   opaca (independiente del acento) para asegurar buen contraste siempre. */
+[data-variante="consigna"] .nombre-firma, [data-variante="consigna"] .redes,
+[data-variante="consigna"] .fecha-realizacion, [data-variante="consigna"] .suscribite-texto {
+  color: #fff; background: rgba(23,23,23,.85); border-radius: .3em; padding: .25em .6em; display: inline-block;
+}
 [data-variante="consigna"] .redes, [data-variante="consigna"] .suscribite-texto { text-align: center; }
-[data-variante="consigna"] .suscribite-texto { color: rgba(255,255,255,.92); }
 [data-variante="consigna"] .suscribite-texto strong { color: #fff; }
-[data-variante="consigna"] .fecha-realizacion { color: rgba(255,255,255,.6); text-align: center; }
+/* El logo de la agrupación (obligatorio en toda variante) va sobre una
+   chapita blanca: sin esto, un logo del mismo tono que el color de acento
+   (frecuente, porque el acento suele salir del propio logo) se vuelve
+   invisible contra un fondo a pleno de ese mismo color. */
+[data-variante="consigna"] .logo-firma, [data-variante="consigna"] .logo-po {
+  background: #fff; padding: .25em .5em; border-radius: .25em;
+}
 [data-variante="consigna"] .qr-bloque { background: #fff; }
+[data-modo="bn"][data-variante="consigna"] .nombre-firma, [data-modo="bn"][data-variante="consigna"] .redes,
+[data-modo="bn"][data-variante="consigna"] .fecha-realizacion, [data-modo="bn"][data-variante="consigna"] .suscribite-texto {
+  background: none; padding: 0;
+}
 
-/* FOTO: foto real a pleno arriba, título en franja sólida encima del
-   límite inferior de la foto; sin cuerpo, para no desbordar. */
+/* FOTO: la foto es la protagonista real (~68% de la pieza, no una franja
+   fina) con tratamiento de duotono; el título se superpone en una franja
+   sólida a todo el ancho sobre su límite inferior (margen negativo sobre
+   foto-area, así sigue siendo contenido normal del documento y el ajuste
+   de escala lo sigue midiendo bien); el resto del contenido queda legible
+   sobre el fondo blanco de la pieza. Sin cuerpo, para no desbordar. */
+[data-variante="foto"] { --alto-foto: 68%; }
+[data-variante="foto"] .foto-area { margin-bottom: calc(-1 * var(--solapa-foto, 3em)); }
 [data-variante="foto"] .cuerpo { display: none !important; }
-[data-variante="foto"] .etiqueta, [data-variante="foto"] .titulo { background: var(--negro); color: #fff; padding: .18em .3em; display: inline-block; width: fit-content; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
-[data-variante="foto"] .etiqueta { background: var(--acento); }
+[data-variante="foto"] .etiqueta, [data-variante="foto"] .titulo {
+  position: relative; z-index: 2; color: #fff;
+  margin-left: calc(-1 * var(--pad-h)); margin-right: calc(-1 * var(--pad-h));
+  width: calc(100% + var(--pad-h) * 2); padding: .22em var(--pad-h); box-sizing: border-box;
+}
+[data-variante="foto"] .etiqueta { background: var(--acento); margin-bottom: 0; }
+[data-variante="foto"] .titulo { background: rgba(20,20,20,.88); margin-top: 0; }
+/* Con la foto ocupando ~68%, a la historia (la más grande de las dos
+   piezas digitales) le queda poco alto para bajada/datos/pie: se achican
+   esos tamaños solo en esta combinación puntual (nunca por debajo de los
+   pisos de BRIEF.md, que rigen para impresos, no para redes). */
+.formato-story[data-variante="foto"] {
+  --fs-bajada: 40px; --fs-dato: 36px; --fs-nombre: 22px; --fs-redes: 20px; --fs-fecha: 20px; --alto-logo: 56px;
+  --alto-foto: 62%; --solapa-foto: 110px;
+}
+/* La mariposa A6 (105×148,5mm) es el formato más chico: un QR obligatorio
+   de 20mm, 4 líneas de redes y el bloque de datos ya ocupan más de la
+   mitad de la hoja a sus tamaños mínimos (los de BRIEF.md no se pueden
+   bajar). El techo real de la foto acá es ~50%, no ~70%: sigue siendo
+   claramente protagonista frente al resto de las piezas, con el resto del
+   contenido legible en el espacio que queda. */
+.formato-mariposa[data-variante="foto"] { --alto-foto: 50%; --solapa-foto: 8mm; }
+.formato-a5[data-variante="foto"] { --alto-foto: 63%; --solapa-foto: 12mm; }
 
 /* Blanco y negro real (solo hoja A6): sin filtro de escala de grises, sin
    áreas grandes sólidas — el color se reemplaza por trama/contorno. */
@@ -344,7 +406,9 @@ noscript .aviso-nojs {
 /* Los logos son archivos de color fijo (no se pueden "redibujar" en negro):
    se pasan a escala de grises solo a ellos, no a toda la pieza (H5). */
 [data-modo="bn"] .logo-firma, [data-modo="bn"] .logo-po { filter: grayscale(1) contrast(1.1); }
-[data-modo="bn"] [data-variante="foto"] .etiqueta, [data-modo="bn"] [data-variante="foto"] .titulo { background: #000; }
+/* La etiqueta y el título de la variante "foto" ya son casi negros de
+   por sí (ver arriba); en blanco y negro alcanza con que --acento se
+   vuelva negro (heredado de la regla general de más arriba). */
 
 /* ============ ETIQUETAS DE FORMATO EN PANTALLA (no se imprimen) ============ */
 .medida { font-family: var(--font-texto); font-size: 12px; color: #666; }
@@ -672,14 +736,36 @@ body[data-vista] .acciones-pieza, body[data-vista] .etiqueta-pieza { display: no
       } else if (aviso) {
         aviso.classList.add('oculto');
       }
-      // Campo diagonal de la variante "bloque": su límite inferior sigue al
-      // bloque etiqueta+título ya escalado, con un margen, para que la
-      // bajada nunca quede a caballo entre el campo de color y el blanco.
+      // Campo diagonal de la variante "bloque": se calculan sus DOS bordes
+      // (--fin-diagonal-alto en x=100%, --fin-diagonal-bajo en x=0%) para
+      // que, midiendo ya con el título escalado, el borde en TODO punto
+      // (mínimo en el lado alto) quede por debajo del título completo, y
+      // (máximo en el lado bajo) por encima de lo que sigue (bajada, o
+      // cuerpo/datos si no hay bajada) con un margen de al menos una línea.
+      // Así ninguna línea de texto queda repartida entre el campo de color
+      // y el blanco, sea cual sea el contenido.
       if (pieza.dataset.variante === 'bloque' && titulo) {
         var rPieza = pieza.getBoundingClientRect();
         var rTitulo = titulo.getBoundingClientRect();
-        var pct = ((rTitulo.bottom - rPieza.top) / rPieza.height) * 100 + 9;
-        pieza.style.setProperty('--fin-diagonal', Math.min(pct, 92).toFixed(1) + '%');
+        var siguiente = (bajada && !bajada.classList.contains('oculto')) ? bajada
+          : pieza.querySelector('.cuerpo:not(.oculto)') || pieza.querySelector('.bloque-datos') || pieza.querySelector('.pie');
+        var margenLinea = 28;
+        if (siguiente) {
+          var lh = parseFloat(getComputedStyle(siguiente).lineHeight);
+          if (!isNaN(lh) && lh > 0) margenLinea = lh * 1.15;
+        }
+        var limiteAlto = ((rTitulo.bottom - rPieza.top) / rPieza.height) * 100 + 3.5; // aire bajo el título (con margen: la caja de línea real puede pasarse unos px del boundingRect del bloque)
+        var limiteBajo = limiteAlto + 10;
+        if (siguiente) {
+          var rSig = siguiente.getBoundingClientRect();
+          var topeBajo = ((rSig.top - rPieza.top - margenLinea) / rPieza.height) * 100;
+          if (topeBajo < limiteBajo) limiteBajo = topeBajo;
+        }
+        if (limiteBajo < limiteAlto) limiteBajo = limiteAlto;
+        limiteAlto = Math.max(0, Math.min(95, limiteAlto));
+        limiteBajo = Math.max(limiteAlto, Math.min(95, limiteBajo));
+        pieza.style.setProperty('--fin-diagonal-alto', limiteAlto.toFixed(1) + '%');
+        pieza.style.setProperty('--fin-diagonal-bajo', limiteBajo.toFixed(1) + '%');
       }
     }
 

@@ -1,6 +1,6 @@
 # Brief de materiales — Partido Obrero
 
-**Versión:** 1.1.1
+**Versión:** 1.2.0
 **Fecha:** 2026-09-26
 
 ---
@@ -70,9 +70,18 @@ seguí con valores por defecto razonables y avisá qué asumiste.
     contrastes y los colores — ver sección 6).
 
 Una vez que tengas estos datos (los obligatorios; los opcionales podés
-asumirlos con un valor por defecto razonable), **resumí en 3-4 líneas el
-plan** que vas a seguir (formatos, quién firma, qué redes, con o sin foto) y
-pedí una confirmación corta antes de producir el material final. Si te
+asumirlos con un valor por defecto razonable), **resumí el plan** que vas
+a seguir y pedí una confirmación corta antes de producir el material
+final. El plan **siempre** incluye estas líneas, sin excepción:
+
+- Formatos que vas a entregar (y si hay versión blanco y negro).
+- Quién firma y qué redes van.
+- Con o sin foto.
+- **Fecha de realización** que va a llevar el material (`dd/mm/aaaa`).
+- **¿Sumamos también el logo del Partido Obrero?** (cuando firma una
+  agrupación; preguntalo siempre, no lo decidas vos).
+- **¿Sumamos "Suscribite a Prensa Obrera" con el QR?** (preguntalo
+  siempre; es opcional, pero no te lo podés saltear). Si te
 confirman, avanzá. Si piden un cambio, ajustá el plan y volvé a confirmar
 brevemente.
 
@@ -82,11 +91,14 @@ brevemente.
 
 Todo material final (cualquier formato) tiene que incluir:
 
-1. **Fecha de producción del material**: chica, en el pie/footer. Usá la
-   **fecha real del día en que se genera el material**, salvo que te digan
-   explícitamente otra fecha. Formato: `dd/mm/aaaa`. Si no sabés con
-   certeza la fecha de hoy, **preguntásela al compañero**: nunca la
-   inventes ni la adivines.
+1. **Fecha de realización del material**: va **siempre**, completa, con
+   día, mes y año: `dd/mm/aaaa`. Es el registro histórico y la "versión"
+   del material. **Solo la fecha, sin texto delante** (nada de "Producido
+   el", "Fecha:" ni similares). Chica, en gris, en un rincón del pie,
+   **lejos del bloque de la actividad** para que nadie la confunda con la
+   fecha del evento. Usá la fecha real del día en que se hace el material,
+   salvo que te digan otra. Si no sabés con certeza la fecha de hoy,
+   **preguntásela al compañero**: nunca la inventes ni la adivines.
 2. **Agrupación que firma** (ver tabla de la sección 8). Si no está claro
    quién firma, preguntá. Si no hay ninguna indicación y el tema es
    general, el valor por defecto es **"Partido Obrero"**.
@@ -113,8 +125,15 @@ Proponelo siempre y dejá que el compañero decida si va:
 - **Nunca dibujes, redibujes, recrees, modifiques ni "mejores" un logo.**
   Ninguna IA reproduce logos oficiales con fidelidad; el trazo va a salir
   distinto al original y eso es inaceptable en un material institucional.
-- **Usá exclusivamente los archivos de logo adjuntos** en la carpeta
-  `logos/` de este mismo paquete.
+- **Usá exclusivamente archivos de logo oficiales**: los adjuntos al chat
+  (vienen en la carpeta `logos/` de este paquete) o los publicados en
+  `https://programadoresobreros.com.ar/materiales/logos` (ver tabla abajo).
+- Si podés descargar un archivo de esos enlaces, usalo. **Si no podés**
+  (la mayoría de las IA no pueden meter una imagen de internet en su
+  diseño), decile al compañero exactamente: *"Descargá este logo desde
+  [enlace] y subímelo acá"*, y esperá el archivo.
+- Para ChatGPT y Gemini pedí los archivos **`.png`** (muchas IA no aceptan
+  `.svg`); para imprenta o HTML, el `.svg`.
 - Si el logo que necesitás **no fue adjuntado** al chat, no lo inventes ni
   lo generes: dejá una caja bien marcada en el diseño que diga
   `LOGO: [nombre de la agrupación]` y avisale a la persona qué archivo
@@ -132,6 +151,33 @@ Proponelo siempre y dejá que el compañero decida si va:
   Nunca reemplaza al logo del Partido Obrero ni al de una agrupación:
   podés sumarlo como ilustración de apoyo, pero el logo real siempre tiene
   que estar presente aparte.
+- Cuando firma una agrupación, **preguntá si se suma el logo del Partido
+  Obrero** (por ejemplo, más chico, junto al de la agrupación). No lo
+  agregues ni lo saques por tu cuenta.
+
+### Logos oficiales online (enlace directo y uso)
+
+Base: `https://programadoresobreros.com.ar/materiales/logos/`
+
+| Archivo | Para qué | Fondo |
+|---|---|---|
+| `partido-obrero-hd.png` / `partido-obrero.svg` | Partido Obrero: material general o co-firma | Claro u oscuro |
+| `prensa-obrera.png` / `-blanco.png` | Prensa Obrera | Claro / oscuro |
+| `tribuna-docente.png` | Tribuna Docente | Claro u oscuro |
+| `polo-obrero.png` / `-blanco.png` | Polo Obrero | Claro / oscuro |
+| `ujs.png` / `-blanco.png` | UJS | Claro / oscuro |
+| `pdt.png` / `-blanco.png` | Plenario de Trabajadoras | Claro / oscuro |
+| `csc.png` / `-blanco.png` | Coordinadora Sindical Clasista | Claro / oscuro |
+| `apel.png` / `-blanco.png` | APeL | Claro / oscuro |
+| `agrupacion-1969.png` / `-blanco.png` | Agrupación 1969 | Claro / oscuro |
+| `ojo-obrero.png` / `-blanco.png` | Ojo Obrero | Claro / oscuro |
+| `revista-edm.png` | Revista En Defensa del Marxismo | Claro u oscuro |
+| `fit-u.png` | FIT-U (solo material electoral del frente) | Claro u oscuro |
+| `partido-obrero-mascot.png` | "Obrerito", decorativo opcional | Claro u oscuro |
+| `qr-suscribite-prensa-obrera.png` | QR a la página de suscripción | Claro (impresos) |
+
+Ejemplo de enlace completo:
+`https://programadoresobreros.com.ar/materiales/logos/tribuna-docente.png`
 
 ---
 
@@ -218,8 +264,17 @@ funcionar también en blanco y negro puro. Esto significa:
   "el texto rojo es la fecha" como única pista).
 - Evitá áreas grandes de color oscuro sólido: gastan mucho tóner y quedan
   mal en fotocopiadora.
-- Antes de entregar el archivo, hacé una revisión mental (o generá una
-  vista) en escala de grises para confirmar que se sigue leyendo bien.
+- **Entregá una versión real en blanco y negro** (escala de grises, sin
+  colores) de cada pieza que vaya a fotocopia: no alcanza con que "se
+  lea" en color.
+- **Tamaños mínimos de letra en impresos**: cuerpo de texto 9 pt en A6
+  (10 pt en A5/A4); redes, fecha de realización y pie, nunca menos de
+  7 pt. Si en el pie no entran todas las redes con ese tamaño, dejá las
+  2 más importantes y avisá.
+
+**Historias (1080×1920)**: aprovechá el alto. Respetá las zonas seguras,
+pero agrandá título y bloques para ocupar el espacio útil: no dejes la
+pieza cuadrada flotando en el medio con mucho vacío arriba y abajo.
 
 ---
 
@@ -447,8 +502,10 @@ Esta regla aplica a **todo** lo que hagas en esta skill:
 
 Antes de dar por terminado el material, repasá esta lista:
 
-- [ ] La **fecha de producción** está presente, en el pie, con el formato
-      `dd/mm/aaaa`, y es la fecha real (o la que te confirmaron).
+- [ ] La **fecha de realización** está presente, completa (`dd/mm/aaaa`),
+      **sin texto delante**, chica, en el pie y lejos de la fecha del evento.
+- [ ] Preguntaste si se suma el **logo del Partido Obrero** (si firma una
+      agrupación) y respetaste la respuesta.
 - [ ] Está claro **quién firma** el material (agrupación de la sección 8).
 - [ ] Las **redes mostradas** están todas en la tabla verificada de la
       sección 9, sin handles inventados.
@@ -458,8 +515,10 @@ Antes de dar por terminado el material, repasá esta lista:
       con lo que aparece en cualquier imagen generada.
 - [ ] Se entregaron **al menos 3 formatos**, adaptando el mismo diseño.
 - [ ] Hay **buen contraste** de texto y fondo en todos los formatos.
-- [ ] Le **ofreciste** al compañero el llamado a suscribirse a Prensa
-      Obrera (con el QR adjunto en impresos) y respetaste lo que decidió.
+- [ ] **Preguntaste en el plan** si va "Suscribite a Prensa Obrera" con
+      QR, y respetaste lo que decidió.
+- [ ] Si va a fotocopia, entregaste también la **versión en blanco y
+      negro** y los textos del pie respetan el **tamaño mínimo**.
 - [ ] Si el material va a fotocopia o impresión casera, **funciona en
       blanco y negro puro** (ningún dato depende solo del color, sin
       áreas oscuras grandes que gasten tóner).

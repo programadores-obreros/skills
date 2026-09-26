@@ -3,6 +3,23 @@
 Todas las versiones siguen [semver](https://semver.org/lang/es/)
 (`MAYOR.MENOR.PARCHE`) y se documentan con fecha.
 
+## [1.2.0] - 2026-09-26
+
+Ajustes tras la primera prueba real en ChatGPT (charla de Tribuna Docente).
+
+- **Fecha de realización**: siempre completa (`dd/mm/aaaa`), sin texto
+  delante ("Producido el" fuera), lejos de la fecha del evento.
+- El **plan** ahora incluye obligatoriamente: fecha de realización, si se
+  suma el logo del PO (cuando firma una agrupación) y si va "Suscribite a
+  Prensa Obrera" con QR (en la prueba no se ofreció).
+- **Logos online** con enlace directo en
+  `programadoresobreros.com.ar/materiales/logos` y guía de uso; si la IA
+  no puede descargarlos, le pide al compañero que los baje y los suba.
+- **Fotocopia**: versión real en blanco y negro obligatoria y tamaños
+  mínimos de letra en impresos (en la prueba las mariposas salieron en
+  color y el pie quedó muy chico).
+- **Historias**: aprovechar el alto útil.
+
 ## [1.1.1] - 2026-09-26
 
 - Todos los logos también en `.png` (1600 px, fondo transparente) para

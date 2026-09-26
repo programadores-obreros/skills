@@ -3,6 +3,19 @@
 Todas las versiones siguen [semver](https://semver.org/lang/es/)
 (`MAYOR.MENOR.PARCHE`) y se documentan con fecha.
 
+## [1.3.0] - 2026-09-26
+
+Ajustes tras la segunda ronda de pruebas (ChatGPT y Gemini).
+
+- **Regla de oro**: nada se produce hasta que la persona escriba
+  "confirmo" (ChatGPT y Gemini generaron antes de confirmar).
+- El plan termina con las preguntas del logo del PO y del "Suscribite"
+  explícitas (Gemini las salteó) y controla la coherencia de los datos
+  (día de la semana vs. fecha).
+- Archivos: usar el nombre y la extensión exactos de los adjuntos.
+- QR: mínimo 2 × 2 cm impreso / 220 px digital; si no entra, solo el link
+  (en la prueba el QR de la mariposa medía ~7 mm y no se podía escanear).
+
 ## [1.2.0] - 2026-09-26
 
 Ajustes tras la primera prueba real en ChatGPT (charla de Tribuna Docente).

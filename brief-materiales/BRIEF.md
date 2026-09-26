@@ -84,7 +84,9 @@ Todo material final (cualquier formato) tiene que incluir:
 
 1. **Fecha de producción del material**: chica, en el pie/footer. Usá la
    **fecha real del día en que se genera el material**, salvo que te digan
-   explícitamente otra fecha. Formato: `dd/mm/aaaa`.
+   explícitamente otra fecha. Formato: `dd/mm/aaaa`. Si no sabés con
+   certeza la fecha de hoy, **preguntásela al compañero**: nunca la
+   inventes ni la adivines.
 2. **Agrupación que firma** (ver tabla de la sección 8). Si no está claro
    quién firma, preguntá. Si no hay ninguna indicación y el tema es
    general, el valor por defecto es **"Partido Obrero"**.
@@ -334,7 +336,7 @@ solamente `@prensaobrera` (sin guion bajo).**
 |---|---|
 | Facebook | facebook.com/pletrabajadoras |
 | X | @pletrabajadoras |
-| Instagram | @plenariodetrabajadoras — **verificar antes de imprimir** |
+| Instagram | @plenariodetrabajadoras |
 
 `x.com/PdTMendoza` es una cuenta **regional** (Mendoza), no la cuenta
 nacional: no la uses como si fuera la cuenta general del PDT.
@@ -342,7 +344,7 @@ nacional: no la uses como si fuera la cuenta general del PDT.
 ### CSC (Coordinadora Sindical Clasista)
 | Red | Cuenta / link |
 |---|---|
-| Facebook | facebook.com/ElClasista.CSC — **verificar antes de imprimir** |
+| Facebook | facebook.com/ElClasista.CSC |
 
 ⚠️ Ojo: **no** es `facebook.com/CoordinadoraSindicalClasista`.
 

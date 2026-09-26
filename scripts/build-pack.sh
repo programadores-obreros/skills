@@ -38,12 +38,16 @@ WORK_DIR="$(mktemp -d)"
 trap 'rm -rf "$WORK_DIR"' EXIT
 
 PACK_DIR="$WORK_DIR/brief-materiales"
-mkdir -p "$PACK_DIR/logos"
+mkdir -p "$PACK_DIR/logos" "$PACK_DIR/plantilla"
 
 cp "$BRIEF_FILE" "$PACK_DIR/BRIEF.md"
 cp "$SKILL_DIR"/logos/*.svg "$PACK_DIR/logos/"
 cp "$SKILL_DIR"/logos/*.png "$PACK_DIR/logos/"
 cp "$SKILL_DIR/logos/LEEME.md" "$PACK_DIR/logos/LEEME.md"
+# La plantilla vive en su propia carpeta, al lado de logos/, para que las
+# rutas relativas "../logos/archivo.png" de adentro del HTML sigan
+# funcionando tal cual después de descomprimir el zip.
+cp "$SKILL_DIR/plantilla/plantilla-materiales.html" "$PACK_DIR/plantilla/plantilla-materiales.html"
 
 cat > "$PACK_DIR/LEEME-PRIMERO.txt" <<EOF
 BRIEF DE MATERIALES - PARTIDO OBRERO (v$VERSION)
@@ -57,6 +61,14 @@ Como usar este paquete:
 3. Revisa el texto final letra por letra antes de imprimir o publicar
    nada. Las IA que generan imagenes a veces escriben mal el texto de
    adentro de la imagen.
+
+Tambien trae plantilla/plantilla-materiales.html: una plantilla ya
+disenada (posteo, historia y hoja A6 para imprenta/fotocopia) donde solo
+hay que completar el contenido. Si tu IA no genera imagenes, o preferis
+que los logos queden exactos sin riesgo de que se redibujen, subisela a
+la IA junto con el BRIEF.md y pedile que complete solo esa plantilla (ver
+seccion 7 del BRIEF.md). No la saques de su carpeta plantilla/: usa los
+logos de logos/ con una ruta relativa.
 
 Mas detalle en BRIEF.md y en logos/LEEME.md.
 EOF

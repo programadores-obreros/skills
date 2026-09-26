@@ -1,0 +1,1075 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plantilla de materiales — Partido Obrero</title>
+
+<!--
+  CONVENCIÓN DE CARPETAS (no la cambies)
+  ---------------------------------------
+  Este archivo vive en la carpeta "plantilla/", al lado de una carpeta
+  "logos/" un nivel arriba (así viene en el paquete descargable). Todas las
+  imágenes se referencian como "../logos/archivo.png". Si movés este HTML
+  de lugar, tenés que mover también la carpeta logos/ manteniendo esa
+  misma relación, o corregir las rutas a mano.
+
+  CÓMO EDITAR EL CONTENIDO (para una IA o para un compañero/a)
+  ---------------------------------------------------------------
+  Todo el contenido real vive en UN solo lugar: el objeto "MATERIAL" del
+  <script> que está más abajo, justo antes de las piezas. Cada campo tiene
+  un comentario "EDITAR:" al lado.
+
+  Para cambiar texto, fecha, firma, redes, logo o color de acento, editá
+  SOLO ese objeto. Un script al final de la página toma esos valores y los
+  copia automáticamente a las 10 veces que aparecen repetidos en el diseño
+  (posteo, historia y las 8 mariposas de las 2 hojas A6). No edites el
+  texto que aparece más abajo, dentro de cada pieza: ese texto es apenas
+  un "placeholder" de ejemplo que se pisa solo al cargar la página, y si
+  el navegador no ejecuta JavaScript por algún motivo, ese mismo texto de
+  ejemplo queda visible como contenido de respaldo (nunca queda vacío).
+
+  NO cambies la estructura, el tamaño de las piezas, el tamaño del QR ni
+  los tamaños mínimos de letra: eso es lo que hace que el material sea
+  profesional y siga las reglas de BRIEF.md. Si te pidieron completar esta
+  plantilla, devolvé el archivo completo con solo el bloque MATERIAL
+  cambiado.
+-->
+
+<style>
+  :root {
+    --acento: #E84426; /* rojo PO por defecto; MATERIAL.color_acento lo puede pisar */
+    --negro: #1a1a1a;
+    --gris-cuerpo: #333333;
+    --gris-pie: #595959;
+    --blanco: #ffffff;
+    --font-titulo: "Arial Black", "Helvetica Neue Condensed Bold", "Helvetica Neue", "Arial Narrow", Arial, sans-serif;
+    --font-texto: "Helvetica Neue", Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #e9e9e9;
+    font-family: var(--font-texto);
+    color: var(--negro);
+  }
+
+  img { display: block; }
+
+  /* ============ BARRA DE INSTRUCCIONES (solo pantalla) ============ */
+  .barra-instrucciones {
+    background: var(--negro);
+    color: #fff;
+    padding: 18px 24px 22px;
+    font-family: var(--font-texto);
+  }
+  .barra-instrucciones h1 {
+    font-size: 18px;
+    margin: 0 0 8px;
+    color: #fff;
+  }
+  .barra-instrucciones ol {
+    margin: 0;
+    padding-left: 20px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .barra-instrucciones li { margin-bottom: 6px; }
+  .barra-instrucciones code {
+    background: rgba(255,255,255,0.14);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+  }
+  .barra-instrucciones .aviso {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.25);
+    font-size: 13px;
+    color: #f0c9c0;
+  }
+
+  /* ============ LIENZO CONTENEDOR (solo para ver todo en pantalla) ============ */
+  .lienzos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 40px;
+    align-items: flex-start;
+  }
+  .etiqueta-pieza {
+    font-family: var(--font-texto);
+    font-size: 13px;
+    color: #444;
+    margin: 0 0 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+  .envoltorio-pieza { display: flex; flex-direction: column; }
+
+  /* ============ COMPONENTES COMPARTIDOS ============ */
+  .icono { width: 1em; height: 1em; flex: none; }
+
+  /* =====================================================================
+     POSTEO 1080×1080
+     ===================================================================== */
+  .pieza-post {
+    position: relative;
+    width: 1080px;
+    height: 1080px;
+    background: var(--blanco);
+    overflow: hidden;
+  }
+  .pieza-post .franja {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 14px;
+    background: var(--acento);
+  }
+  .pieza-post .contenido {
+    position: absolute;
+    top: 78px; left: 72px; right: 72px; bottom: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .pieza-post .etiqueta {
+    font-family: var(--font-texto);
+    font-weight: 800;
+    font-size: 27px;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--acento);
+    margin: 0 0 14px;
+  }
+  .pieza-post .titulo {
+    font-family: var(--font-titulo);
+    font-weight: 900;
+    font-size: 78px;
+    line-height: 1.03;
+    letter-spacing: -0.01em;
+    color: var(--negro);
+    margin: 0 0 22px;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .pieza-post .bajada {
+    font-size: 33px;
+    font-weight: 500;
+    line-height: 1.32;
+    color: var(--gris-cuerpo);
+    margin: 0 0 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .pieza-post .cuerpo {
+    font-size: 26px;
+    line-height: 1.45;
+    color: var(--gris-cuerpo);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .pieza-post .bloque-datos {
+    margin-top: auto;
+    background: var(--acento);
+    color: #fff;
+    padding: 30px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .pieza-post .dato {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 32px;
+    font-weight: 700;
+  }
+  .pieza-post .pie {
+    padding: 26px 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .pieza-post .pie-firma {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-width: 0;
+  }
+  .pieza-post .logo-firma { height: 64px; width: auto; max-width: 260px; object-fit: contain; }
+  .pieza-post .logo-po { height: 44px; width: auto; max-width: 170px; object-fit: contain; }
+  .pieza-post .nombre-firma {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--negro);
+    white-space: nowrap;
+  }
+  .pieza-post .pie-der {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .pieza-post .redes {
+    list-style: none;
+    margin: 0; padding: 0;
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--gris-pie);
+    text-align: right;
+  }
+  .pieza-post .qr-bloque {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff;
+    border: 2px solid #eee;
+    padding: 10px 14px;
+  }
+  .pieza-post .qr-bloque img { width: 240px; height: 240px; }
+  .pieza-post .qr-texto { font-size: 18px; line-height: 1.35; color: var(--negro); max-width: 150px; }
+  .pieza-post .qr-texto strong { color: var(--acento); }
+  .pieza-post .fecha-realizacion {
+    position: absolute;
+    left: 72px;
+    bottom: 12px;
+    font-size: 17px;
+    color: #9a9a9a;
+  }
+
+  /* =====================================================================
+     HISTORIA 1080×1920
+     ===================================================================== */
+  .pieza-story {
+    position: relative;
+    width: 1080px;
+    height: 1920px;
+    background: var(--blanco);
+    overflow: hidden;
+  }
+  .pieza-story .zona-segura {
+    position: absolute;
+    left: 0; right: 0;
+    height: 250px;
+    pointer-events: none;
+  }
+  .pieza-story .zona-segura.arriba { top: 0; }
+  .pieza-story .zona-segura.abajo { bottom: 0; }
+  .pieza-story .franja {
+    position: absolute;
+    top: 250px; left: 0; right: 0;
+    height: 14px;
+    background: var(--acento);
+  }
+  .pieza-story .contenido {
+    position: absolute;
+    top: 250px; bottom: 250px; left: 0; right: 0;
+    padding: 56px 76px 40px;
+    display: flex;
+    flex-direction: column;
+  }
+  .pieza-story .bloque-texto { display: flex; flex-direction: column; }
+  .pieza-story .etiqueta {
+    font-family: var(--font-texto);
+    font-weight: 800;
+    font-size: 32px;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--acento);
+    margin: 0 0 20px;
+  }
+  .pieza-story .titulo {
+    font-family: var(--font-titulo);
+    font-weight: 900;
+    font-size: 104px;
+    line-height: 1.03;
+    letter-spacing: -0.01em;
+    color: var(--negro);
+    margin: 0 0 30px;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .pieza-story .bajada {
+    font-size: 42px;
+    font-weight: 500;
+    line-height: 1.34;
+    color: var(--gris-cuerpo);
+    margin: 0 0 26px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .pieza-story .cuerpo {
+    font-size: 33px;
+    line-height: 1.48;
+    color: var(--gris-cuerpo);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .pieza-story .bloque-datos {
+    margin-top: 56px;
+    background: var(--acento);
+    color: #fff;
+    padding: 46px 52px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .pieza-story .dato {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 46px;
+    font-weight: 700;
+  }
+  .pieza-story .pie {
+    margin-top: auto;
+    padding-top: 56px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  .pieza-story .pie-firma {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .pieza-story .logo-firma { height: 84px; width: auto; max-width: 340px; object-fit: contain; }
+  .pieza-story .logo-po { height: 58px; width: auto; max-width: 220px; object-fit: contain; }
+  .pieza-story .nombre-firma { font-size: 30px; font-weight: 700; }
+  .pieza-story .pie-der {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .pieza-story .redes {
+    list-style: none;
+    margin: 0; padding: 0;
+    font-size: 26px;
+    line-height: 1.55;
+    color: var(--gris-pie);
+  }
+  .pieza-story .qr-bloque {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #fff;
+    border: 2px solid #eee;
+    padding: 12px 16px;
+  }
+  .pieza-story .qr-bloque img { width: 260px; height: 260px; }
+  .pieza-story .qr-texto { font-size: 22px; line-height: 1.35; max-width: 180px; }
+  .pieza-story .qr-texto strong { color: var(--acento); }
+  .pieza-story .fecha-realizacion {
+    position: absolute;
+    left: 76px;
+    bottom: 210px;
+    font-size: 22px;
+    color: #9a9a9a;
+  }
+
+  /* =====================================================================
+     HOJA A4 CON 4 MARIPOSAS A6 (105×148,5 mm cada una)
+     ===================================================================== */
+  .hoja-a6 {
+    width: 210mm;
+    height: 297mm;
+    background: #fff;
+    display: grid;
+    grid-template-columns: 105mm 105mm;
+    grid-template-rows: 148.5mm 148.5mm;
+    overflow: hidden;
+  }
+  .mariposa {
+    position: relative;
+    width: 105mm;
+    height: 148.5mm;
+    overflow: hidden;
+    padding: 6mm 7mm 5mm;
+    display: flex;
+    flex-direction: column;
+  }
+  /* líneas de corte: solo en los bordes internos donde hay que cortar */
+  .mariposa:nth-child(1), .mariposa:nth-child(3) { border-right: 0.35mm dashed #b5b5b5; }
+  .mariposa:nth-child(1), .mariposa:nth-child(2) { border-bottom: 0.35mm dashed #b5b5b5; }
+
+  .mariposa .franja { display: none; } /* la mariposa no lleva franja superior, ya usa el color en el bloque de datos */
+
+  .mariposa .etiqueta {
+    font-family: var(--font-texto);
+    font-weight: 800;
+    font-size: 9pt;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--acento);
+    margin: 0 0 3.5mm;
+  }
+  .mariposa .titulo {
+    font-family: var(--font-titulo);
+    font-weight: 900;
+    font-size: 24pt;
+    line-height: 1.05;
+    letter-spacing: -0.005em;
+    color: var(--negro);
+    margin: 0 0 3.5mm;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .mariposa .bajada {
+    font-size: 12pt;
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--gris-cuerpo);
+    margin: 0 0 3mm;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .mariposa .cuerpo {
+    font-size: 10pt;
+    line-height: 1.4;
+    color: var(--gris-cuerpo);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .mariposa .bloque-datos {
+    margin-top: 5mm;
+    background: var(--acento);
+    color: #fff;
+    padding: 4.5mm 4mm;
+    display: flex;
+    flex-direction: column;
+    gap: 2mm;
+  }
+  .mariposa .dato {
+    display: flex;
+    align-items: center;
+    gap: 2mm;
+    font-size: 12.5pt;
+    font-weight: 700;
+  }
+  .mariposa .pie {
+    margin-top: auto;
+    padding-top: 3mm;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2mm;
+  }
+  .mariposa .pie-firma {
+    display: flex;
+    align-items: center;
+    gap: 2mm;
+    min-width: 0;
+  }
+  .mariposa .logo-firma { height: 8mm; width: auto; max-width: 30mm; object-fit: contain; }
+  .mariposa .logo-po { height: 6mm; width: auto; max-width: 22mm; object-fit: contain; }
+  .mariposa .nombre-firma {
+    font-size: 7pt;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mariposa .pie-der {
+    display: flex;
+    align-items: center;
+    gap: 1.6mm;
+  }
+  .mariposa .redes {
+    list-style: none;
+    margin: 0; padding: 0;
+    font-size: 7pt;
+    line-height: 1.35;
+    color: var(--gris-pie);
+    text-align: right;
+  }
+  .mariposa .qr-bloque {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 1mm;
+    border: 0.3mm solid #eee;
+  }
+  .mariposa .qr-bloque img { width: 22mm; height: 22mm; }
+  .mariposa .fecha-realizacion {
+    position: absolute;
+    left: 7mm;
+    bottom: 2mm;
+    font-size: 7pt;
+    color: #9a9a9a;
+  }
+
+  /* Variante blanco y negro puro: mismo diseño, sin ningún color */
+  .hoja-a6.bn { filter: grayscale(1) contrast(1.05); }
+
+  /* Oculta cualquier bloque opcional (QR, logo PO, bajada, cuerpo, datos)
+     cuando el campo correspondiente viene vacío o apagado; el resto del
+     pie/diseño se reacomoda solo porque todo es flexbox, sin dejar huecos. */
+  .oculto { display: none !important; }
+
+  /* ============ ETIQUETAS DE FORMATO EN PANTALLA (no se imprimen) ============ */
+  .medida {
+    font-family: var(--font-texto);
+    font-size: 12px;
+    color: #666;
+  }
+
+  /* ============ IMPRESIÓN ============ */
+  @page { size: A4; margin: 0; }
+  @media print {
+    html, body { background: #fff; }
+    .barra-instrucciones,
+    .lienzos > .envoltorio-pieza.digital,
+    .etiqueta-pieza { display: none !important; }
+    .lienzos { display: block; padding: 0; gap: 0; }
+    .hoja-a6 { page-break-after: always; break-after: page; }
+    .hoja-a6:last-child { page-break-after: auto; break-after: auto; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ============ BARRA DE INSTRUCCIONES (no sale impresa ni en capturas recortadas) ============ -->
+  <div class="barra-instrucciones">
+    <h1>Cómo usar esta plantilla</h1>
+    <ol>
+      <li><strong>Editar el contenido:</strong> abrí este archivo con un editor de texto (o pedile a tu IA que lo edite) y cambiá solo el bloque <code>const MATERIAL = { ... }</code> que está antes de las piezas. Todo el diseño se actualiza solo.</li>
+      <li><strong>Imprimir la hoja A6 (mariposas):</strong> abrí este archivo en el navegador, <code>Ctrl+P</code> → Destino "Guardar como PDF" → Papel <strong>A4</strong> → Márgenes <strong>"Ninguno"</strong> → Escala <strong>100%</strong>. Salen 2 páginas: la hoja a color y la hoja en blanco y negro para fotocopia. Cortá primero al medio y después cada mitad, siguiendo la línea punteada.</li>
+      <li><strong>Guardar el posteo o la historia para redes:</strong> cada pieza tiene su tamaño exacto en píxeles (1080×1080 o 1080×1920). La forma más simple es: click derecho sobre la pieza → "Inspeccionar" → activar la vista de dispositivo móvil (ícono de celular) → poner ese ancho y alto exactos → sacar una captura de pantalla con la herramienta de captura del navegador o del sistema operativo, recortando solo esa pieza.</li>
+      <li><strong>Revisá el texto letra por letra</strong> antes de publicar o imprimir.</li>
+    </ol>
+    <div class="aviso">Si le pasaste este archivo a una IA para que lo complete: solo tiene que cambiar el bloque MATERIAL. Nunca debe rediseñar la estructura, achicar el QR por debajo de 20×20&nbsp;mm, ni bajar el cuerpo de 9&nbsp;pt o el pie/redes/fecha de 7&nbsp;pt.</div>
+  </div>
+
+  <script>
+    /* =====================================================================
+       CONTENIDO DEL MATERIAL — el único lugar que hay que editar.
+       El ejemplo de abajo es el de la charla de Tribuna Docente usada para
+       probar esta plantilla; reemplazalo por el contenido real.
+       ===================================================================== */
+    const MATERIAL = {
+      etiqueta: 'Charla abierta',                 // EDITAR: etiqueta/categoría chica arriba del título
+      titulo: 'IA y educación: ¿herramienta o amenaza?', // EDITAR: título o consigna principal
+      bajada: 'Inteligencia artificial en las escuelas: qué cambia en el trabajo docente', // EDITAR: bajada (opcional; dejar '' si no hace falta)
+      cuerpo: 'Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.', // EDITAR: cuerpo (opcional; dejar '' si no hace falta)
+      fecha_actividad: 'Jueves 8/10', // EDITAR: fecha de la actividad (vacío si no aplica)
+      hora: '19 h',                   // EDITAR: hora de la actividad
+      lugar: 'Local de San Justo · Arieta 3000', // EDITAR: lugar de la actividad
+      firma: 'Tribuna Docente',       // EDITAR: agrupación que firma (tabla de la sección 8 del BRIEF)
+      logo_firma: 'tribuna-docente.png', // EDITAR: archivo exacto en logos/ (nombre y extensión tal cual)
+      logo_po: '',                    // EDITAR: archivo del logo del Partido Obrero en logos/, o '' si no se suma
+      redes: [                        // EDITAR: redes verificadas de la sección 9 del BRIEF, en el orden que quieras
+        'tribunadocente.com.ar',
+        'IG @tribunadocente',
+        'X @TD_Nacional',
+        'facebook.com/TribunaDocenteNacional'
+      ],
+      qr: true,                       // EDITAR: true = mostrar "Suscribite a Prensa Obrera" con QR; false = sacarlo
+      fecha_realizacion: '26/09/2026', // EDITAR: fecha en que se hizo este material, dd/mm/aaaa (nunca inventarla)
+      color_acento: '#BD3979'         // EDITAR: color de acento del material (por defecto, rojo PO #E84426)
+    };
+    /* Contenido de ejemplo: charla de Tribuna Docente, usada para probar esta
+       plantilla. Reemplazar por el material real antes de publicar. */
+  </script>
+
+  <main class="lienzos">
+
+    <!-- ============ POSTEO 1080×1080 ============ -->
+    <div class="envoltorio-pieza digital">
+      <p class="etiqueta-pieza medida">Posteo — 1080 × 1080 px</p>
+      <div class="pieza-post" id="pieza-post">
+        <div class="franja"></div>
+        <div class="contenido">
+          <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
+          <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
+          <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
+          <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
+
+          <div class="bloque-datos" data-if="datos">
+            <div class="dato">
+              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span><span data-field="fecha_actividad">Jueves 8/10</span> · <span data-field="hora">19 h</span></span>
+            </div>
+            <div class="dato">
+              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              <span data-field="lugar">Local de San Justo · Arieta 3000</span>
+            </div>
+          </div>
+
+          <div class="pie">
+            <div class="pie-firma">
+              <img class="logo-firma" data-logo="firma" src="../logos/tribuna-docente.png" alt="Logo de la agrupación que firma">
+              <img class="logo-po oculto" data-logo="po" src="" alt="Logo Partido Obrero">
+              <span class="nombre-firma" data-field="firma">Tribuna Docente</span>
+            </div>
+            <div class="pie-der">
+              <ul class="redes" data-field="redes">
+                <li>tribunadocente.com.ar</li>
+                <li>IG @tribunadocente</li>
+                <li>X @TD_Nacional</li>
+                <li>facebook.com/TribunaDocenteNacional</li>
+              </ul>
+              <div class="qr-bloque" data-if="qr">
+                <img src="../logos/qr-suscribite-prensa-obrera.png" alt="Código QR: Suscribite a Prensa Obrera">
+                <span class="qr-texto"><strong>Suscribite a Prensa Obrera</strong><br>prensaobrera.com/bancar-a-prensa-obrera</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
+      </div>
+    </div>
+
+    <!-- ============ HISTORIA 1080×1920 ============ -->
+    <div class="envoltorio-pieza digital">
+      <p class="etiqueta-pieza medida">Historia — 1080 × 1920 px (250 px libres arriba y abajo)</p>
+      <div class="pieza-story" id="pieza-story">
+        <div class="zona-segura arriba"></div>
+        <div class="franja"></div>
+        <div class="contenido">
+          <div class="bloque-texto">
+            <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
+            <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
+            <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
+            <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
+          </div>
+
+          <div class="bloque-datos" data-if="datos">
+            <div class="dato">
+              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span><span data-field="fecha_actividad">Jueves 8/10</span> · <span data-field="hora">19 h</span></span>
+            </div>
+            <div class="dato">
+              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              <span data-field="lugar">Local de San Justo · Arieta 3000</span>
+            </div>
+          </div>
+
+          <div class="pie">
+            <div class="pie-firma">
+              <img class="logo-firma" data-logo="firma" src="../logos/tribuna-docente.png" alt="Logo de la agrupación que firma">
+              <img class="logo-po oculto" data-logo="po" src="" alt="Logo Partido Obrero">
+              <span class="nombre-firma" data-field="firma">Tribuna Docente</span>
+            </div>
+            <div class="pie-der">
+              <ul class="redes" data-field="redes">
+                <li>tribunadocente.com.ar</li>
+                <li>IG @tribunadocente</li>
+                <li>X @TD_Nacional</li>
+                <li>facebook.com/TribunaDocenteNacional</li>
+              </ul>
+              <div class="qr-bloque" data-if="qr">
+                <img src="../logos/qr-suscribite-prensa-obrera.png" alt="Código QR: Suscribite a Prensa Obrera">
+                <span class="qr-texto"><strong>Suscribite a Prensa Obrera</strong><br>prensaobrera.com/bancar-a-prensa-obrera</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
+        <div class="zona-segura abajo"></div>
+      </div>
+    </div>
+
+    <!-- ============ HOJA A4 · 4 MARIPOSAS A6 · COLOR ============ -->
+    <div class="envoltorio-pieza">
+      <p class="etiqueta-pieza medida">Hoja A6 para imprenta o fotocopia — A4, 4 mariposas (color)</p>
+      <div class="hoja-a6" id="hoja-a6-color">
+        <!-- Las 4 mariposas son idénticas: el script las completa a todas desde MATERIAL -->
+        <div class="mariposa">
+          <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
+          <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
+          <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
+          <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
+          <div class="bloque-datos" data-if="datos">
+            <div class="dato">
+              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span><span data-field="fecha_actividad">Jueves 8/10</span> · <span data-field="hora">19 h</span></span>
+            </div>
+            <div class="dato">
+              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              <span data-field="lugar">Local de San Justo · Arieta 3000</span>
+            </div>
+          </div>
+          <div class="pie">
+            <div class="pie-firma">
+              <img class="logo-firma" data-logo="firma" src="../logos/tribuna-docente.png" alt="Logo de la agrupación que firma">
+              <img class="logo-po oculto" data-logo="po" src="" alt="Logo Partido Obrero">
+              <span class="nombre-firma" data-field="firma">Tribuna Docente</span>
+            </div>
+            <div class="pie-der">
+              <div class="qr-bloque" data-if="qr">
+                <img src="../logos/qr-suscribite-prensa-obrera.png" alt="Código QR: Suscribite a Prensa Obrera">
+              </div>
+              <ul class="redes" data-field="redes">
+                <li>tribunadocente.com.ar</li>
+                <li>IG @tribunadocente</li>
+                <li>X @TD_Nacional</li>
+                <li>facebook.com/TribunaDocenteNacional</li>
+              </ul>
+            </div>
+          </div>
+          <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
+        </div>
+
+        <div class="mariposa">
+          <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
+          <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
+          <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
+          <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
+          <div class="bloque-datos" data-if="datos">
+            <div class="dato">
+              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span><span data-field="fecha_actividad">Jueves 8/10</span> · <span data-field="hora">19 h</span></span>
+            </div>
+            <div class="dato">
+              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              <span data-field="lugar">Local de San Justo · Arieta 3000</span>
+            </div>
+          </div>
+          <div class="pie">
+            <div class="pie-firma">
+              <img class="logo-firma" data-logo="firma" src="../logos/tribuna-docente.png" alt="Logo de la agrupación que firma">
+              <img class="logo-po oculto" data-logo="po" src="" alt="Logo Partido Obrero">
+              <span class="nombre-firma" data-field="firma">Tribuna Docente</span>
+            </div>
+            <div class="pie-der">
+              <div class="qr-bloque" data-if="qr">
+                <img src="../logos/qr-suscribite-prensa-obrera.png" alt="Código QR: Suscribite a Prensa Obrera">
+              </div>
+              <ul class="redes" data-field="redes">
+                <li>tribunadocente.com.ar</li>
+                <li>IG @tribunadocente</li>
+                <li>X @TD_Nacional</li>
+                <li>facebook.com/TribunaDocenteNacional</li>
+              </ul>
+            </div>
+          </div>
+          <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
+        </div>
+
+        <div class="mariposa">
+          <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
+          <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
+          <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
+          <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
+          <div class="bloque-datos" data-if="datos">
+            <div class="dato">
+              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span><span data-field="fecha_actividad">Jueves 8/10</span> · <span data-field="hora">19 h</span></span>
+            </div>
+            <div class="dato">
+              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              <span data-field="lugar">Local de San Justo · Arieta 3000</span>
+            </div>
+          </div>
+          <div class="pie">
+            <div class="pie-firma">
+              <img class="logo-firma" data-logo="firma" src="../logos/tribuna-docente.png" alt="Logo de la agrupación que firma">
+              <img class="logo-po oculto" data-logo="po" src="" alt="Logo Partido Obrero">
+              <span class="nombre-firma" data-field="firma">Tribuna Docente</span>
+            </div>
+            <div class="pie-der">
+              <div class="qr-bloque" data-if="qr">
+                <img src="../logos/qr-suscribite-prensa-obrera.png" alt="Código QR: Suscribite a Prensa Obrera">
+              </div>
+              <ul class="redes" data-field="redes">
+                <li>tribunadocente.com.ar</li>
+                <li>IG @tribunadocente</li>
+                <li>X @TD_Nacional</li>
+                <li>facebook.com/TribunaDocenteNacional</li>
+              </ul>
+            </div>
+          </div>
+          <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
+        </div>
+
+        <div class="mariposa">
+          <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
+          <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
+          <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
+          <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
+          <div class="bloque-datos" data-if="datos">
+            <div class="dato">
+              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span><span data-field="fecha_actividad">Jueves 8/10</span> · <span data-field="hora">19 h</span></span>
+            </div>
+            <div class="dato">
+              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              <span data-field="lugar">Local de San Justo · Arieta 3000</span>
+            </div>
+          </div>
+          <div class="pie">
+            <div class="pie-firma">
+              <img class="logo-firma" data-logo="firma" src="../logos/tribuna-docente.png" alt="Logo de la agrupación que firma">
+              <img class="logo-po oculto" data-logo="po" src="" alt="Logo Partido Obrero">
+              <span class="nombre-firma" data-field="firma">Tribuna Docente</span>
+            </div>
+            <div class="pie-der">
+              <div class="qr-bloque" data-if="qr">
+                <img src="../logos/qr-suscribite-prensa-obrera.png" alt="Código QR: Suscribite a Prensa Obrera">
+              </div>
+              <ul class="redes" data-field="redes">
+                <li>tribunadocente.com.ar</li>
+                <li>IG @tribunadocente</li>
+                <li>X @TD_Nacional</li>
+                <li>facebook.com/TribunaDocenteNacional</li>
+              </ul>
+            </div>
+          </div>
+          <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ HOJA A4 · 4 MARIPOSAS A6 · BLANCO Y NEGRO (fotocopia) ============ -->
+    <div class="envoltorio-pieza">
+      <p class="etiqueta-pieza medida">Hoja A6 para fotocopia — A4, 4 mariposas (blanco y negro puro)</p>
+      <div class="hoja-a6 bn" id="hoja-a6-bn">
+        <div class="mariposa">
+          <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
+          <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
+          <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
+          <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
+          <div class="bloque-datos" data-if="datos">
+            <div class="dato">
+              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span><span data-field="fecha_actividad">Jueves 8/10</span> · <span data-field="hora">19 h</span></span>
+            </div>
+            <div class="dato">
+              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              <span data-field="lugar">Local de San Justo · Arieta 3000</span>
+            </div>
+          </div>
+          <div class="pie">
+            <div class="pie-firma">
+              <img class="logo-firma" data-logo="firma" src="../logos/tribuna-docente.png" alt="Logo de la agrupación que firma">
+              <img class="logo-po oculto" data-logo="po" src="" alt="Logo Partido Obrero">
+              <span class="nombre-firma" data-field="firma">Tribuna Docente</span>
+            </div>
+            <div class="pie-der">
+              <div class="qr-bloque" data-if="qr">
+                <img src="../logos/qr-suscribite-prensa-obrera.png" alt="Código QR: Suscribite a Prensa Obrera">
+              </div>
+              <ul class="redes" data-field="redes">
+                <li>tribunadocente.com.ar</li>
+                <li>IG @tribunadocente</li>
+                <li>X @TD_Nacional</li>
+                <li>facebook.com/TribunaDocenteNacional</li>
+              </ul>
+            </div>
+          </div>
+          <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
+        </div>
+
+        <div class="mariposa">
+          <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
+          <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
+          <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
+          <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
+          <div class="bloque-datos" data-if="datos">
+            <div class="dato">
+              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span><span data-field="fecha_actividad">Jueves 8/10</span> · <span data-field="hora">19 h</span></span>
+            </div>
+            <div class="dato">
+              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              <span data-field="lugar">Local de San Justo · Arieta 3000</span>
+            </div>
+          </div>
+          <div class="pie">
+            <div class="pie-firma">
+              <img class="logo-firma" data-logo="firma" src="../logos/tribuna-docente.png" alt="Logo de la agrupación que firma">
+              <img class="logo-po oculto" data-logo="po" src="" alt="Logo Partido Obrero">
+              <span class="nombre-firma" data-field="firma">Tribuna Docente</span>
+            </div>
+            <div class="pie-der">
+              <div class="qr-bloque" data-if="qr">
+                <img src="../logos/qr-suscribite-prensa-obrera.png" alt="Código QR: Suscribite a Prensa Obrera">
+              </div>
+              <ul class="redes" data-field="redes">
+                <li>tribunadocente.com.ar</li>
+                <li>IG @tribunadocente</li>
+                <li>X @TD_Nacional</li>
+                <li>facebook.com/TribunaDocenteNacional</li>
+              </ul>
+            </div>
+          </div>
+          <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
+        </div>
+
+        <div class="mariposa">
+          <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
+          <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
+          <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
+          <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
+          <div class="bloque-datos" data-if="datos">
+            <div class="dato">
+              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span><span data-field="fecha_actividad">Jueves 8/10</span> · <span data-field="hora">19 h</span></span>
+            </div>
+            <div class="dato">
+              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              <span data-field="lugar">Local de San Justo · Arieta 3000</span>
+            </div>
+          </div>
+          <div class="pie">
+            <div class="pie-firma">
+              <img class="logo-firma" data-logo="firma" src="../logos/tribuna-docente.png" alt="Logo de la agrupación que firma">
+              <img class="logo-po oculto" data-logo="po" src="" alt="Logo Partido Obrero">
+              <span class="nombre-firma" data-field="firma">Tribuna Docente</span>
+            </div>
+            <div class="pie-der">
+              <div class="qr-bloque" data-if="qr">
+                <img src="../logos/qr-suscribite-prensa-obrera.png" alt="Código QR: Suscribite a Prensa Obrera">
+              </div>
+              <ul class="redes" data-field="redes">
+                <li>tribunadocente.com.ar</li>
+                <li>IG @tribunadocente</li>
+                <li>X @TD_Nacional</li>
+                <li>facebook.com/TribunaDocenteNacional</li>
+              </ul>
+            </div>
+          </div>
+          <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
+        </div>
+
+        <div class="mariposa">
+          <p class="etiqueta" data-field="etiqueta">Charla abierta</p>
+          <h1 class="titulo" data-field="titulo">IA y educación: ¿herramienta o amenaza?</h1>
+          <p class="bajada" data-field="bajada">Inteligencia artificial en las escuelas: qué cambia en el trabajo docente</p>
+          <p class="cuerpo" data-field="cuerpo">Un espacio para pensar juntos cómo la inteligencia artificial entra a las aulas: qué tareas cambia, qué preguntas abre para la enseñanza y qué lugar le damos los y las docentes.</p>
+          <div class="bloque-datos" data-if="datos">
+            <div class="dato">
+              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span><span data-field="fecha_actividad">Jueves 8/10</span> · <span data-field="hora">19 h</span></span>
+            </div>
+            <div class="dato">
+              <svg class="icono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-7.2-7-12a7 7 0 0 1 14 0c0 4.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              <span data-field="lugar">Local de San Justo · Arieta 3000</span>
+            </div>
+          </div>
+          <div class="pie">
+            <div class="pie-firma">
+              <img class="logo-firma" data-logo="firma" src="../logos/tribuna-docente.png" alt="Logo de la agrupación que firma">
+              <img class="logo-po oculto" data-logo="po" src="" alt="Logo Partido Obrero">
+              <span class="nombre-firma" data-field="firma">Tribuna Docente</span>
+            </div>
+            <div class="pie-der">
+              <div class="qr-bloque" data-if="qr">
+                <img src="../logos/qr-suscribite-prensa-obrera.png" alt="Código QR: Suscribite a Prensa Obrera">
+              </div>
+              <ul class="redes" data-field="redes">
+                <li>tribunadocente.com.ar</li>
+                <li>IG @tribunadocente</li>
+                <li>X @TD_Nacional</li>
+                <li>facebook.com/TribunaDocenteNacional</li>
+              </ul>
+            </div>
+          </div>
+          <div class="fecha-realizacion" data-field="fecha_realizacion">26/09/2026</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    /* =====================================================================
+       Aplica MATERIAL a todas las piezas. Si esto no llega a ejecutarse
+       (JavaScript desactivado), el contenido de ejemplo de arriba queda
+       visible tal cual, así que la página nunca se ve vacía o rota.
+       ===================================================================== */
+    (function aplicarMaterial(m) {
+      try {
+        document.documentElement.style.setProperty('--acento', m.color_acento || '#E84426');
+
+        var campos = ['etiqueta', 'titulo', 'bajada', 'cuerpo', 'fecha_actividad', 'hora', 'lugar', 'firma', 'fecha_realizacion'];
+        campos.forEach(function (campo) {
+          var valor = m[campo] || '';
+          document.querySelectorAll('[data-field="' + campo + '"]').forEach(function (el) {
+            el.textContent = valor;
+          });
+        });
+
+        // Redes: se reconstruye la lista completa en cada lugar donde aparece.
+        document.querySelectorAll('[data-field="redes"]').forEach(function (ul) {
+          ul.innerHTML = '';
+          (m.redes || []).forEach(function (red) {
+            var li = document.createElement('li');
+            li.textContent = red;
+            ul.appendChild(li);
+          });
+        });
+
+        // Logo de la agrupación que firma.
+        document.querySelectorAll('[data-logo="firma"]').forEach(function (img) {
+          if (m.logo_firma) {
+            img.src = '../logos/' + m.logo_firma;
+            img.alt = 'Logo de ' + (m.firma || 'la agrupación que firma');
+          }
+        });
+
+        // Logo opcional del Partido Obrero (co-firma).
+        document.querySelectorAll('[data-logo="po"]').forEach(function (img) {
+          if (m.logo_po) {
+            img.src = '../logos/' + m.logo_po;
+            img.classList.remove('oculto');
+          } else {
+            img.classList.add('oculto');
+          }
+        });
+
+        // Bloque "Suscribite a Prensa Obrera" con QR: se apaga y el pie se
+        // reacomoda solo porque es flexbox (no queda un hueco vacío).
+        document.querySelectorAll('[data-if="qr"]').forEach(function (el) {
+          el.classList.toggle('oculto', !m.qr);
+        });
+
+        // Bloque de fecha/hora/lugar: si no hay actividad (fecha vacía), se
+        // saca del diseño para no dejar una caja vacía.
+        var hayDatos = !!(m.fecha_actividad || m.hora || m.lugar);
+        document.querySelectorAll('[data-if="datos"]').forEach(function (el) {
+          el.classList.toggle('oculto', !hayDatos);
+        });
+
+        // Bajada y cuerpo son opcionales: si vienen vacíos, se ocultan.
+        document.querySelectorAll('[data-field="bajada"]').forEach(function (el) {
+          el.closest('p').classList.toggle('oculto', !m.bajada);
+        });
+        document.querySelectorAll('[data-field="cuerpo"]').forEach(function (el) {
+          el.closest('p').classList.toggle('oculto', !m.cuerpo);
+        });
+      } catch (e) {
+        // Si algo falla, no rompe la página: queda el contenido de ejemplo.
+        console.error('No se pudo aplicar MATERIAL, se muestra el contenido de ejemplo.', e);
+      }
+    })(MATERIAL);
+  </script>
+
+</body>
+</html>

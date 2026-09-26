@@ -16,6 +16,12 @@ inventar nada.
 - **`logos/`** — carpeta con los logos oficiales aprobados, listos para
   subir junto con el brief. Mirá `logos/LEEME.md` para saber qué archivo
   usar en cada caso.
+- **`plantilla/plantilla-materiales.html`** — una plantilla ya diseñada
+  (posteo 1080×1080, historia 1080×1920 y hoja A6 para imprenta/fotocopia,
+  a color y en blanco y negro) donde solo hay que completar un bloque de
+  contenido al principio del archivo. Es la vía recomendada cuando la IA
+  no genera imágenes, o cuando importa que los logos queden exactos sin
+  riesgo de que se redibujen (ver sección 7 de `BRIEF.md`).
 - **`CHANGELOG.md`** — historial de cambios de este brief.
 
 ## Cómo usarlo (paso a paso)

@@ -295,7 +295,37 @@ pieza cuadrada flotando en el medio con mucho vacío arriba y abajo.
 
 ## 7. Qué entregar según la herramienta que uses
 
-### Si tu IA genera imágenes (ChatGPT, Gemini, y similares)
+### Si te adjuntaron la plantilla HTML, usala siempre
+
+Si junto con este brief te adjuntaron `plantilla/plantilla-materiales.html`
+(viene en el mismo paquete descargable), **esa es la vía recomendada**,
+incluso si tu IA genera imágenes: ya tiene el diseño profesional resuelto
+(jerarquía, grilla, tamaños exactos por formato, QR con el tamaño mínimo
+correcto) y usa los archivos de logo reales, así que no hay riesgo de que
+se redibuje un logo o de quedarte sin usos de imágenes.
+
+Reglas al usarla:
+
+1. **Solo completá el bloque `const MATERIAL = { ... }`** que está cerca
+   del principio del archivo (tiene un comentario `EDITAR:` en cada campo).
+   No edites el texto que aparece repetido más abajo, dentro de cada
+   pieza: se pisa solo con lo que pusiste en `MATERIAL`.
+2. **Nunca reestructures el diseño**: no cambies el tamaño de las piezas,
+   no muevas ni saques bloques, no cambies la tipografía ni la grilla.
+3. **Nunca achiques el QR** por debajo de 20×20 mm (impreso) ni por debajo
+   de 220×220 px (digital) — son los valores con los que ya viene. Si no
+   va QR, usá `qr: false` en vez de achicarlo.
+4. **Nunca bajes los tamaños mínimos de letra**: cuerpo 9 pt, pie/redes/
+   fecha de realización 7 pt en la hoja A6 (10 pt de cuerpo en A5/A4).
+5. Devolvé **el archivo HTML completo**, no solo un fragmento, con
+   únicamente el bloque `MATERIAL` cambiado.
+6. Recordale a la persona los pasos simples para usarlo: abrir el archivo
+   con doble clic, `Ctrl+P` para pasar a PDF la hoja de imprenta/fotocopia,
+   o una captura de pantalla para el posteo/historia (la propia plantilla
+   trae esos pasos escritos arriba de todo, en una barra que no sale
+   impresa).
+
+### Si tu IA genera imágenes y no te dieron la plantilla (ChatGPT, Gemini, y similares)
 
 1. Generá **cada formato pedido** como imagen.
 2. **Además**, entregá el **texto final completo en texto plano** (no solo
@@ -307,7 +337,7 @@ pieza cuadrada flotando en el medio con mucho vacío arriba y abajo.
    **revisar el texto de la imagen letra por letra**, y ofrecé regenerar o
    corregir la pieza si encuentra un error.
 
-### Si tu IA no genera imágenes (por ejemplo, DeepSeek)
+### Si tu IA no genera imágenes y no te dieron la plantilla (por ejemplo, DeepSeek)
 
 1. Producí un **único archivo HTML autocontenido** (con el CSS incluido
    adentro del mismo archivo, sin dependencias externas) que:

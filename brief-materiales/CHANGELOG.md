@@ -15,6 +15,14 @@ Ajustes tras la segunda ronda de pruebas (ChatGPT y Gemini).
 - Archivos: usar el nombre y la extensión exactos de los adjuntos.
 - QR: mínimo 2 × 2 cm impreso / 220 px digital; si no entra, solo el link
   (en la prueba el QR de la mariposa medía ~7 mm y no se podía escanear).
+- **Plantilla HTML pre-diseñada** (`plantilla/plantilla-materiales.html`):
+  un único archivo autocontenido, ya diseñado (posteo 1080×1080, historia
+  1080×1920, hoja A4 con 4 mariposas A6 a color y en blanco y negro puro),
+  con un solo bloque `MATERIAL` para completar contenido sin tocar el
+  diseño. Sección 7 la recomienda como vía principal cuando está adjunta,
+  para cualquier IA (evita que se redibujen logos o se gasten usos de
+  imágenes). Verificada: QR decodificado con `zbarimg` en las 8 mariposas
+  (color y B/N), hoja A6 exportada a exactamente 1 página A4 por variante.
 
 ## [1.2.0] - 2026-09-26
 

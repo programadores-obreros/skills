@@ -158,8 +158,8 @@ IA. Evitalo siguiendo esto:
 
 ### Paleta de colores
 - **Rojo PO**: `#E84426` (tomado de los propios archivos de logo del
-  Partido Obrero: `partido-obrero--mark-red.svg`,
-  `partido-obrero--mascot-obrerito.svg` y `fit-u--mark-red.svg` usan
+  Partido Obrero: `partido-obrero.svg`,
+  `partido-obrero-mascot.svg` y `fit-u.svg` usan
   exactamente ese valor). El wordmark propio de Prensa Obrera usa una
   variante muy cercana, `#E64427`; cualquiera de los dos es válido como
   "rojo PO", no los inventes de otra fuente.

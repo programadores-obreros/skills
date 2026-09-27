@@ -56,29 +56,32 @@ cp "$SKILL_DIR/plantilla/plantilla-materiales.html" "$PACK_DIR/plantilla/plantil
 cp "$SKILL_DIR/plantilla/FUENTES-LICENCIA.txt" "$PACK_DIR/plantilla/FUENTES-LICENCIA.txt"
 
 cat > "$PACK_DIR/LEEME-PRIMERO.txt" <<EOF
-BRIEF DE MATERIALES - PARTIDO OBRERO (v$VERSION)
+BRIEF DE MATERIALES — PARTIDO OBRERO (v$VERSION)
 
-Como usar este paquete:
+Este archivo es para vos, no para la IA: no hace falta subirlo al chat.
 
-1. Subi el archivo BRIEF.md a tu IA (ChatGPT, Gemini, DeepSeek, Claude...).
-   Recomendado: subi tambien plantilla/plantilla-materiales.html (ver
-   punto 4) y los logos de la carpeta logos/ que necesites.
-2. Contale a la IA que queres comunicar, con tus propias palabras. Te va a
-   ir preguntando los datos que falten (titulo, fecha, quien firma, etc.).
+Cómo usar este paquete:
+
+1. Subí a tu IA (ChatGPT, Gemini, DeepSeek, Claude…) el archivo BRIEF.md.
+   Recomendado: subí también plantilla/plantilla-materiales.html (ver el
+   punto 4) y los logos de la carpeta logos/ que necesites (en ChatGPT y
+   Gemini, los .png).
+2. Contale a la IA qué querés comunicar, con tus propias palabras. Te va a
+   ir preguntando los datos que falten (título, fecha, quién firma, etc.).
    No va a producir nada hasta que le escribas "confirmo".
-3. Revisa el texto final letra por letra antes de imprimir o publicar
-   nada. Las IA que generan imagenes a veces escriben mal el texto de
+3. Revisá el texto final letra por letra antes de imprimir o publicar
+   nada. Las IA que generan imágenes a veces escriben mal el texto de
    adentro de la imagen.
 
-4. plantilla/plantilla-materiales.html: una plantilla ya disenada (posteo,
-   historia, hoja A6 para imprenta/fotocopia a color y en blanco y negro,
-   volante A5 y afiche A4) donde solo hay que completar un bloque de
-   contenido. Es la via recomendada, incluso si tu IA genera imagenes: sale
-   con los logos reales y el QR que funciona. Cuando la IA te devuelva el
-   archivo completo, GUARDALO DENTRO DE LA CARPETA plantilla/ (al lado de
-   logos/): si lo guardas en otro lado, los logos no van a cargar.
+4. plantilla/plantilla-materiales.html: una plantilla ya diseñada (posteo,
+   historia, hoja A6 para imprenta o fotocopia, a color y en blanco y
+   negro, volante A5 y afiche A4) donde solo hay que completar un bloque
+   de contenido. Es la vía recomendada, incluso si tu IA genera imágenes:
+   sale con los logos reales y el QR que funciona. Cuando la IA te
+   devuelva el archivo completo, GUARDALO DENTRO DE LA CARPETA plantilla/
+   (al lado de logos/): si lo guardás en otro lado, los logos no cargan.
 
-Mas detalle en BRIEF.md, en logos/LEEME.md y en SKILL.md (version para
+Más detalle en BRIEF.md, en logos/LEEME.md y en SKILL.md (versión para
 Claude como Agent Skill).
 EOF
 

@@ -1,6 +1,6 @@
 # Brief de materiales — Partido Obrero
 
-**Versión:** 1.4.0
+**Versión:** 1.4.1
 **Fecha:** 2026-09-26
 
 ---

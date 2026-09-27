@@ -3,6 +3,11 @@
 Todas las versiones siguen [semver](https://semver.org/lang/es/)
 (`MAYOR.MENOR.PARCHE`) y se documentan con fecha.
 
+## [1.4.1] - 2026-09-26
+
+- `LEEME-PRIMERO.txt` con tildes y una aclaración: es para la persona, no
+  hace falta subirlo al chat.
+
 ## [1.4.0] - 2026-09-26
 
 Reescritura de la plantilla tras una auditoría independiente de la versión
